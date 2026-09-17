@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<!--
+  Portfolio site — "Build a Portfolio Site That Sells Your Work" checklist
+  step. Structural layout inspired by lokkeestudios.com, coryhughart.com,
+  and wassim.dev (bold hero, pill nav, chip tags, card-based work grid),
+  restyled warm/boho-feminine per the user's brand direction: cream/
+  terracotta/sage palette, serif headlines, arch-shaped frames, inline
+  line-art (sun, leaf sprig) instead of tech-glow gradients, dotted
+  dividers instead of hard borders. No external fonts/icons — all type
+  is system serif/sans stacks, all ornament is inline SVG.
+  Work-card thumbnails (images/thumb-*.jpg) are free stock photography
+  from Pexels (Pexels License — free for commercial use, no attribution
+  required), reused from each linked concept project's own gallery.
+  Brand: "Sagebrush Sites" is the primary business brand (nav, title,
+  footer); Michelle Feliciano is credited as founder in the About section
+  and on personal profiles (GitHub/LinkedIn). Business name checked
+  against TX Comptroller entity search, USPTO trademark search, and
+  domain availability before adoption — see /branding/niche-and-brand.md.
+  Domain sagebrushsites.com is registered (see /branding/deploy-instructions.md
+  for DNS + GitHub Pages custom-domain setup). Contact email is
+  TEMPORARILY the founder's personal Gmail until Squarespace email
+  forwarding for the domain is set up and verified (also covered in
+  deploy-instructions.md) — swap back to michellefeliciano@sagebrushsites.com
+  once that's live. Also still a placeholder: the founder's real headshot in the About
+  section (currently a monogram in an arch frame — intentionally NOT a
+  stock photo, since that would misrepresent a real person). The hero's
+  "SS" monogram is a business logomark placeholder, not a person.
+  GitHub/LinkedIn links are real. No og:image set yet — add a branded
+  1200x630 share image when one exists, for better link previews.
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sagebrush Sites — Web Development for Salons & Beauty Businesses</title>
+<meta name="description" content="Sagebrush Sites — a Fort Worth, TX studio building fast, mobile-first websites for salons and beauty businesses. Hand-coded, zero-dependency, offline-first.">
+<meta property="og:title" content="Sagebrush Sites — Web Development for Salons & Beauty Businesses">
+<meta property="og:description" content="Fast, mobile-first websites for salons and beauty businesses that turn browsers into booked appointments.">
+<meta property="og:url" content="https://sagebrushsites.com">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23c1653f' stroke-width='2'%3E%3Ccircle cx='12' cy='12' r='4'/%3E%3Cpath d='M12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1'/%3E%3C/svg%3E">
+<style>
+  :root {
+    --cream: #faf3ea;
+    --cream-deep: #f2e6d5;
+    --panel: #fffdf9;
+    --ink: #40312a;
+    --ink-soft: #8a7566;
+    --line: #e6d6c2;
+    --terracotta: #c1653f;
+    --rust: #a8492b;
+    --sage: #7f8f6a;
+    --rose: #d69a8e;
+    --mustard: #d3a13f;
+    --radius: 22px;
+    --radius-sm: 12px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    background-color: var(--cream);
+    background-image: radial-gradient(var(--line) 1px, transparent 1px);
+    background-size: 22px 22px;
+    color: var(--ink);
+    line-height: 1.65;
+  }
+
+  h1, h2, h3 {
+    font-family: Georgia, "Iowan Old Style", "Palatino Linotype", Palatino, serif;
+    font-weight: 400;
+    letter-spacing: 0.01em;
+  }
+
+  a { color: inherit; text-decoration: none; }
+
+  img, svg { display: block; max-width: 100%; }
+
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+
+  ::selection { background: var(--rose); color: #3a241d; }
+
+  a:focus-visible, button:focus-visible {
+    outline: 2px solid var(--rust);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  .accent-serif { font-family: Georgia, "Iowan Old Style", Palatino, serif; font-style: italic; color: var(--rust); }
+
+  .icon { color: var(--terracotta); flex-shrink: 0; }
+
+  /* ---------- Dotted divider ---------- */
+  .divider {
+    height: 3px;
+    background-image: radial-gradient(circle, var(--terracotta) 1.4px, transparent 1.6px);
+    background-size: 14px 3px;
+    background-repeat: repeat-x;
+    opacity: 0.55;
+  }
+
+  /* ---------- Nav ---------- */
+  header { position: sticky; top: 0; z-index: 100; padding: 18px 24px; background: rgba(250, 243, 234, 0.88); backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+
+  nav.pill { max-width: 1000px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 14px; }
+
+  .brand { display: flex; align-items: center; gap: 8px; font-family: Georgia, Palatino, serif; font-style: italic; font-size: 1.2rem; white-space: nowrap; }
+  .brand span { color: var(--rust); }
+
+  .nav-links { display: flex; align-items: center; gap: 4px; font-size: 0.82rem; letter-spacing: 0.04em; text-transform: uppercase; }
+
+  .nav-links a { padding: 8px 14px; border-radius: 999px; color: var(--ink-soft); transition: background 0.15s ease, color 0.15s ease; }
+  .nav-links a:hover { color: var(--rust); }
+  .nav-links a.active { background: var(--cream-deep); color: var(--rust); }
+
+  .nav-cta { border: 1.5px solid var(--terracotta); color: var(--rust); padding: 9px 18px; border-radius: 999px; font-size: 0.82rem; font-weight: 600; white-space: nowrap; }
+  .nav-cta:hover { background: var(--terracotta); color: #fff8f0; }
+
+  .nav-toggle { display: none; background: none; border: none; color: var(--ink); font-size: 1.4rem; cursor: pointer; padding: 6px 10px; }
+
+  .mobile-menu { display: none; flex-direction: column; max-width: 1000px; margin: 10px auto 0; background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a { padding: 14px 20px; border-bottom: 1px solid var(--line); font-size: 0.92rem; color: var(--ink-soft); }
+  .mobile-menu a:last-child { border-bottom: none; }
+
+  /* ---------- Hero ---------- */
+  .hero { padding: 80px 0 60px; text-align: center; position: relative; }
+
+  .sprig { position: absolute; opacity: 0.4; }
+  .sprig.left { top: 60px; left: 4%; transform: rotate(-18deg); }
+  .sprig.right { top: 110px; right: 6%; transform: rotate(20deg) scaleX(-1); }
+
+  .arch-frame {
+    width: 132px;
+    height: 156px;
+    margin: 0 auto 26px;
+    border-radius: 66px 66px 0 0;
+    background: linear-gradient(160deg, var(--rose), var(--terracotta));
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding-bottom: 20px;
+    border: 1px solid var(--line);
+  }
+
+  .arch-frame .mono { font-family: Georgia, Palatino, serif; font-style: italic; font-size: 1.7rem; color: #fff8f0; }
+
+  .hero .eyebrow { display: inline-flex; align-items: center; gap: 8px; font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--rust); background: var(--cream-deep); border: 1px solid var(--line); padding: 7px 16px 7px 12px; border-radius: 999px; margin-bottom: 26px; }
+
+  .hero h1 { font-size: clamp(2rem, 4.6vw, 3.1rem); max-width: 760px; margin: 0 auto 22px; font-weight: 400; line-height: 1.25; }
+
+  .hero p.lead { max-width: 540px; margin: 0 auto 34px; color: var(--ink-soft); font-size: 1.05rem; }
+
+  .hero-ctas { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+
+  .btn { display: inline-block; padding: 13px 28px; border-radius: 999px; font-size: 0.92rem; letter-spacing: 0.02em; border: 1.5px solid var(--terracotta); }
+  .btn-primary { background: var(--terracotta); color: #fff8f0; }
+  .btn-primary:hover { background: var(--rust); border-color: var(--rust); }
+  .btn-ghost { background: transparent; color: var(--rust); }
+  .btn-ghost:hover { background: var(--cream-deep); }
+
+  /* ---------- Section shell ---------- */
+  section { padding: 78px 0; }
+
+  .section-head { max-width: 640px; margin: 0 auto 46px; text-align: center; }
+  .section-head .eyebrow { display: inline-flex; align-items: center; gap: 8px; font-size: 0.76rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--sage); margin-bottom: 14px; justify-content: center; }
+  .section-head h2 { font-size: clamp(1.7rem, 3.4vw, 2.3rem); margin-bottom: 12px; font-weight: 400; }
+  .section-head p { color: var(--ink-soft); }
+
+  /* ---------- Work grid ---------- */
+  .work-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; }
+
+  .work-card { background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; transition: transform 0.2s ease, box-shadow 0.2s ease; }
+  .work-card:hover { transform: translateY(-4px); box-shadow: 0 18px 34px -22px rgba(168, 73, 43, 0.35); }
+
+  .work-thumb { aspect-ratio: 16 / 10; display: flex; align-items: flex-end; padding: 18px; border-bottom: 1px solid var(--line); background-size: cover; background-position: center; }
+  .work-thumb span.tag-live { background: rgba(255,255,255,0.85); color: var(--rust); font-size: 0.74rem; padding: 5px 12px; border-radius: 999px; font-weight: 600; }
+
+  .thumb-hair { background-image: url('images/thumb-hair.jpg'); }
+  .thumb-nail { background-image: url('images/thumb-nail.jpg'); }
+  .thumb-barber { background-image: url('images/thumb-barber.jpg'); }
+  .thumb-spa { background-image: url('images/thumb-spa.jpg'); }
+
+  .work-body { padding: 22px 24px 26px; }
+  .work-body h3 { font-size: 1.15rem; margin-bottom: 8px; font-weight: 400; }
+  .work-body p { font-size: 0.9rem; color: var(--ink-soft); margin-bottom: 16px; }
+
+  .chip-row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px; }
+  .chip { font-size: 0.74rem; padding: 5px 13px; border-radius: 999px; background: var(--cream-deep); border: 1px solid var(--line); color: var(--ink-soft); }
+
+  .work-links { display: flex; flex-wrap: wrap; gap: 8px 18px; }
+  .work-link { font-size: 0.86rem; font-weight: 600; color: var(--rust); display: inline-flex; align-items: center; gap: 6px; border-bottom: 1px solid transparent; }
+  .work-link:hover { border-bottom-color: var(--rust); }
+  .work-link.secondary { color: var(--ink-soft); }
+  .work-link.secondary:hover { color: var(--rust); border-bottom-color: var(--rust); }
+
+  .work-note { text-align: center; margin-top: 32px; font-size: 0.9rem; color: var(--ink-soft); }
+  .work-note a { color: var(--rust); font-weight: 600; border-bottom: 1px solid var(--rust); }
+
+  /* ---------- Process ---------- */
+  .process-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
+
+  .process-card { background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); padding: 28px 24px; text-align: center; }
+  .process-card .num-circle { width: 40px; height: 40px; margin: 0 auto 14px; border-radius: 50%; border: 1.5px solid var(--terracotta); display: flex; align-items: center; justify-content: center; font-family: Georgia, Palatino, serif; font-style: italic; color: var(--rust); font-size: 1.05rem; }
+  .process-card h3 { font-size: 1.05rem; margin-bottom: 8px; font-weight: 400; }
+  .process-card p { font-size: 0.88rem; color: var(--ink-soft); }
+
+  .process-note { margin-top: 40px; text-align: center; background: var(--cream-deep); border: 1px solid var(--line); border-radius: var(--radius); padding: 30px 24px; }
+  .process-note p { color: var(--ink-soft); font-size: 0.94rem; margin-bottom: 16px; }
+
+  /* ---------- About ---------- */
+  .about-grid { display: grid; grid-template-columns: 1fr 1.4fr; gap: 50px; align-items: center; }
+
+  .about-arch {
+    width: 220px;
+    height: 260px;
+    margin: 0 auto;
+    border-radius: 110px 110px 0 0;
+    background: linear-gradient(160deg, var(--rose), var(--sage));
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding-bottom: 30px;
+    border: 1px solid var(--line);
+  }
+
+  .about-arch .mono { font-family: Georgia, Palatino, serif; font-style: italic; font-size: 2.4rem; color: #fff8f0; }
+
+  .about-copy h2 { font-size: 1.9rem; margin-bottom: 16px; font-weight: 400; }
+  .about-copy p { color: var(--ink-soft); margin-bottom: 14px; }
+
+  .facts { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 22px; }
+  .fact { background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius-sm); padding: 14px 16px; }
+  .fact .k { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--sage); margin-bottom: 4px; }
+  .fact .v { font-size: 0.9rem; }
+
+  /* ---------- Skills ---------- */
+  .skills-row { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
+  .skill-chip { font-size: 0.88rem; padding: 11px 20px; border-radius: 999px; background: var(--panel); border: 1px solid var(--line); }
+  .skill-chip strong { color: var(--rust); font-weight: 600; }
+
+  /* ---------- Contact ---------- */
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; }
+
+  .contact-info dl { display: grid; grid-template-columns: auto 1fr; gap: 12px 16px; font-size: 0.94rem; }
+  .contact-info dt { color: var(--rust); font-weight: 600; }
+  .contact-info dd { color: var(--ink-soft); }
+
+  .social-row { display: flex; gap: 10px; margin-top: 24px; flex-wrap: wrap; }
+  .social-pill { font-size: 0.82rem; padding: 9px 18px; border-radius: 999px; background: var(--panel); border: 1px solid var(--line); color: var(--ink-soft); }
+  .social-pill:hover { color: var(--rust); border-color: var(--terracotta); }
+
+  form { display: flex; flex-direction: column; gap: 12px; }
+  form input, form textarea {
+    font-family: inherit;
+    font-size: 0.92rem;
+    padding: 13px 16px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    background: var(--panel);
+    color: var(--ink);
+  }
+  form input::placeholder, form textarea::placeholder { color: var(--ink-soft); opacity: 0.8; }
+  form textarea { min-height: 120px; resize: vertical; }
+  form button { align-self: flex-start; border: none; cursor: pointer; }
+  .form-note { font-size: 0.78rem; color: var(--ink-soft); opacity: 0.85; }
+
+  /* ---------- Footer ---------- */
+  footer { padding: 36px 0; text-align: center; font-size: 0.88rem; color: var(--ink-soft); }
+  footer .sig { font-family: Georgia, Palatino, serif; font-style: italic; font-size: 1.05rem; color: var(--rust); margin-bottom: 6px; }
+  footer .foot-note { font-size: 0.76rem; opacity: 0.75; margin-top: 6px; }
+
+  @media (max-width: 820px) {
+    .about-grid, .contact-grid { grid-template-columns: 1fr; }
+    .nav-links { display: none; }
+    .nav-toggle { display: block; }
+    .facts { grid-template-columns: 1fr; }
+    .sprig { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="pill">
+    <a href="#top" class="brand">
+      <svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></svg>
+      Sagebrush <span>Sites</span>
+    </a>
+    <div class="nav-links" id="nav-links">
+      <a href="#work" data-nav>Work</a>
+      <a href="#process" data-nav>Process</a>
+      <a href="#about" data-nav>About</a>
+      <a href="#skills" data-nav>Skills</a>
+      <a href="#contact" data-nav>Contact</a>
+    </div>
+    <a href="#contact" class="nav-cta">Get in touch</a>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Open menu" aria-expanded="false">&#9776;</button>
+  </nav>
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="#work">Work</a>
+    <a href="#process">Process</a>
+    <a href="#about">About</a>
+    <a href="#skills">Skills</a>
+    <a href="#contact">Contact</a>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- ---------- Hero ---------- -->
+  <section class="hero wrap">
+    <svg class="sprig left icon" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M12 21C12 21 5 17 5 10C5 6 8 3 12 3C16 3 19 6 19 10C19 17 12 21 12 21Z"/><path d="M12 21V6"/></svg>
+    <svg class="sprig right icon" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M12 21C12 21 5 17 5 10C5 6 8 3 12 3C16 3 19 6 19 10C19 17 12 21 12 21Z"/><path d="M12 21V6"/></svg>
+
+    <div class="arch-frame"><span class="mono">SS</span></div>
+
+    <p class="eyebrow">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></svg>
+      Fort Worth, Texas
+    </p>
+    <h1>Websites for <span class="accent-serif">salons &amp; beauty businesses</span> that turn browsers into booked appointments.</h1>
+    <p class="lead">I'm Sagebrush Sites, a Fort Worth-based studio. I design and build warm, mobile-first sites for hair, nail, barber, and spa businesses — thoughtful detail without the bloat, and a site that gets people to actually book.</p>
+    <div class="hero-ctas">
+      <a href="#work" class="btn btn-primary">View my work</a>
+      <a href="#contact" class="btn btn-ghost">Get in touch</a>
+    </div>
+  </section>
+
+  <div class="divider" aria-hidden="true"></div>
+
+  <!-- ---------- Work ---------- -->
+  <section id="work" class="wrap">
+    <div class="section-head">
+      <p class="eyebrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M12 21C12 21 5 17 5 10C5 6 8 3 12 3C16 3 19 6 19 10C19 17 12 21 12 21Z"/><path d="M12 21V6"/></svg> Featured Work</p>
+      <h2>Concept projects, built to show real craft</h2>
+      <p>I'm early in my freelance journey, so these are self-directed concept builds rather than paid client work — each one fully coded and live, not a mockup.</p>
+    </div>
+    <div class="work-grid">
+
+      <div class="work-card">
+        <div class="work-thumb thumb-hair"><span class="tag-live">Concept project</span></div>
+        <div class="work-body">
+          <h3>Haven Hair Studio</h3>
+          <p>Modern, minimalist hair salon site with a hand-built JS gallery lightbox and a booking-ready contact flow.</p>
+          <div class="chip-row"><span class="chip">HTML/CSS/JS</span><span class="chip">Gallery + Lightbox</span><span class="chip">Mobile-first</span></div>
+          <div class="work-links">
+            <a class="work-link" href="spec-projects/haven-hair-studio/index.html">View project →</a>
+            <a class="work-link secondary" href="case-studies/haven-hair-studio.html">Read case study →</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="work-card">
+        <div class="work-thumb thumb-nail"><span class="tag-live">Concept project</span></div>
+        <div class="work-body">
+          <h3>Bloom Nail Studio</h3>
+          <p>Playful, color-driven nail studio site with a bold chip-based service menu and a photo-grid gallery.</p>
+          <div class="chip-row"><span class="chip">HTML/CSS/JS</span><span class="chip">Color System</span><span class="chip">Mobile-first</span></div>
+          <div class="work-links">
+            <a class="work-link" href="spec-projects/bloom-nail-studio/index.html">View project →</a>
+            <a class="work-link secondary" href="case-studies/bloom-nail-studio.html">Read case study →</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="work-card">
+        <div class="work-thumb thumb-barber"><span class="tag-live">Concept project</span></div>
+        <div class="work-body">
+          <h3>Ironclad Barber Co.</h3>
+          <p>Vintage-modern barbershop site with a warm dark palette, brass accents, and a straightforward service menu.</p>
+          <div class="chip-row"><span class="chip">HTML/CSS/JS</span><span class="chip">Vintage Theme</span><span class="chip">Mobile-first</span></div>
+          <div class="work-links">
+            <a class="work-link" href="spec-projects/ironclad-barber-co/index.html">View project →</a>
+            <a class="work-link secondary" href="case-studies/ironclad-barber-co.html">Read case study →</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="work-card">
+        <div class="work-thumb thumb-spa"><span class="tag-live">Concept project</span></div>
+        <div class="work-body">
+          <h3>Still Water Spa</h3>
+          <p>Calm, wellness-oriented day spa site with a sage palette and unhurried, editorial-style copy.</p>
+          <div class="chip-row"><span class="chip">HTML/CSS/JS</span><span class="chip">Editorial Copy</span><span class="chip">Mobile-first</span></div>
+          <div class="work-links">
+            <a class="work-link" href="spec-projects/still-water-spa/index.html">View project →</a>
+            <a class="work-link secondary" href="case-studies/still-water-spa.html">Read case study →</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <p class="work-note">Interested in a similar build for your salon or beauty business? <a href="#contact">Let's talk</a>.</p>
+  </section>
+
+  <div class="divider" aria-hidden="true"></div>
+
+  <!-- ---------- Process ---------- -->
+  <section id="process" class="wrap">
+    <div class="section-head">
+      <p class="eyebrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></svg> How We'd Work Together</p>
+      <h2>A simple, four-step process</h2>
+      <p>No jargon, no surprise scope creep — just a clear path from idea to a live site.</p>
+    </div>
+    <div class="process-grid">
+      <div class="process-card"><div class="num-circle">1</div><h3>Discover</h3><p>A free intro call to understand your business, your booking platform, and what the site needs to actually do.</p></div>
+      <div class="process-card"><div class="num-circle">2</div><h3>Design</h3><p>A layout and style built around your brand — not a generic template — reviewed with you before any code is written.</p></div>
+      <div class="process-card"><div class="num-circle">3</div><h3>Build</h3><p>Hand-coded HTML/CSS/JS, fast-loading and mobile-first, with your booking platform linked or embedded.</p></div>
+      <div class="process-card"><div class="num-circle">4</div><h3>Launch</h3><p>Final review, go-live, and a walkthrough so you're not stuck if you need to update something yourself.</p></div>
+    </div>
+    <div class="process-note">
+      <p>Pricing depends on scope — number of pages, gallery size, and booking integration all factor in. I'll always give you a clear quote before any work starts.</p>
+      <a href="#contact" class="btn btn-primary">Get a free quote</a>
+    </div>
+  </section>
+
+  <div class="divider" aria-hidden="true"></div>
+
+  <!-- ---------- About ---------- -->
+  <section id="about" class="wrap">
+    <div class="about-grid">
+      <div class="about-arch"><span class="mono">MF</span></div>
+      <div class="about-copy">
+        <h2>About Sagebrush Sites</h2>
+        <p>Sagebrush Sites designs and builds websites for salons and beauty businesses — warm, mobile-first sites that load fast, show off the work through real photo galleries, and make booking an appointment effortless.</p>
+        <p>Sagebrush Sites is founded by Michelle Feliciano, based in Fort Worth, with a background in computer information systems and over a decade of client-focused experience. Web development is new territory specifically, but working closely with clients and getting the details right isn't — no bloated templates, no slow page loads, just sites that look as good as the work they represent and get browsers to actually book. Every project gets the same attention to detail as the concept work you see here.</p>
+        <div class="facts">
+          <div class="fact"><div class="k">Based in</div><div class="v">Fort Worth, TX</div></div>
+          <div class="fact"><div class="k">Specialty</div><div class="v">Salons &amp; beauty businesses</div></div>
+          <div class="fact"><div class="k">Stack</div><div class="v">HTML, CSS, JavaScript</div></div>
+          <div class="fact"><div class="k">Availability</div><div class="v">Open for new projects</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider" aria-hidden="true"></div>
+
+  <!-- ---------- Skills ---------- -->
+  <section id="skills" class="wrap">
+    <div class="section-head">
+      <p class="eyebrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M12 21C12 21 5 17 5 10C5 6 8 3 12 3C16 3 19 6 19 10C19 17 12 21 12 21Z"/><path d="M12 21V6"/></svg> Skills</p>
+      <h2>What I actually build with</h2>
+      <p>No framework overhead — every project here is hand-coded, which keeps sites fast and easy to hand off.</p>
+    </div>
+    <div class="skills-row">
+      <span class="skill-chip"><strong>HTML5</strong> — semantic, accessible markup</span>
+      <span class="skill-chip"><strong>CSS3</strong> — responsive, mobile-first layouts</span>
+      <span class="skill-chip"><strong>JavaScript</strong> — interactive UI, no framework bloat</span>
+      <span class="skill-chip"><strong>Performance</strong> — fast loads, zero unnecessary dependencies</span>
+      <span class="skill-chip"><strong>Booking integrations</strong> — Vagaro, Square, Fresha, Booksy</span>
+    </div>
+  </section>
+
+  <div class="divider" aria-hidden="true"></div>
+
+  <!-- ---------- Contact ---------- -->
+  <section id="contact" class="wrap">
+    <div class="section-head">
+      <p class="eyebrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></svg> Get In Touch</p>
+      <h2>Let's create something beautiful together</h2>
+      <p>Tell me about your business and what you're looking for — I'll follow up to schedule a free intro call.</p>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-info">
+        <dl>
+          <dt>Email</dt>
+          <dd>michelle.feliciano502@gmail.com</dd>
+          <dt>Location</dt>
+          <dd>Fort Worth, TX (remote-friendly)</dd>
+          <dt>Response time</dt>
+          <dd>Within 1–2 business days</dd>
+        </dl>
+        <div class="social-row">
+          <a href="https://github.com/MichelleFeliciano" class="social-pill" target="_blank" rel="noopener">GitHub</a>
+          <a href="https://www.linkedin.com/in/michelle-felicianowebdev/" class="social-pill" target="_blank" rel="noopener">LinkedIn</a>
+        </div>
+      </div>
+      <form action="mailto:michelle.feliciano502@gmail.com" method="post" enctype="text/plain">
+        <input type="text" name="name" placeholder="Your name" required>
+        <input type="email" name="email" placeholder="Your email" required>
+        <textarea name="message" placeholder="Tell me about your business and what you need" required></textarea>
+        <button type="submit" class="btn btn-primary">Send message</button>
+        <p class="form-note">This form opens your email client rather than submitting to a live backend — matches the zero-dependency, no-backend approach used across this whole project.</p>
+      </form>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <p class="sig">Sagebrush Sites</p>
+  <p>&copy; 2026 · Fort Worth, Texas · Founded by Michelle Feliciano</p>
+  <p class="foot-note">Contact email, domain, and social links above are placeholders — swap in real values before this goes live.</p>
+</footer>
+
+<script>
+  (function () {
+    var navToggle = document.getElementById('nav-toggle');
+    var mobileMenu = document.getElementById('mobile-menu');
+
+    navToggle.addEventListener('click', function () {
+      var isOpen = mobileMenu.classList.toggle('open');
+      navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+
+    mobileMenu.querySelectorAll('a').forEach(function (link) {
+      link.addEventListener('click', function () {
+        mobileMenu.classList.remove('open');
+        navToggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+
+    var navLinks = document.querySelectorAll('#nav-links a[data-nav]');
+    var sections = Array.from(navLinks).map(function (link) {
+      return document.querySelector(link.getAttribute('href'));
+    }).filter(Boolean);
+
+    function setActive() {
+      var scrollPos = window.scrollY + 140;
+      var current = sections[0];
+      sections.forEach(function (sec) {
+        if (sec.offsetTop <= scrollPos) current = sec;
+      });
+      navLinks.forEach(function (link) {
+        link.classList.toggle('active', link.getAttribute('href') === '#' + current.id);
+      });
+    }
+
+    document.addEventListener('scroll', setActive, { passive: true });
+    setActive();
+  })();
+</script>
+
+</body>
+</html>
