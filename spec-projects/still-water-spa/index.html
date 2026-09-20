@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<!--
+  CONCEPT / SPEC PROJECT — not a real business.
+  Built as a portfolio piece for the "salons & beauty businesses" niche
+  (see /branding/niche-and-brand.md). Photography (images/*.jpg) is free
+  stock photography from Pexels (Pexels License — free for commercial
+  use, no attribution required), used to demonstrate layout and
+  interaction, not to represent a real business's actual work.
+  Testimonials are sample copy. Swap both for real material before
+  presenting this to an actual prospective client.
+
+  Layout note: full-bleed hero with a floating note badge, three
+  wayfinding link-cards, alternating text/image story sections in
+  place of a dense services grid, photography woven into the sections
+  themselves rather than a separate tile gallery, and a single
+  auto-rotating quote instead of a testimonial grid — deliberately
+  structured differently from the other three spec projects.
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Still Water Spa — Fort Worth, TX</title>
+<style>
+  :root {
+    --bg: #f7f6f1;
+    --panel: #ffffff;
+    --ink: #33392f;
+    --ink-soft: #6f7565;
+    --line: #e4e5da;
+    --sage: #7c9070;
+    --sage-deep: #55684c;
+    --stone: #ded9c9;
+    --radius: 6px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    color: var(--ink);
+    background: var(--bg);
+    line-height: 1.7;
+    font-weight: 300;
+  }
+
+  h1, h2, h3 { font-weight: 400; letter-spacing: 0.01em; }
+  a { color: inherit; text-decoration: none; }
+  img { display: block; max-width: 100%; }
+
+  .wrap { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+  .wrap-narrow { max-width: 640px; margin: 0 auto; padding: 0 24px; }
+
+  /* ---------- Utility bar + nav ---------- */
+  .utility-bar {
+    background: var(--sage-deep);
+    color: #eef1e9;
+    font-size: 0.78rem;
+    letter-spacing: 0.03em;
+  }
+  .utility-bar .wrap { display: flex; justify-content: space-between; padding: 8px 24px; }
+
+  header { position: sticky; top: 0; z-index: 60; background: rgba(247, 246, 241, 0.95); backdrop-filter: blur(6px); border-bottom: 1px solid var(--line); }
+
+  nav.wrap { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 16px; padding: 20px 24px; }
+
+  .nav-links { display: flex; gap: 26px; font-size: 0.84rem; letter-spacing: 0.02em; }
+  .nav-links.right { justify-content: flex-end; align-items: center; }
+  .nav-links a:hover { color: var(--sage-deep); }
+
+  .brand { font-size: 1.15rem; letter-spacing: 0.16em; text-transform: uppercase; text-align: center; white-space: nowrap; }
+  .brand span { color: var(--sage-deep); }
+
+  .book-btn { border: 1px solid var(--sage-deep); color: var(--sage-deep); padding: 9px 20px; border-radius: 999px; font-size: 0.8rem; letter-spacing: 0.03em; white-space: nowrap; }
+  .book-btn:hover { background: var(--sage-deep); color: #fff; }
+
+  .nav-toggle { display: none; background: none; border: none; font-size: 1.6rem; color: var(--ink); cursor: pointer; line-height: 1; padding: 4px; justify-self: end; }
+
+  .mobile-menu { display: none; flex-direction: column; border-top: 1px solid var(--line); background: var(--bg); }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a { padding: 14px 24px; border-bottom: 1px solid var(--line); font-size: 0.92rem; }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    position: relative;
+    min-height: 76vh;
+    display: flex;
+    align-items: center;
+    background-image: linear-gradient(90deg, rgba(51,57,47,0.62) 0%, rgba(51,57,47,0.15) 65%), url('images/treatment-room-one.jpg');
+    background-size: cover;
+    background-position: center;
+    color: #fff;
+    padding: 60px 24px 100px;
+  }
+
+  .hero-inner { max-width: 1100px; margin: 0 auto; width: 100%; position: relative; }
+  .hero .eyebrow { text-transform: uppercase; letter-spacing: 0.2em; font-size: 0.72rem; margin-bottom: 20px; color: var(--stone); }
+  .hero h1 { font-size: clamp(2.2rem, 5.2vw, 3.6rem); max-width: 620px; font-weight: 300; margin-bottom: 22px; }
+  .hero p.lead { max-width: 440px; margin-bottom: 34px; color: #eef1e9; font-size: 1.02rem; }
+  .hero-ctas { display: flex; gap: 14px; flex-wrap: wrap; }
+
+  .btn { display: inline-block; padding: 14px 28px; border-radius: 999px; font-size: 0.88rem; letter-spacing: 0.02em; border: 1px solid var(--sage-deep); }
+  .btn-primary { background: var(--sage-deep); color: #fff; }
+  .btn-primary:hover { background: #445a3c; }
+  .btn-ghost { background: transparent; color: #fff; border-color: rgba(255,255,255,0.7); }
+  .btn-ghost:hover { background: rgba(255,255,255,0.12); }
+
+  .note-badge {
+    position: absolute;
+    left: 0;
+    bottom: -28px;
+    background: var(--panel);
+    color: var(--ink);
+    border-radius: var(--radius);
+    box-shadow: 0 10px 30px rgba(51,57,47,0.15);
+    padding: 16px 22px;
+    font-size: 0.85rem;
+    max-width: 320px;
+    border-left: 3px solid var(--sage);
+  }
+  .note-badge strong { display: block; margin-bottom: 3px; }
+  .note-badge span { color: var(--ink-soft); font-size: 0.8rem; }
+
+  /* ---------- Sections ---------- */
+  section { padding: 90px 0 80px; }
+
+  .section-head { text-align: center; max-width: 600px; margin: 0 auto 50px; }
+  .section-head .eyebrow { text-transform: uppercase; letter-spacing: 0.2em; font-size: 0.7rem; color: var(--sage-deep); margin-bottom: 12px; }
+  .section-head h2 { font-size: clamp(1.6rem, 3.2vw, 2.1rem); margin-bottom: 14px; font-weight: 300; }
+  .section-head p { color: var(--ink-soft); }
+
+  /* ---------- Wayfinding link cards ---------- */
+  .path-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .path-card { border: 1px solid var(--line); border-radius: var(--radius); padding: 30px 26px; background: var(--panel); }
+  .path-card .num { font-size: 0.78rem; letter-spacing: 0.1em; color: var(--sage-deep); margin-bottom: 14px; display: block; }
+  .path-card h3 { font-size: 1.15rem; margin-bottom: 10px; }
+  .path-card p { font-size: 0.9rem; color: var(--ink-soft); margin-bottom: 16px; }
+  .path-card a.link { font-size: 0.82rem; color: var(--sage-deep); border-bottom: 1px solid var(--sage-deep); padding-bottom: 2px; }
+
+  /* ---------- Alternating story sections ---------- */
+  .story { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; padding: 60px 0; border-top: 1px solid var(--line); }
+  .story.reverse .story-media { order: 2; }
+  .story.reverse .story-copy { order: 1; }
+
+  .story-media { aspect-ratio: 4 / 3; border-radius: var(--radius); background-size: cover; background-position: center; }
+  .story-copy .eyebrow { text-transform: uppercase; letter-spacing: 0.16em; font-size: 0.72rem; color: var(--sage-deep); margin-bottom: 14px; }
+  .story-copy h3 { font-size: 1.6rem; margin-bottom: 14px; font-weight: 300; }
+  .story-copy p.desc { color: var(--ink-soft); margin-bottom: 22px; }
+
+  .story-list { display: flex; flex-direction: column; gap: 0; }
+  .story-list-row { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid var(--line); font-size: 0.94rem; }
+  .story-list-row .price { color: var(--sage-deep); font-weight: 600; white-space: nowrap; padding-left: 14px; }
+  .story-note { margin-top: 18px; font-size: 0.84rem; color: var(--ink-soft); }
+
+  /* ---------- Panoramic divider ---------- */
+  .panorama { height: 320px; background-image: linear-gradient(0deg, rgba(51,57,47,0.25), rgba(51,57,47,0.25)), url('images/quiet-lounge.jpg'); background-size: cover; background-position: center; display: flex; align-items: center; justify-content: center; }
+  .panorama p { color: #fff; font-size: clamp(1.1rem, 2.6vw, 1.5rem); font-weight: 300; text-align: center; max-width: 620px; padding: 0 24px; }
+
+  /* ---------- About ---------- */
+  .about-block { max-width: 680px; margin: 0 auto; text-align: center; }
+  .about-portrait { width: 96px; height: 96px; border-radius: 50%; margin: 0 auto 24px; background-image: url('images/about.jpg'); background-size: cover; background-position: center; }
+  .about-block h2 { font-size: clamp(1.6rem, 3.2vw, 2.1rem); font-weight: 300; margin-bottom: 18px; }
+  .about-block p { color: var(--ink-soft); margin-bottom: 14px; }
+  .about-block .who { color: var(--sage-deep); font-size: 0.85rem; letter-spacing: 0.06em; text-transform: uppercase; margin-top: 8px; }
+
+  /* ---------- Testimonial carousel ---------- */
+  .quote-carousel { max-width: 680px; margin: 0 auto; text-align: center; position: relative; min-height: 160px; }
+  .quote-slide { display: none; }
+  .quote-slide.active { display: block; }
+  .quote-slide p.quote { font-size: 1.25rem; font-weight: 300; font-style: italic; margin-bottom: 20px; }
+  .quote-slide p.who { font-size: 0.82rem; color: var(--sage-deep); letter-spacing: 0.04em; text-transform: uppercase; }
+  .quote-dots { display: flex; justify-content: center; gap: 10px; margin-top: 30px; }
+  .quote-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--line); border: none; cursor: pointer; padding: 0; }
+  .quote-dot.active { background: var(--sage-deep); }
+  .testimonials-disclaimer { text-align: center; font-size: 0.78rem; color: var(--ink-soft); margin-top: 30px; opacity: 0.75; }
+
+  /* ---------- Closing CTA band ---------- */
+  .cta-band { background: var(--sage-deep); color: #fff; text-align: center; padding: 80px 24px; }
+  .cta-band h2 { font-size: clamp(1.6rem, 3.2vw, 2.2rem); font-weight: 300; margin-bottom: 16px; }
+  .cta-band p { max-width: 480px; margin: 0 auto 30px; color: #dfe6d8; }
+  .cta-band .btn-primary { background: #fff; color: var(--sage-deep); border-color: #fff; }
+  .cta-band .btn-primary:hover { background: #eef1e9; }
+
+  /* ---------- Contact ---------- */
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; }
+  .contact-info dl { display: grid; grid-template-columns: auto 1fr; gap: 14px 18px; font-size: 0.92rem; }
+  .contact-info dt { text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.72rem; color: var(--sage-deep); padding-top: 2px; }
+  .contact-info dd { color: var(--ink-soft); }
+
+  form { display: flex; flex-direction: column; gap: 14px; }
+  form input, form textarea { font-family: inherit; font-size: 0.9rem; padding: 12px 2px; border: none; border-bottom: 1px solid var(--line); background: transparent; color: var(--ink); border-radius: 0; }
+  form input:focus, form textarea:focus { outline: none; border-color: var(--sage-deep); }
+  form textarea { min-height: 90px; resize: vertical; }
+  form button { align-self: flex-start; margin-top: 6px; }
+  .form-note { font-size: 0.76rem; color: var(--ink-soft); opacity: 0.8; }
+
+  /* ---------- Footer ---------- */
+  footer { padding: 38px 0; text-align: center; font-size: 0.82rem; color: var(--ink-soft); border-top: 1px solid var(--line); }
+  footer .concept-logo { width: 14px; height: 14px; border-radius: 50%; vertical-align: middle; margin-right: 5px; opacity: 0.85; }
+  footer .concept-tag { display: inline-block; margin-top: 8px; font-size: 0.7rem; letter-spacing: 0.05em; text-transform: uppercase; color: var(--sage-deep); opacity: 0.85; }
+
+  @media (max-width: 860px) {
+    .path-row { grid-template-columns: 1fr; }
+    .story, .story.reverse { grid-template-columns: 1fr; }
+    .story-media, .story.reverse .story-media { order: 1; }
+    .story-copy, .story.reverse .story-copy { order: 2; }
+    .contact-grid { grid-template-columns: 1fr; }
+  }
+
+  @media (max-width: 780px) {
+    .nav-links { display: none; }
+    .nav-toggle { display: block; }
+    nav.wrap { grid-template-columns: auto 1fr auto; }
+    .utility-bar .wrap { font-size: 0.7rem; }
+    .note-badge { position: static; margin-top: 24px; }
+    .hero { padding-bottom: 40px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="utility-bar">
+  <div class="wrap">
+    <span>Wed–Sun · 10am–6pm</span>
+    <span>(817) 555-0164</span>
+  </div>
+</div>
+
+<header>
+  <nav class="wrap">
+    <div class="nav-links">
+      <a href="#facials">Facials</a>
+      <a href="#massage">Massage</a>
+    </div>
+    <a href="#top" class="brand">Still Water <span>Spa</span></a>
+    <div class="nav-links right">
+      <a href="#about">About</a>
+      <a href="#contact" class="book-btn">Book a Visit</a>
+    </div>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Open menu" aria-expanded="false">&#9776;</button>
+  </nav>
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="#facials">Facials</a>
+    <a href="#massage">Massage</a>
+    <a href="#about">About</a>
+    <a href="#testimonials">Reviews</a>
+    <a href="#contact">Book a Visit</a>
+  </div>
+</header>
+
+<main id="top">
+
+  <section class="hero">
+    <div class="hero-inner">
+      <p class="eyebrow">Fort Worth, Texas</p>
+      <h1>An hour where nothing is asked of you.</h1>
+      <p class="lead">Facials, peels, and massage in a space built for quiet. No rushing between rooms, no upsells at checkout.</p>
+      <div class="hero-ctas">
+        <a href="#contact" class="btn btn-primary">Book an appointment</a>
+        <a href="#facials" class="btn btn-ghost">Explore treatments</a>
+      </div>
+      <div class="note-badge">
+        <strong>New client?</strong>
+        <span>Every visit starts with a free 5-minute skin consultation.</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap" style="padding-top: 130px;">
+    <div class="section-head">
+      <p class="eyebrow">Find Your Way</p>
+      <h2>Your path to an unhurried hour</h2>
+    </div>
+    <div class="path-row">
+      <div class="path-card">
+        <span class="num">01</span>
+        <h3>Facials &amp; Peels</h3>
+        <p>Targeted treatments for texture, tone, and acne — tailored at consultation.</p>
+        <a href="#facials" class="link">See facials &amp; peels &rarr;</a>
+      </div>
+      <div class="path-card">
+        <span class="num">02</span>
+        <h3>Massage</h3>
+        <p>Full-body relaxation or targeted tension relief, 30 to 90 minutes.</p>
+        <a href="#massage" class="link">See massage &rarr;</a>
+      </div>
+      <div class="path-card">
+        <span class="num">03</span>
+        <h3>The Space</h3>
+        <p>A look at the rooms, the lounge, and what makes a visit here different.</p>
+        <a href="#about" class="link">See the space &rarr;</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="facials" class="wrap">
+    <div class="story">
+      <div class="story-media" style="background-image: url('images/facial-bar.jpg');"></div>
+      <div class="story-copy">
+        <p class="eyebrow">Skin</p>
+        <h3>Facials &amp; peels, priced plainly</h3>
+        <p class="desc">Every service starts with a five-minute skin consultation, included in the price — no guessing what you'll actually pay.</p>
+        <div class="story-list">
+          <div class="story-list-row"><span>Signature Facial</span><span class="price">$95+</span></div>
+          <div class="story-list-row"><span>Chemical Peel</span><span class="price">$130+</span></div>
+          <div class="story-list-row"><span>Microdermabrasion</span><span class="price">$110+</span></div>
+          <div class="story-list-row"><span>Express Facial (30 min)</span><span class="price">$60+</span></div>
+        </div>
+        <p class="story-note">New to facials or peels? Mention it when booking and we'll recommend where to start.</p>
+      </div>
+    </div>
+
+    <div id="massage" class="story reverse">
+      <div class="story-media" style="background-image: url('images/massage-room.jpg');"></div>
+      <div class="story-copy">
+        <p class="eyebrow">Body</p>
+        <h3>Massage, on your schedule</h3>
+        <p class="desc">A dedicated massage room with a heated table and sound dampening — built for the hour to actually feel like an hour.</p>
+        <div class="story-list">
+          <div class="story-list-row"><span>60-Min Massage</span><span class="price">$105+</span></div>
+          <div class="story-list-row"><span>Facial + Massage Combo</span><span class="price">$175+</span></div>
+        </div>
+        <p class="story-note">Combine any massage with a facial for a longer, unhurried afternoon.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="panorama">
+    <p>&ldquo;The quiet lounge alone is worth booking early and staying after.&rdquo;</p>
+  </div>
+
+  <section id="about" class="wrap">
+    <div class="story reverse" style="border-top: none;">
+      <div class="story-media" style="background-image: url('images/reception.jpg');"></div>
+      <div class="story-copy">
+        <p class="eyebrow">The Space</p>
+        <h3>Reception, kept uncluttered</h3>
+        <p class="desc">Check-in is intentionally calm — no retail wall pushed in your face on the way to your room.</p>
+      </div>
+    </div>
+    <div class="story">
+      <div class="story-media" style="background-image: url('images/product-wall.jpg');"></div>
+      <div class="story-copy">
+        <p class="eyebrow">The Space</p>
+        <h3>A curated product wall</h3>
+        <p class="desc">Skincare used in-treatment is also available to take home — never pushed, always available if you ask.</p>
+      </div>
+    </div>
+
+    <div class="about-block" style="margin-top: 20px; padding-top: 40px; border-top: 1px solid var(--line);">
+      <div class="about-portrait"></div>
+      <h2>About Still Water</h2>
+      <p>Still Water Spa was founded by licensed esthetician Renata Okafor, who spent years in spas built more for upselling than for actual rest.</p>
+      <p>Every treatment here is built around one idea: an hour that's actually yours. No product pressure, no packed schedule that rushes your session.</p>
+      <p class="who">Renata Okafor, Founder</p>
+    </div>
+  </section>
+
+  <section id="testimonials" class="wrap-narrow">
+    <div class="section-head">
+      <p class="eyebrow">Reviews</p>
+      <h2>What clients say</h2>
+    </div>
+    <div class="quote-carousel" id="quote-carousel">
+      <div class="quote-slide active">
+        <p class="quote">&ldquo;First facial where I wasn't pressured to buy a $200 serum on the way out. Just good, honest treatment.&rdquo;</p>
+        <p class="who">Sample client feedback</p>
+      </div>
+      <div class="quote-slide">
+        <p class="quote">&ldquo;The quiet lounge alone is worth booking early and staying after. Genuinely relaxing.&rdquo;</p>
+        <p class="who">Sample client feedback</p>
+      </div>
+      <div class="quote-slide">
+        <p class="quote">&ldquo;My skin has never looked better after three peel sessions. Renata actually explains what she's doing and why.&rdquo;</p>
+        <p class="who">Sample client feedback</p>
+      </div>
+    </div>
+    <div class="quote-dots" id="quote-dots">
+      <button class="quote-dot active" data-index="0" aria-label="Show review 1"></button>
+      <button class="quote-dot" data-index="1" aria-label="Show review 2"></button>
+      <button class="quote-dot" data-index="2" aria-label="Show review 3"></button>
+    </div>
+    <p class="testimonials-disclaimer">Concept project — reviews above are illustrative sample copy, not real client quotes.</p>
+  </section>
+
+  <div class="cta-band">
+    <h2>Ready for an hour that's actually yours?</h2>
+    <p>Send a message or call — we'll confirm a time that works for you.</p>
+    <a href="#contact" class="btn btn-primary">Book your appointment</a>
+  </div>
+
+  <section id="contact" class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">Visit Us</p>
+      <h2>Get in touch</h2>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-info">
+        <dl>
+          <dt>Address</dt><dd>3315 Camp Bowie Blvd, Fort Worth, TX 76107</dd>
+          <dt>Phone</dt><dd>(817) 555-0164</dd>
+          <dt>Email</dt><dd>hello@stillwaterspa.example</dd>
+          <dt>Hours</dt><dd>Wed–Sun, 10am–6pm · Closed Mon–Tue</dd>
+        </dl>
+        <!-- In a real build: replace this section with an embedded booking widget
+             (Vagaro / Square Appointments / Fresha / Booksy / GlossGenius),
+             matching whichever platform the client already uses. -->
+      </div>
+      <form action="mailto:hello@stillwaterspa.example" method="post" enctype="text/plain">
+        <input type="text" name="name" placeholder="Your name" required>
+        <input type="email" name="email" placeholder="Your email" required>
+        <textarea name="message" placeholder="What are you looking to book?" required></textarea>
+        <button type="submit" class="btn btn-primary">Send message</button>
+        <p class="form-note">Concept project: this form opens your email client rather than submitting to a live booking system.</p>
+      </form>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <p>&copy; 2026 Still Water Spa · Fort Worth, TX</p>
+  <p class="concept-tag"><img src="images/logo.png" alt="Sagebrush Sites" class="concept-logo">Concept project — designed &amp; built by Sagebrush Sites</p>
+</footer>
+
+<script>
+  (function () {
+    var navToggle = document.getElementById('nav-toggle');
+    var mobileMenu = document.getElementById('mobile-menu');
+
+    navToggle.addEventListener('click', function () {
+      var isOpen = mobileMenu.classList.toggle('open');
+      navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+
+    mobileMenu.querySelectorAll('a').forEach(function (link) {
+      link.addEventListener('click', function () {
+        mobileMenu.classList.remove('open');
+        navToggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+
+    var slides = document.querySelectorAll('#quote-carousel .quote-slide');
+    var dots = document.querySelectorAll('#quote-dots .quote-dot');
+    var current = 0;
+    var timer;
+
+    function show(index) {
+      slides[current].classList.remove('active');
+      dots[current].classList.remove('active');
+      current = index;
+      slides[current].classList.add('active');
+      dots[current].classList.add('active');
+    }
+
+    function next() {
+      show((current + 1) % slides.length);
+    }
+
+    function resetTimer() {
+      clearInterval(timer);
+      timer = setInterval(next, 6000);
+    }
+
+    dots.forEach(function (dot) {
+      dot.addEventListener('click', function () {
+        show(parseInt(dot.getAttribute('data-index'), 10));
+        resetTimer();
+      });
+    });
+
+    resetTimer();
+  })();
+</script>
+
+</body>
+</html>

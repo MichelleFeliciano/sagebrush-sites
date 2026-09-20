@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<!--
+  On-site case study page, rendered from branding/case-studies/still-water-spa.md.
+  Keep this file's content in sync with that markdown source if either changes.
+  Same boho visual system as ../index.html — zero external dependencies.
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Still Water Spa — Case Study | Sagebrush Sites</title>
+<link rel="icon" type="image/png" href="../images/logo.png">
+<style>
+  :root {
+    --cream: #faf3ea; --cream-deep: #f2e6d5; --panel: #fffdf9; --ink: #40312a; --ink-soft: #8a7566;
+    --line: #e6d6c2; --terracotta: #c1653f; --rust: #a8492b; --sage: #7f8f6a; --rose: #d69a8e;
+    --radius: 22px; --radius-sm: 12px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    background-color: var(--cream);
+    background-image: radial-gradient(var(--line) 1px, transparent 1px);
+    background-size: 22px 22px;
+    color: var(--ink);
+    line-height: 1.7;
+  }
+  h1, h2 { font-family: Georgia, "Iowan Old Style", "Palatino Linotype", Palatino, serif; font-weight: 400; }
+  a { color: inherit; text-decoration: none; }
+  .wrap { max-width: 780px; margin: 0 auto; padding: 0 24px; }
+  ::selection { background: var(--rose); color: #3a241d; }
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--rust); outline-offset: 3px; border-radius: 4px; }
+
+  header { position: sticky; top: 0; z-index: 100; padding: 18px 24px; background: rgba(250, 243, 234, 0.9); backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+  nav.pill { max-width: 1000px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 14px; }
+  .brand { display: flex; align-items: center; gap: 8px; font-family: Georgia, Palatino, serif; font-style: italic; font-size: 1.2rem; }
+  .brand span { color: var(--rust); }
+  .brand-logo { width: 24px; height: 24px; border-radius: 50%; flex-shrink: 0; }
+  .back-link { font-size: 0.86rem; color: var(--rust); border: 1.5px solid var(--terracotta); padding: 9px 18px; border-radius: 999px; }
+  .back-link:hover { background: var(--terracotta); color: #fff8f0; }
+
+  .divider { height: 3px; background-image: radial-gradient(circle, var(--terracotta) 1.4px, transparent 1.6px); background-size: 14px 3px; background-repeat: repeat-x; opacity: 0.55; margin: 46px 0; }
+
+  .hero { padding: 60px 0 10px; text-align: center; }
+  .thumb-strip { height: 8px; border-radius: 999px; max-width: 220px; margin: 0 auto 26px; background: linear-gradient(90deg, #b7c4a5, #7f8f6a); }
+  .eyebrow { display: inline-block; font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--rust); background: var(--cream-deep); border: 1px solid var(--line); padding: 7px 16px; border-radius: 999px; margin-bottom: 22px; }
+  .hero h1 { font-size: clamp(1.9rem, 4.4vw, 2.7rem); margin-bottom: 18px; }
+  .hero p.dek { max-width: 560px; margin: 0 auto; color: var(--ink-soft); font-size: 1.02rem; }
+
+  .cta-row { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; margin-top: 30px; }
+  .btn { display: inline-block; padding: 12px 24px; border-radius: 999px; font-size: 0.9rem; border: 1.5px solid var(--terracotta); }
+  .btn-primary { background: var(--terracotta); color: #fff8f0; }
+  .btn-primary:hover { background: var(--rust); border-color: var(--rust); }
+  .btn-ghost { background: transparent; color: var(--rust); }
+  .btn-ghost:hover { background: var(--cream-deep); }
+
+  article section { padding: 0 0 10px; }
+  article h2 { font-size: 1.5rem; color: var(--rust); margin-bottom: 16px; }
+  article p { color: var(--ink); margin-bottom: 14px; }
+  article p:last-child { margin-bottom: 0; }
+  article p.note { color: var(--ink-soft); font-size: 0.92rem; font-style: italic; }
+
+  .chip-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+  .chip { font-size: 0.78rem; padding: 6px 14px; border-radius: 999px; background: var(--cream-deep); border: 1px solid var(--line); color: var(--ink-soft); }
+
+  .result-box { background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); padding: 26px 28px; }
+
+  footer { padding: 60px 0 40px; text-align: center; }
+  footer .footer-logo { width: 36px; height: 36px; margin: 0 auto 10px; border-radius: 50%; }
+  footer .sig { font-family: Georgia, Palatino, serif; font-style: italic; font-size: 1.05rem; color: var(--rust); margin-bottom: 6px; }
+  footer p { color: var(--ink-soft); font-size: 0.88rem; }
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="pill">
+    <a href="../index.html" class="brand"><img src="../images/logo.png" alt="Sagebrush Sites logo" class="brand-logo">Sagebrush <span>Sites</span></a>
+    <a href="../work.html" class="back-link">← All Work</a>
+  </nav>
+</header>
+
+<main>
+  <div class="wrap">
+    <div class="hero">
+      <div class="thumb-strip"></div>
+      <p class="eyebrow">Concept Project · Case Study</p>
+      <h1>Still Water Spa</h1>
+      <p class="dek">A calm, editorial-toned day spa site built so the layout itself feels unhurried — not just the copy.</p>
+      <div class="cta-row">
+        <a href="../../spec-projects/still-water-spa/index.html" class="btn btn-primary">View live site →</a>
+        <a href="../work.html" class="btn btn-ghost">Back to portfolio</a>
+      </div>
+    </div>
+
+    <div class="divider" aria-hidden="true"></div>
+
+    <article>
+      <section>
+        <h2>Problem</h2>
+        <p>Day spas sell calm and unhurried attention — but a lot of spa websites undercut exactly that positioning with generic, cluttered templates that feel just as rushed as the experience they're trying to sell against. When the whole pitch is "an hour where nothing is asked of you," a busy, ad-heavy, slow-loading site quietly contradicts the brand before a client ever walks in.</p>
+      </section>
+
+      <section>
+        <h2>Approach</h2>
+        <p>The design goal here was restraint, not more features — and restraint meant rethinking the layout itself, not just muting the palette. There's no dense pricing grid: treatments live inside alternating text-and-photo story sections (facials, then massage, each with its own short plain-text price list), the way a spa's own site copy would walk you through a service rather than dump a menu on you. A three-card "path" section at the top helps a first-time visitor jump straight to what they came for. The photo tour of the space — treatment rooms, the quiet lounge — is woven directly into those story sections and a single full-bleed pull-quote panorama, instead of living in a separate clickable gallery grid. Reviews rotate one at a time through a single auto-advancing quote instead of a testimonial grid, so only one thought is on screen at a time — quieter, on purpose.</p>
+      </section>
+
+      <section>
+        <h2>Tech Stack</h2>
+        <p>Same offline-first foundation as the rest of the portfolio: plain HTML5, CSS3, vanilla JavaScript, single self-contained file, zero external dependencies, no build step. The only new interactive piece is the auto-advancing quote carousel — a small <code>setInterval</code> loop with clickable dots, restarting its timer on manual navigation so it never fights the visitor.</p>
+        <div class="chip-row">
+          <span class="chip">HTML5</span><span class="chip">CSS3</span><span class="chip">Vanilla JS</span><span class="chip">Zero dependencies</span><span class="chip">No build step</span>
+        </div>
+      </section>
+
+      <section>
+        <h2>Result</h2>
+        <div class="result-box">
+          <p class="note">No real client, no fabricated numbers.</p>
+          <p>Verified directly in-browser: zero external network requests, zero console errors, working quote carousel and mobile nav at phone widths. Across the four spec projects, the honest result to point to isn't a business metric — it's that the same offline-first, dependency-free foundation supports four structurally different builds (a ledger menu and filmstrip gallery here, a masonry gallery and icon menu there) instead of one template reskinned four times.</p>
+        </div>
+      </section>
+    </article>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <img src="../images/logo.png" alt="Sagebrush Sites logo" class="footer-logo">
+    <p class="sig">Sagebrush Sites</p>
+    <p>Interested in something similar for your spa? <a href="../contact.html" style="color: var(--rust); font-weight: 600; border-bottom: 1px solid var(--rust);">Get in touch</a>.</p>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<!--
+  CONCEPT / SPEC PROJECT — not a real business.
+  Built as a portfolio piece for the "salons & beauty businesses" niche
+  (see /branding/niche-and-brand.md). Photography (images/*.jpg) is free
+  stock photography from Pexels (Pexels License — free for commercial
+  use, no attribution required), used to demonstrate layout and
+  interaction, not to represent a real business's actual work.
+  Testimonials are sample copy. Swap both for real material before
+  presenting this to an actual prospective client.
+
+  Layout note: full-bleed vintage-badge hero, ledger-style price board
+  (no cards), horizontal scroll-snap filmstrip gallery (no lightbox
+  modal), and a pull-quote About section — deliberately structured
+  differently from the other three spec projects, not just recolored.
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ironclad Barber Co. — San Antonio, TX</title>
+<style>
+  :root {
+    --bg: #14100c;
+    --panel: #1c1712;
+    --panel-line: #332a20;
+    --cream: #f1e9db;
+    --cream-soft: #b8ab97;
+    --brass: #c9a15a;
+    --brass-bright: #e0bd7c;
+    --rust: #a8492b;
+    --radius: 2px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: Georgia, "Times New Roman", serif;
+    color: var(--cream);
+    background: var(--bg);
+    line-height: 1.6;
+  }
+
+  a { color: inherit; text-decoration: none; }
+  img { display: block; max-width: 100%; }
+
+  .sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; }
+
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+  .wrap-narrow { max-width: 720px; margin: 0 auto; padding: 0 24px; }
+
+  .eyebrow {
+    display: block;
+    text-transform: uppercase;
+    letter-spacing: 0.28em;
+    font-size: 0.72rem;
+    color: var(--brass);
+  }
+
+  /* ---------- Nav ---------- */
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 60;
+    background: rgba(20, 16, 12, 0.92);
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid var(--panel-line);
+  }
+
+  nav.wrap {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 16px;
+    padding: 14px 24px;
+  }
+
+  .nav-links { display: flex; gap: 26px; font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; }
+  .nav-links.right { justify-content: flex-end; }
+  .nav-links a:hover { color: var(--brass-bright); }
+
+  .badge-mark {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    justify-content: center;
+  }
+
+  .badge-mark svg { width: 40px; height: 40px; flex-shrink: 0; }
+  .badge-mark .brand-name { font-size: 1rem; letter-spacing: 0.14em; text-transform: uppercase; white-space: nowrap; }
+  .badge-mark .brand-name span { display: block; font-size: 0.62rem; letter-spacing: 0.22em; color: var(--brass); }
+
+  .book-btn {
+    background: transparent;
+    color: var(--brass-bright);
+    border: 1px solid var(--brass);
+    padding: 9px 18px;
+    font-size: 0.76rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+  .book-btn:hover { background: var(--brass); color: var(--bg); }
+
+  .nav-toggle {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 1.6rem;
+    color: var(--cream);
+    cursor: pointer;
+    line-height: 1;
+    padding: 4px;
+    justify-self: end;
+  }
+
+  .mobile-menu { display: none; flex-direction: column; border-top: 1px solid var(--panel-line); background: var(--bg); }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a { padding: 14px 24px; border-bottom: 1px solid var(--panel-line); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.1em; }
+  .mobile-menu a.book-btn { text-align: center; margin: 14px 24px; border-bottom: none; }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    position: relative;
+    min-height: 78vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background-image:
+      linear-gradient(180deg, rgba(15, 11, 8, 0.45) 0%, rgba(15, 11, 8, 0.72) 60%, var(--bg) 100%),
+      url('images/hot-towel-shave.jpg');
+    background-size: cover;
+    background-position: center 25%;
+    padding: 120px 24px 80px;
+  }
+
+  .hero-inner { max-width: 720px; }
+
+  .hero .stars { color: var(--brass); font-size: 1rem; letter-spacing: 0.6em; margin-bottom: 22px; }
+
+  .hero h1 {
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    font-size: clamp(2.4rem, 6vw, 4.2rem);
+    line-height: 1.05;
+    margin: 18px 0 22px;
+  }
+
+  .hero h1 em { font-style: normal; color: var(--brass-bright); }
+
+  .hero p.lead {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    max-width: 480px;
+    margin: 0 auto 36px;
+    color: var(--cream-soft);
+    font-size: 1.02rem;
+  }
+
+  .hero-ctas { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+
+  .btn {
+    display: inline-block;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    padding: 14px 30px;
+    font-size: 0.82rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border: 1px solid var(--brass);
+    font-weight: 600;
+  }
+  .btn-primary { background: var(--brass); color: var(--bg); }
+  .btn-primary:hover { background: var(--brass-bright); border-color: var(--brass-bright); }
+  .btn-ghost { background: transparent; color: var(--brass-bright); }
+  .btn-ghost:hover { background: rgba(201, 161, 90, 0.12); }
+
+  /* ---------- Sections ---------- */
+  section { padding: 76px 0; }
+  section + section { border-top: 1px solid var(--panel-line); }
+
+  .section-head { text-align: center; max-width: 560px; margin: 0 auto 46px; }
+  .section-head h2 { font-size: clamp(1.7rem, 3.4vw, 2.3rem); font-weight: 400; margin: 14px 0 12px; }
+  .section-head p { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; color: var(--cream-soft); font-size: 0.94rem; }
+
+  /* ---------- Services: ledger / price board ---------- */
+  .ledger { display: grid; grid-template-columns: 1fr 1fr; gap: 0 60px; }
+
+  .ledger-row {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--panel-line);
+  }
+
+  .ledger-row .name { font-size: 1.06rem; white-space: nowrap; }
+  .ledger-row .leader { flex: 1; border-bottom: 2px dotted var(--panel-line); transform: translateY(-5px); }
+  .ledger-row .price { font-family: -apple-system, sans-serif; color: var(--brass-bright); font-weight: 700; font-size: 0.98rem; white-space: nowrap; }
+
+  .ledger-note {
+    grid-column: 1 / -1;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    text-align: center;
+    margin-top: 30px;
+    font-size: 0.85rem;
+    color: var(--cream-soft);
+  }
+
+  /* ---------- Gallery: horizontal filmstrip, no modal ---------- */
+  .filmstrip {
+    display: flex;
+    gap: 18px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding-bottom: 14px;
+    margin: 0 -24px;
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+
+  .filmstrip::-webkit-scrollbar { height: 6px; }
+  .filmstrip::-webkit-scrollbar-thumb { background: var(--panel-line); border-radius: 999px; }
+
+  .film-item {
+    flex: 0 0 auto;
+    width: 260px;
+    scroll-snap-align: start;
+  }
+
+  .film-photo {
+    aspect-ratio: 4 / 5;
+    background-size: cover;
+    background-position: center;
+    border: 1px solid var(--panel-line);
+    margin-bottom: 12px;
+  }
+
+  .film-item h3 { font-size: 1rem; font-weight: 400; margin-bottom: 4px; }
+  .film-item p { font-family: -apple-system, sans-serif; font-size: 0.84rem; color: var(--cream-soft); }
+
+  .f1 { background-image: url('images/mid-skin-fade.jpg'); }
+  .f2 { background-image: url('images/classic-side-part.jpg'); }
+  .f3 { background-image: url('images/full-beard-sculpt.jpg'); }
+  .f4 { background-image: url('images/buzz-cut.jpg'); }
+  .f5 { background-image: url('images/textured-crop.jpg'); }
+  .f6 { background-image: url('images/hot-towel-shave.jpg'); }
+
+  .filmstrip-hint { text-align: center; font-family: -apple-system, sans-serif; font-size: 0.78rem; color: var(--cream-soft); opacity: 0.7; margin-top: 6px; }
+
+  /* ---------- About: pull-quote over photo ---------- */
+  .about-panel {
+    position: relative;
+    border: 1px solid var(--panel-line);
+    background-image: linear-gradient(180deg, rgba(20, 16, 12, 0.35), rgba(20, 16, 12, 0.92)), url('images/about.jpg');
+    background-size: cover;
+    background-position: center;
+    padding: 70px 40px;
+    text-align: center;
+  }
+
+  .about-panel blockquote {
+    font-size: clamp(1.3rem, 3vw, 1.9rem);
+    max-width: 640px;
+    margin: 0 auto 28px;
+    line-height: 1.4;
+  }
+
+  .about-panel .who { font-family: -apple-system, sans-serif; text-transform: uppercase; letter-spacing: 0.12em; font-size: 0.78rem; color: var(--brass); margin-bottom: 34px; }
+
+  .about-copy { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; max-width: 620px; margin: 0 auto; color: var(--cream-soft); font-size: 0.95rem; text-align: left; }
+  .about-copy p { margin-bottom: 12px; }
+  .about-copy p:last-child { margin-bottom: 0; }
+
+  /* ---------- Testimonials ---------- */
+  .reviews { display: flex; flex-direction: column; gap: 0; max-width: 720px; margin: 0 auto; }
+  .review { display: grid; grid-template-columns: auto 1fr; gap: 18px; padding: 26px 0; border-bottom: 1px solid var(--panel-line); }
+  .review:first-child { border-top: 1px solid var(--panel-line); }
+  .review .mark { font-size: 2.4rem; font-family: Georgia, serif; color: var(--brass); line-height: 1; }
+  .review p.quote { font-family: -apple-system, sans-serif; font-size: 0.98rem; margin-bottom: 10px; }
+  .review p.who { font-family: -apple-system, sans-serif; font-size: 0.78rem; color: var(--brass-bright); text-transform: uppercase; letter-spacing: 0.06em; }
+  .testimonials-disclaimer { text-align: center; font-family: -apple-system, sans-serif; font-size: 0.78rem; color: var(--cream-soft); margin-top: 26px; opacity: 0.7; }
+
+  /* ---------- Contact ---------- */
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; }
+
+  .contact-info dl { display: grid; grid-template-columns: auto 1fr; gap: 14px 18px; font-size: 0.92rem; }
+  .contact-info dt { text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.72rem; color: var(--brass); padding-top: 2px; }
+  .contact-info dd { color: var(--cream-soft); }
+
+  form { display: flex; flex-direction: column; gap: 12px; }
+  form input, form textarea {
+    font-family: inherit; font-size: 0.92rem; padding: 12px 14px;
+    border: 1px solid var(--panel-line); background: var(--panel); color: var(--cream);
+  }
+  form textarea { min-height: 110px; resize: vertical; }
+  form button { align-self: flex-start; }
+  .form-note { font-size: 0.76rem; color: var(--cream-soft); opacity: 0.75; }
+
+  /* ---------- Footer ---------- */
+  footer { padding: 36px 0; text-align: center; font-family: -apple-system, sans-serif; font-size: 0.8rem; color: var(--cream-soft); border-top: 1px solid var(--panel-line); }
+  footer .concept-logo { width: 14px; height: 14px; border-radius: 50%; vertical-align: middle; margin-right: 5px; opacity: 0.85; }
+  footer .concept-tag { display: inline-block; margin-top: 8px; font-size: 0.7rem; letter-spacing: 0.05em; text-transform: uppercase; color: var(--brass); opacity: 0.9; }
+
+  @media (max-width: 860px) {
+    .ledger { grid-template-columns: 1fr; }
+    .contact-grid { grid-template-columns: 1fr; }
+    .review { grid-template-columns: 1fr; }
+    .review .mark { display: none; }
+  }
+
+  @media (max-width: 780px) {
+    .nav-links { display: none; }
+    .nav-toggle { display: block; }
+    nav.wrap { grid-template-columns: auto 1fr auto; }
+    .badge-mark { justify-content: flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="wrap">
+    <div class="nav-links">
+      <a href="#services">Services</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#about">About</a>
+    </div>
+    <a href="#top" class="badge-mark">
+      <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle cx="30" cy="30" r="28" stroke="#c9a15a" stroke-width="1.5"/>
+        <circle cx="30" cy="30" r="23" stroke="#c9a15a" stroke-width="1"/>
+        <text x="30" y="37" text-anchor="middle" font-family="Georgia, serif" font-size="19" fill="#e0bd7c">IB</text>
+      </svg>
+      <span class="brand-name">Ironclad<span>Barber Co.</span></span>
+    </a>
+    <div class="nav-links right">
+      <a href="#testimonials">Reviews</a>
+      <a href="#contact" class="book-btn">Book Now</a>
+    </div>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Open menu" aria-expanded="false">&#9776;</button>
+  </nav>
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="#services">Services</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#about">About</a>
+    <a href="#testimonials">Reviews</a>
+    <a href="#contact" class="btn btn-primary book-btn">Book Now</a>
+  </div>
+</header>
+
+<main id="top">
+
+  <section class="hero">
+    <div class="hero-inner">
+      <p class="stars">&#9733; &#9733; &#9733;</p>
+      <p class="eyebrow">Est. San Antonio, Texas</p>
+      <h1>Ironclad<br><em>Barber Co.</em></h1>
+      <p class="lead">Old-school barbering with modern fades. Walk in or book ahead — either way, you leave looking like you meant to.</p>
+      <div class="hero-ctas">
+        <a href="#contact" class="btn btn-primary">Book an appointment</a>
+        <a href="#gallery" class="btn btn-ghost">See the work</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="services" class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">The Board</p>
+      <h2>Straightforward menu</h2>
+      <p>No upsells at the chair — the price you see is the price you pay.</p>
+    </div>
+    <div class="ledger">
+      <div class="ledger-row"><span class="name">Classic Cut</span><span class="leader"></span><span class="price">$35+</span></div>
+      <div class="ledger-row"><span class="name">Skin Fade</span><span class="leader"></span><span class="price">$42+</span></div>
+      <div class="ledger-row"><span class="name">Beard Trim &amp; Shape</span><span class="leader"></span><span class="price">$22+</span></div>
+      <div class="ledger-row"><span class="name">Hot Towel Shave</span><span class="leader"></span><span class="price">$38+</span></div>
+      <div class="ledger-row"><span class="name">Cut &amp; Beard Combo</span><span class="leader"></span><span class="price">$52+</span></div>
+      <div class="ledger-row"><span class="name">Kids Cut (12 &amp; under)</span><span class="leader"></span><span class="price">$25+</span></div>
+      <p class="ledger-note">Walk-ins welcome when the chair's open — booking ahead guarantees your time.</p>
+    </div>
+  </section>
+
+  <section id="gallery" class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">Recent Work</p>
+      <h2>Cuts we're proud of</h2>
+    </div>
+    <div class="filmstrip">
+      <div class="film-item"><div class="film-photo f1"></div><h3>Mid Skin Fade</h3><p>Clean mid fade to skin with a textured crop on top.</p></div>
+      <div class="film-item"><div class="film-photo f2"></div><h3>Classic Side Part</h3><p>Traditional scissor cut with a hard side part and low taper.</p></div>
+      <div class="film-item"><div class="film-photo f3"></div><h3>Full Beard Sculpt</h3><p>Beard shaped and lined for a sharp, defined edge.</p></div>
+      <div class="film-item"><div class="film-photo f4"></div><h3>Buzz Cut</h3><p>Even all-over clipper cut, quick and low-maintenance.</p></div>
+      <div class="film-item"><div class="film-photo f5"></div><h3>Textured Crop</h3><p>Longer top with heavy texture, faded sides.</p></div>
+      <div class="film-item"><div class="film-photo f6"></div><h3>Hot Towel Shave</h3><p>Straight-razor shave finished with a cold towel and balm.</p></div>
+    </div>
+    <p class="filmstrip-hint">Scroll to see more &rarr;</p>
+  </section>
+
+  <section id="about" class="wrap">
+    <div class="about-panel">
+      <blockquote>&ldquo;Every client gets the full time their service takes. No exceptions.&rdquo;</blockquote>
+      <p class="who">Dale Ferris, Founder</p>
+      <div class="about-copy">
+        <p>Ironclad Barber Co. was opened by Dale Ferris after twelve years cutting hair in shops that rushed every appointment to fit one more in.</p>
+        <p>That means real fades, real straight-razor shaves, and a chair you don't feel rushed out of — whether you're in for a five-minute buzz or a full shave and cut.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="testimonials" class="wrap-narrow">
+    <div class="section-head">
+      <p class="eyebrow">Word of Mouth</p>
+      <h2>What clients say</h2>
+    </div>
+    <div class="reviews">
+      <div class="review"><span class="mark">&ldquo;</span><div><p class="quote">First barber in years who actually got my fade even on both sides. Found my regular spot.</p><p class="who">Sample client feedback</p></div></div>
+      <div class="review"><span class="mark">&ldquo;</span><div><p class="quote">The hot towel shave alone is worth the drive across town.</p><p class="who">Sample client feedback</p></div></div>
+      <div class="review"><span class="mark">&ldquo;</span><div><p class="quote">No rushing, no upsell, just a good cut at a fair price. What more do you need.</p><p class="who">Sample client feedback</p></div></div>
+    </div>
+    <p class="testimonials-disclaimer">Concept project — reviews above are illustrative sample copy, not real client quotes.</p>
+  </section>
+
+  <section id="contact" class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">Visit Us</p>
+      <h2>Book your appointment</h2>
+      <p>Send a message or call — we'll confirm a time that works for you.</p>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-info">
+        <dl>
+          <dt>Address</dt><dd>908 Alamo Heights Blvd, San Antonio, TX 78209</dd>
+          <dt>Phone</dt><dd>(210) 555-0139</dd>
+          <dt>Email</dt><dd>hello@ironcladbarberco.example</dd>
+          <dt>Hours</dt><dd>Tue–Sat, 9am–7pm · Closed Sun–Mon</dd>
+        </dl>
+        <!-- In a real build: replace this section with an embedded booking widget
+             (Vagaro / Square Appointments / Fresha / Booksy / GlossGenius),
+             matching whichever platform the client already uses. -->
+      </div>
+      <form action="mailto:hello@ironcladbarberco.example" method="post" enctype="text/plain">
+        <input type="text" name="name" placeholder="Your name" required>
+        <input type="email" name="email" placeholder="Your email" required>
+        <textarea name="message" placeholder="What are you looking to book?" required></textarea>
+        <button type="submit" class="btn btn-primary">Send message</button>
+        <p class="form-note">Concept project: this form opens your email client rather than submitting to a live booking system.</p>
+      </form>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <p>&copy; 2026 Ironclad Barber Co. · San Antonio, TX</p>
+  <p class="concept-tag"><img src="images/logo.png" alt="Sagebrush Sites" class="concept-logo">Concept project — designed &amp; built by Sagebrush Sites</p>
+</footer>
+
+<script>
+  (function () {
+    var navToggle = document.getElementById('nav-toggle');
+    var mobileMenu = document.getElementById('mobile-menu');
+
+    navToggle.addEventListener('click', function () {
+      var isOpen = mobileMenu.classList.toggle('open');
+      navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+
+    mobileMenu.querySelectorAll('a').forEach(function (link) {
+      link.addEventListener('click', function () {
+        mobileMenu.classList.remove('open');
+        navToggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+  })();
+</script>
+
+</body>
+</html>

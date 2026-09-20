@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<!--
+  CONCEPT / SPEC PROJECT — not a real business.
+  Built as a portfolio piece for the "salons & beauty businesses" niche
+  (see /branding/niche-and-brand.md). Photography (images/*.jpg) is free
+  stock photography from Pexels (Pexels License — free for commercial
+  use, no attribution required), used to demonstrate layout and
+  interaction, not to represent a real business's actual work.
+  Testimonials are sample copy. Swap both for real material before
+  presenting this to an actual prospective client.
+
+  Layout note: full-bleed color-block panels alternating with photo
+  panels, a chip/pill-based service menu, a bento-grid gallery (keeps
+  a lightbox), and scattered Polaroid-style review cards — deliberately
+  structured differently from the other three spec projects.
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bloom Nail Studio — Houston, TX</title>
+<style>
+  :root {
+    --bg: #fffaf9;
+    --panel: #ffffff;
+    --ink: #2c2430;
+    --ink-soft: #6b5f70;
+    --line: #f0e2e6;
+    --coral: #ff7a6b;
+    --coral-deep: #e2503f;
+    --mint: #4fd1b3;
+    --mint-deep: #21916f;
+    --lavender: #b892f0;
+    --sun: #ffc857;
+    --sun-deep: #e0a71f;
+    --radius: 16px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    color: var(--ink);
+    background: var(--bg);
+    line-height: 1.6;
+  }
+
+  h1, h2, h3 { font-weight: 800; letter-spacing: -0.01em; }
+  a { color: inherit; text-decoration: none; }
+  img { display: block; max-width: 100%; }
+
+  .wrap { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+
+  /* ---------- Nav ---------- */
+  header {
+    position: sticky; top: 0; z-index: 60;
+    background: rgba(255, 250, 249, 0.95);
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid var(--line);
+  }
+
+  nav.wrap { display: flex; align-items: center; justify-content: space-between; padding: 14px 24px; }
+
+  .brand { font-size: 2rem; font-weight: 800; letter-spacing: -0.02em; }
+  .brand span { color: var(--coral); }
+
+  .nav-toggle {
+    background: none; border: 2px solid var(--ink); border-radius: 50%;
+    width: 44px; height: 44px; font-size: 1.3rem; color: var(--ink);
+    cursor: pointer; line-height: 1;
+  }
+
+  .mobile-menu { display: none; flex-direction: column; border-top: 1px solid var(--line); background: var(--bg); }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a { padding: 16px 24px; border-bottom: 1px solid var(--line); font-size: 1rem; font-weight: 700; }
+
+  /* ---------- Hero: full-bleed photo ---------- */
+  .hero {
+    position: relative;
+    min-height: 84vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background-image: linear-gradient(0deg, rgba(44,36,48,0.55), rgba(44,36,48,0.15) 60%), url('images/sunset-ombre.jpg');
+    background-size: cover;
+    background-position: center;
+    color: #fff;
+    padding: 60px 24px;
+  }
+
+  .hero-inner { max-width: 640px; }
+  .hero .eyebrow { text-transform: uppercase; letter-spacing: 0.2em; font-size: 0.78rem; margin-bottom: 18px; opacity: 0.9; }
+  .hero h1 { font-size: clamp(2.4rem, 7vw, 4.2rem); margin-bottom: 22px; line-height: 1.05; }
+  .hero p.lead { max-width: 420px; margin: 0 auto 32px; font-size: 1.05rem; opacity: 0.95; }
+
+  .btn {
+    display: inline-block; padding: 16px 34px; border-radius: 999px;
+    font-size: 0.95rem; font-weight: 800; border: 2px solid transparent;
+  }
+  .btn-primary { background: var(--coral); color: #fff; }
+  .btn-primary:hover { background: #ff5c48; }
+  .btn-light { background: #fff; color: var(--ink); }
+  .btn-light:hover { background: #ffe8e4; }
+  .btn-outline { background: transparent; color: #fff; border-color: #fff; }
+  .btn-outline:hover { background: rgba(255,255,255,0.15); }
+
+  /* ---------- Full-bleed color panel ---------- */
+  .panel { padding: 90px 24px; text-align: center; color: #fff; }
+  .panel-coral { background: var(--coral-deep); }
+  .panel-mint { background: var(--mint-deep); }
+  .panel-sun { background: var(--sun-deep); color: var(--ink); }
+  .panel-inner { max-width: 640px; margin: 0 auto; }
+  .panel .eyebrow { text-transform: uppercase; letter-spacing: 0.18em; font-size: 0.75rem; opacity: 0.85; margin-bottom: 16px; }
+  .panel h2 { font-size: clamp(1.9rem, 4vw, 2.6rem); margin-bottom: 20px; }
+  .panel p.desc { font-size: 1.02rem; margin-bottom: 30px; opacity: 0.95; }
+
+  /* ---------- Photo break ---------- */
+  .photo-break { height: 340px; background-size: cover; background-position: center; }
+
+  /* ---------- Sections ---------- */
+  section.wrap { padding: 90px 24px; }
+  .section-head { text-align: center; max-width: 600px; margin: 0 auto 46px; }
+  .section-head .eyebrow { text-transform: uppercase; letter-spacing: 0.16em; font-size: 0.75rem; font-weight: 700; color: var(--coral); margin-bottom: 10px; }
+  .section-head h2 { font-size: clamp(1.9rem, 3.6vw, 2.5rem); margin-bottom: 12px; }
+  .section-head p { color: var(--ink-soft); font-weight: 400; }
+
+  /* ---------- Services: chip/pill menu ---------- */
+  .menu-group { margin-bottom: 40px; }
+  .menu-group:last-of-type { margin-bottom: 0; }
+  .menu-group h3 { font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.14em; color: var(--ink-soft); margin-bottom: 16px; text-align: center; }
+  .chip-wrap { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
+
+  .price-chip {
+    display: flex; align-items: center; gap: 10px;
+    background: var(--panel); border: 2px solid var(--line);
+    border-radius: 999px; padding: 10px 10px 10px 20px;
+    font-weight: 700; font-size: 0.95rem;
+  }
+  .price-chip .amount {
+    background: var(--coral); color: #fff; border-radius: 999px;
+    padding: 6px 14px; font-size: 0.85rem; white-space: nowrap;
+  }
+  .menu-group.mint .price-chip .amount { background: var(--mint-deep); }
+  .menu-group.lavender .price-chip .amount { background: var(--lavender); }
+
+  .services-note { text-align: center; margin-top: 36px; font-size: 0.88rem; color: var(--ink-soft); }
+
+  /* ---------- Gallery: bento grid, keeps lightbox ---------- */
+  .bento { display: grid; grid-template-columns: repeat(4, 1fr); grid-auto-rows: 140px; gap: 14px; }
+  .bento-item {
+    border-radius: var(--radius); background-size: cover; background-position: center;
+    cursor: pointer; position: relative; overflow: hidden; transition: transform 0.2s ease;
+  }
+  .bento-item:hover { transform: scale(0.98); }
+  .bento-item span {
+    position: absolute; left: 12px; bottom: 12px;
+    background: rgba(44,36,48,0.55); color: #fff; font-size: 0.8rem; font-weight: 700;
+    padding: 6px 12px; border-radius: 999px;
+  }
+
+  .b1 { grid-column: span 2; grid-row: span 2; background-image: url('images/sunset-ombre.jpg'); }
+  .b2 { grid-column: span 2; grid-row: span 1; background-image: url('images/minimalist-mint.jpg'); }
+  .b3 { grid-column: span 1; grid-row: span 1; background-image: url('images/lilac-chrome.jpg'); }
+  .b4 { grid-column: span 1; grid-row: span 1; background-image: url('images/golden-hour.jpg'); }
+  .b5 { grid-column: span 2; grid-row: span 1; background-image: url('images/blush-french.jpg'); }
+  .b6 { grid-column: span 2; grid-row: span 1; background-image: url('images/sky-marble.jpg'); }
+
+  /* ---------- Lightbox ---------- */
+  .lightbox { display: none; position: fixed; inset: 0; background: rgba(44, 36, 48, 0.85); z-index: 100; align-items: center; justify-content: center; padding: 24px; }
+  .lightbox.open { display: flex; }
+  .lightbox-panel { background: var(--panel); border-radius: var(--radius); max-width: 460px; width: 100%; overflow: hidden; }
+  .lightbox-swatch { aspect-ratio: 1 / 1; background-size: cover; background-position: center; }
+  .lightbox-body { padding: 22px 24px 26px; }
+  .lightbox-body h3 { margin-bottom: 6px; }
+  .lightbox-body p { font-size: 0.9rem; color: var(--ink-soft); font-weight: 400; margin-bottom: 16px; }
+  .lightbox-close { background: var(--coral); color: #fff; border: none; padding: 9px 18px; border-radius: 999px; font-size: 0.85rem; font-weight: 700; cursor: pointer; }
+  .lightbox-close:hover { background: #ff5c48; }
+
+  /* ---------- Testimonials: scattered cards ---------- */
+  .scatter-row { display: flex; flex-wrap: wrap; gap: 30px; justify-content: center; padding: 20px 0 10px; }
+  .scatter-card {
+    background: var(--panel); border-radius: 10px; padding: 24px; max-width: 260px;
+    box-shadow: 0 12px 24px rgba(44,36,48,0.12);
+    border-bottom: 6px solid var(--coral);
+  }
+  .scatter-card:nth-child(1) { transform: rotate(-3deg); }
+  .scatter-card:nth-child(2) { transform: rotate(2deg); border-bottom-color: var(--mint-deep); }
+  .scatter-card:nth-child(3) { transform: rotate(-1.5deg); border-bottom-color: var(--lavender); }
+  .scatter-card:hover { transform: rotate(0deg) translateY(-4px); }
+  .scatter-card p.quote { font-size: 0.92rem; margin-bottom: 12px; }
+  .scatter-card p.who { font-size: 0.78rem; font-weight: 800; color: var(--coral); text-transform: uppercase; letter-spacing: 0.04em; }
+  .testimonials-disclaimer { text-align: center; font-size: 0.78rem; color: var(--ink-soft); margin-top: 40px; opacity: 0.75; }
+
+  /* ---------- Contact ---------- */
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; text-align: left; }
+  .contact-info dl { display: grid; grid-template-columns: auto 1fr; gap: 10px 16px; font-size: 0.94rem; }
+  .contact-info dt { color: var(--ink); font-weight: 800; }
+  .contact-info dd { color: var(--ink); opacity: 0.85; }
+
+  form { display: flex; flex-direction: column; gap: 12px; }
+  form input, form textarea { font-family: inherit; font-size: 0.92rem; padding: 12px 14px; border: none; border-radius: 10px; background: #fff; color: var(--ink); }
+  form textarea { min-height: 100px; resize: vertical; }
+  form button { align-self: flex-start; }
+  .form-note { font-size: 0.78rem; opacity: 0.85; }
+
+  /* ---------- Footer ---------- */
+  footer { padding: 34px 0; text-align: center; font-size: 0.82rem; color: var(--ink-soft); }
+  footer .concept-logo { width: 14px; height: 14px; border-radius: 50%; vertical-align: middle; margin-right: 5px; opacity: 0.85; }
+  footer .concept-tag { display: inline-block; margin-top: 8px; font-size: 0.72rem; letter-spacing: 0.04em; text-transform: uppercase; color: var(--coral); opacity: 0.85; font-weight: 700; }
+
+  @media (max-width: 780px) {
+    .nav-links { display: none; }
+    .bento { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 150px; }
+    .b1 { grid-column: span 2; grid-row: span 2; }
+    .b2, .b5, .b6 { grid-column: span 2; }
+    .b3, .b4 { grid-column: span 1; }
+    .contact-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="wrap">
+    <a href="#top" class="brand">bloom<span>.</span></a>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Open menu" aria-expanded="false">&#9776;</button>
+  </nav>
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="#services">Services</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#about">About</a>
+    <a href="#testimonials">Reviews</a>
+    <a href="#contact">Contact</a>
+  </div>
+</header>
+
+<main id="top">
+
+  <section class="hero">
+    <div class="hero-inner">
+      <p class="eyebrow">Houston, Texas</p>
+      <h1>Nail art that feels as good as it looks.</h1>
+      <p class="lead">Gel, dip powder, and hand-painted nail art in a studio built for color lovers.</p>
+      <a href="#contact" class="btn btn-primary">Book Now</a>
+    </div>
+  </section>
+
+  <div class="panel panel-coral">
+    <div class="panel-inner">
+      <p class="eyebrow">What We Do</p>
+      <h2>Manicures &amp; pedicures, done properly</h2>
+      <p class="desc">Every service includes shaping, cuticle care, and a hand or foot massage. Bring a photo of the design you want, or tell us your vibe and we'll design something for you.</p>
+      <a href="#services" class="btn btn-light">See the menu</a>
+    </div>
+  </div>
+
+  <section id="services" class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">Services &amp; Pricing</p>
+      <h2>Pick your vibe</h2>
+    </div>
+
+    <div class="menu-group">
+      <h3>Manicures</h3>
+      <div class="chip-wrap">
+        <div class="price-chip">Classic Manicure <span class="amount">$28+</span></div>
+        <div class="price-chip">Gel Manicure <span class="amount">$40+</span></div>
+        <div class="price-chip">Dip Powder <span class="amount">$48+</span></div>
+      </div>
+    </div>
+
+    <div class="menu-group mint">
+      <h3>Pedicures</h3>
+      <div class="chip-wrap">
+        <div class="price-chip">Classic Pedicure <span class="amount">$38+</span></div>
+        <div class="price-chip">Gel Pedicure <span class="amount">$52+</span></div>
+      </div>
+    </div>
+
+    <div class="menu-group lavender">
+      <h3>Add-Ons</h3>
+      <div class="chip-wrap">
+        <div class="price-chip">Hand-Painted Nail Art <span class="amount">+$5&ndash;$40</span></div>
+      </div>
+    </div>
+
+    <p class="services-note">Bring a photo of the design you want, or tell us your vibe and we'll design something for you.</p>
+  </section>
+
+  <div class="photo-break" style="background-image: url('images/golden-hour.jpg');"></div>
+
+  <section id="gallery" class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">Recent Work</p>
+      <h2>A wall of our favorite sets</h2>
+      <p>Tap any piece to see the technique.</p>
+    </div>
+    <div class="bento" id="gallery-grid">
+      <div class="bento-item b1" data-title="Sunset Ombre" data-desc="Hand-blended coral-to-peach ombre with a glossy gel top coat."><span>Sunset Ombre</span></div>
+      <div class="bento-item b2" data-title="Minimalist Mint" data-desc="Clean single-tone mint gel set with a matte finish."><span>Minimalist Mint</span></div>
+      <div class="bento-item b3" data-title="Lilac Chrome" data-desc="Chrome powder over lilac base for a soft mirror finish."><span>Lilac Chrome</span></div>
+      <div class="bento-item b4" data-title="Golden Hour" data-desc="Warm gold foil accents over a nude dip powder base."><span>Golden Hour</span></div>
+      <div class="bento-item b5" data-title="Blush French" data-desc="Modern take on a French tip using a soft blush line instead of white."><span>Blush French</span></div>
+      <div class="bento-item b6" data-title="Sky Marble" data-desc="Hand-marbled blue and white gel design, no two nails identical."><span>Sky Marble</span></div>
+    </div>
+  </section>
+
+  <div class="panel panel-mint" id="about">
+    <div class="panel-inner">
+      <p class="eyebrow">About Bloom</p>
+      <h2>Started by a nail artist who refused to choose</h2>
+      <p class="desc">Bloom Nail Studio was started by Jasmine Cole, who got tired of choosing between fast service and real artistry. The studio is built around clean, sanitary tools for every client, honest timelines, and a color wall big enough that you'll actually find "the one."</p>
+      <a href="#contact" class="btn btn-light">More about Bloom</a>
+    </div>
+  </div>
+
+  <section id="testimonials" class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">Reviews</p>
+      <h2>What clients say</h2>
+    </div>
+    <div class="scatter-row">
+      <div class="scatter-card"><p class="quote">"Showed a blurry Pinterest photo and they matched it almost exactly. My gel lasted a full three weeks."</p><p class="who">Sample client feedback</p></div>
+      <div class="scatter-card"><p class="quote">"Cleanest studio I've been to. You can tell they actually sanitize between clients."</p><p class="who">Sample client feedback</p></div>
+      <div class="scatter-card"><p class="quote">"Booked same-week, in and out in an hour, and the color wall alone is worth the visit."</p><p class="who">Sample client feedback</p></div>
+    </div>
+    <p class="testimonials-disclaimer">Concept project — reviews above are illustrative sample copy, not real client quotes.</p>
+  </section>
+
+  <div class="panel panel-sun" id="contact">
+    <div class="panel-inner" style="max-width: 760px;">
+      <p class="eyebrow">Visit Us</p>
+      <h2>Book your appointment</h2>
+      <p class="desc">Send a message or call — we'll confirm a time that works for you.</p>
+      <div class="contact-grid">
+        <div class="contact-info">
+          <dl>
+            <dt>Address</dt><dd>2210 Rice Village Ln, Houston, TX 77005</dd>
+            <dt>Phone</dt><dd>(713) 555-0172</dd>
+            <dt>Email</dt><dd>hello@bloomnailstudio.example</dd>
+            <dt>Hours</dt><dd>Mon–Sat, 10am–7pm · Closed Sun</dd>
+          </dl>
+          <!-- In a real build: replace this section with an embedded booking widget
+               (Vagaro / Square Appointments / Fresha / Booksy / GlossGenius),
+               matching whichever platform the client already uses. -->
+        </div>
+        <form action="mailto:hello@bloomnailstudio.example" method="post" enctype="text/plain">
+          <input type="text" name="name" placeholder="Your name" required>
+          <input type="email" name="email" placeholder="Your email" required>
+          <textarea name="message" placeholder="What are you looking to book?" required></textarea>
+          <button type="submit" class="btn btn-primary">Send message</button>
+          <p class="form-note">Concept project: this form opens your email client rather than submitting to a live booking system.</p>
+        </form>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  <p>&copy; 2026 Bloom Nail Studio · Houston, TX</p>
+  <p class="concept-tag"><img src="images/logo.png" alt="Sagebrush Sites" class="concept-logo">Concept project — designed &amp; built by Sagebrush Sites</p>
+</footer>
+
+<div class="lightbox" id="lightbox">
+  <div class="lightbox-panel">
+    <div class="lightbox-swatch" id="lightbox-swatch"></div>
+    <div class="lightbox-body">
+      <h3 id="lightbox-title"></h3>
+      <p id="lightbox-desc"></p>
+      <button class="lightbox-close" id="lightbox-close">Close</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  (function () {
+    var lightbox = document.getElementById('lightbox');
+    var swatch = document.getElementById('lightbox-swatch');
+    var titleEl = document.getElementById('lightbox-title');
+    var descEl = document.getElementById('lightbox-desc');
+    var closeBtn = document.getElementById('lightbox-close');
+    var items = document.querySelectorAll('.bento-item');
+
+    items.forEach(function (item) {
+      item.addEventListener('click', function () {
+        titleEl.textContent = item.getAttribute('data-title');
+        descEl.textContent = item.getAttribute('data-desc');
+        var bgImage = getComputedStyle(item).backgroundImage;
+        swatch.style.backgroundImage = bgImage;
+        lightbox.classList.add('open');
+      });
+    });
+
+    function close() { lightbox.classList.remove('open'); }
+
+    closeBtn.addEventListener('click', close);
+    lightbox.addEventListener('click', function (e) { if (e.target === lightbox) close(); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') close(); });
+
+    var navToggle = document.getElementById('nav-toggle');
+    var mobileMenu = document.getElementById('mobile-menu');
+
+    navToggle.addEventListener('click', function () {
+      var isOpen = mobileMenu.classList.toggle('open');
+      navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+
+    mobileMenu.querySelectorAll('a').forEach(function (link) {
+      link.addEventListener('click', function () {
+        mobileMenu.classList.remove('open');
+        navToggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+  })();
+</script>
+
+</body>
+</html>

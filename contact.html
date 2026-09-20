@@ -27,11 +27,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sagebrush Sites — Web Development for Salons & Beauty Businesses</title>
-<meta name="description" content="Sagebrush Sites — a Fort Worth, TX studio building fast, mobile-first websites for salons and beauty businesses. Hand-coded, zero-dependency, offline-first.">
-<meta property="og:title" content="Sagebrush Sites — Web Development for Salons & Beauty Businesses">
-<meta property="og:description" content="Sagebrush Sites — a Fort Worth, TX studio building fast, mobile-first websites for salons and beauty businesses. Hand-coded, zero-dependency, offline-first.">
-<meta property="og:url" content="https://sagebrushsites.com">
+<title>Contact — Sagebrush Sites</title>
+<meta name="description" content="Get in touch with Sagebrush Sites about a website for your salon or beauty business.">
+<meta property="og:title" content="Contact — Sagebrush Sites">
+<meta property="og:description" content="Get in touch with Sagebrush Sites about a website for your salon or beauty business.">
+<meta property="og:url" content="https://sagebrushsites.com/contact.html">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary">
 <link rel="icon" type="image/png" href="images/logo.png">
@@ -292,7 +292,7 @@
       <a href="process.html">Process</a>
       <a href="about.html">About</a>
       <a href="skills.html">Skills</a>
-      <a href="contact.html">Contact</a>
+      <a href="contact.html" class="active">Contact</a>
     </div>
     <a href="contact.html" class="nav-cta">Get in touch</a>
     <button class="nav-toggle" id="nav-toggle" aria-label="Open menu" aria-expanded="false">&#9776;</button>
@@ -302,31 +302,42 @@
     <a href="process.html">Process</a>
     <a href="about.html">About</a>
     <a href="skills.html">Skills</a>
-    <a href="contact.html">Contact</a>
+    <a href="contact.html" class="active">Contact</a>
   </div>
 </header>
 
-<main id="top">
-
-  <!-- ---------- Hero ---------- -->
-  <section class="hero wrap">
-    <svg class="sprig left icon" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M12 21C12 21 5 17 5 10C5 6 8 3 12 3C16 3 19 6 19 10C19 17 12 21 12 21Z"/><path d="M12 21V6"/></svg>
-    <svg class="sprig right icon" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M12 21C12 21 5 17 5 10C5 6 8 3 12 3C16 3 19 6 19 10C19 17 12 21 12 21Z"/><path d="M12 21V6"/></svg>
-
-    <img src="images/logo.png" alt="Sagebrush Sites" class="hero-logo">
-
-    <p class="eyebrow">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></svg>
-      Fort Worth, Texas
-    </p>
-    <h1>Websites for <span class="accent-serif">salons &amp; beauty businesses</span> that turn browsers into booked appointments.</h1>
-    <p class="lead">I'm Sagebrush Sites, a Fort Worth-based studio. I design and build warm, mobile-first sites for hair, nail, barber, and spa businesses &mdash; thoughtful detail without the bloat, and a site that gets people to actually book.</p>
-    <div class="hero-ctas">
-      <a href="work.html" class="btn btn-primary">View my work</a>
-      <a href="contact.html" class="btn btn-ghost">Get in touch</a>
-    </div>
+<main>
+  <section class="page-hero wrap">
+    <p class="eyebrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></svg> Get In Touch</p>
+    <h1>Let's create something beautiful together</h1>
+    <p>Tell me about your business and what you're looking for &mdash; I'll follow up to schedule a free intro call.</p>
   </section>
 
+  <section class="wrap">
+    <div class="contact-grid">
+      <div class="contact-info">
+        <dl>
+          <dt>Email</dt>
+          <dd>michelle.feliciano502@gmail.com</dd>
+          <dt>Location</dt>
+          <dd>Fort Worth, TX (remote-friendly)</dd>
+          <dt>Response time</dt>
+          <dd>Within 1&ndash;2 business days</dd>
+        </dl>
+        <div class="social-row">
+          <a href="https://github.com/MichelleFeliciano" class="social-pill" target="_blank" rel="noopener">GitHub</a>
+          <a href="https://www.linkedin.com/in/michelle-felicianowebdev/" class="social-pill" target="_blank" rel="noopener">LinkedIn</a>
+        </div>
+      </div>
+      <form action="mailto:michelle.feliciano502@gmail.com" method="post" enctype="text/plain">
+        <input type="text" name="name" placeholder="Your name" required>
+        <input type="email" name="email" placeholder="Your email" required>
+        <textarea name="message" placeholder="Tell me about your business and what you need" required></textarea>
+        <button type="submit" class="btn btn-primary">Send message</button>
+        <p class="form-note">This form opens your email client rather than submitting to a live backend &mdash; matches the zero-dependency, no-backend approach used across this whole project.</p>
+      </form>
+    </div>
+  </section>
 </main>
 
 <footer>
