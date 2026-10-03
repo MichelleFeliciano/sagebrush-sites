@@ -45,6 +45,27 @@
     targets.forEach(function (el) { observer.observe(el); });
   }
 
+  /* ---------- Device mockup tilt (pointer devices only) ---------- */
+  if (!reduceMotion && window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
+    document.querySelectorAll("[data-tilt]").forEach(function (stage) {
+      var rig = stage.querySelector(".device-rig");
+      if (!rig) return;
+      stage.addEventListener("pointermove", function (event) {
+        var box = stage.getBoundingClientRect();
+        var x = (event.clientX - box.left) / box.width - 0.5;
+        var y = (event.clientY - box.top) / box.height - 0.5;
+        rig.classList.add("is-tilting");
+        rig.style.setProperty("--ry", (x * 14).toFixed(2) + "deg");
+        rig.style.setProperty("--rx", (-y * 10).toFixed(2) + "deg");
+      });
+      stage.addEventListener("pointerleave", function () {
+        rig.classList.remove("is-tilting");
+        rig.style.setProperty("--ry", "0deg");
+        rig.style.setProperty("--rx", "0deg");
+      });
+    });
+  }
+
   /* ---------- Scroll progress bar ---------- */
   var bar = document.createElement("div");
   bar.className = "scroll-progress";
