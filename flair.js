@@ -66,6 +66,36 @@
     });
   }
 
+  /* ---------- "Try a style" demo ---------- */
+  var lab = document.getElementById("style-lab");
+  if (lab) {
+    lab.hidden = false;
+    var mock = document.getElementById("mock");
+    var gallery = document.getElementById("mock-gallery");
+    var labName = document.getElementById("lab-name");
+    var labDesc = document.getElementById("lab-desc");
+    var labLink = document.getElementById("lab-link");
+
+    var applyStyle = function (input) {
+      mock.setAttribute("data-style", input.value);
+      labName.textContent = input.getAttribute("data-title");
+      labDesc.textContent = input.getAttribute("data-desc");
+      labLink.setAttribute("href", input.getAttribute("data-href"));
+      labLink.innerHTML = "See it on " + input.getAttribute("data-site") + " &rarr;";
+      if (!reduceMotion) {
+        gallery.classList.remove("pop");
+        void gallery.offsetWidth; // restart the animation
+        gallery.classList.add("pop");
+      }
+    };
+
+    Array.prototype.forEach.call(lab.querySelectorAll('input[name="lab-style"]'), function (input) {
+      input.addEventListener("change", function () {
+        if (input.checked) applyStyle(input);
+      });
+    });
+  }
+
   /* ---------- Scroll progress bar ---------- */
   var bar = document.createElement("div");
   bar.className = "scroll-progress";

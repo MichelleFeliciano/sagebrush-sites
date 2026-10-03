@@ -330,6 +330,68 @@
     </div>
   </section>
 
+  <!-- ---------- Try a style (shown by flair.js) ---------- -->
+  <section class="style-lab wrap" id="style-lab" aria-labelledby="lab-title" hidden>
+    <div class="section-head">
+      <p class="eyebrow">Try a style</p>
+      <h2 id="lab-title">One salon, four personalities</h2>
+      <p>Pick a look and watch the sample page below restyle itself. Every concept site on the Work page started with a choice like this.</p>
+    </div>
+
+    <fieldset class="lab-picker">
+      <legend class="sr-only">Choose a style</legend>
+      <input type="radio" name="lab-style" id="lab-editorial" value="editorial" checked
+        data-title="Editorial" data-href="spec-projects/haven-hair-studio/index.html" data-site="Haven Hair Studio"
+        data-desc="Soft corners, a serif headline, and a masonry gallery that lets the photography lead.">
+      <label for="lab-editorial"><span class="swatch" aria-hidden="true"><i style="background:#b3583f"></i><i style="background:#f1e2d8"></i><i style="background:#2b2622"></i></span>Editorial</label>
+
+      <input type="radio" name="lab-style" id="lab-colorblock" value="colorblock"
+        data-title="Color-block" data-href="spec-projects/bloom-nail-studio/index.html" data-site="Bloom Nail Studio"
+        data-desc="Bold type, rounded shapes, pill-shaped service chips, and a bento-style gallery.">
+      <label for="lab-colorblock"><span class="swatch" aria-hidden="true"><i style="background:#ff7a6b"></i><i style="background:#4fd1b3"></i><i style="background:#ffc857"></i></span>Color-block</label>
+
+      <input type="radio" name="lab-style" id="lab-vintage" value="vintage"
+        data-title="Vintage" data-href="spec-projects/ironclad-barber-co/index.html" data-site="Ironclad Barber Co."
+        data-desc="Dark panels, brass accents, a dotted-leader price ledger, and a scrolling filmstrip.">
+      <label for="lab-vintage"><span class="swatch" aria-hidden="true"><i style="background:#c9a15a"></i><i style="background:#a8492b"></i><i style="background:#14100c"></i></span>Vintage</label>
+
+      <input type="radio" name="lab-style" id="lab-calm" value="calm"
+        data-title="Calm" data-href="spec-projects/still-water-spa/index.html" data-site="Still Water Spa"
+        data-desc="Airy spacing, light type, a quiet sage palette, and a story-style layout.">
+      <label for="lab-calm"><span class="swatch" aria-hidden="true"><i style="background:#55684c"></i><i style="background:#7c9070"></i><i style="background:#ded9c9"></i></span>Calm</label>
+    </fieldset>
+
+    <div class="mock" id="mock" data-style="editorial" aria-hidden="true">
+      <div class="mock-nav">
+        <span class="mock-brand">Your Salon</span>
+        <span class="mock-links"><span>Services</span><span>Gallery</span><span>About</span></span>
+        <span class="mock-btn">Book now</span>
+      </div>
+      <div class="mock-hero">
+        <span class="mock-kicker">Your City, Texas</span>
+        <p class="mock-title">Hair that feels like you.</p>
+        <p class="mock-lede">Color, cuts, and styling from a studio that listens first.</p>
+        <span class="mock-btn">Book an appointment</span>
+      </div>
+      <ul class="mock-services">
+        <li><span class="n">Cut &amp; style</span><span class="d"></span><span class="p">$65</span></li>
+        <li><span class="n">Color</span><span class="d"></span><span class="p">$120</span></li>
+        <li><span class="n">Gloss treatment</span><span class="d"></span><span class="p">$55</span></li>
+      </ul>
+      <div class="mock-gallery" id="mock-gallery">
+        <span class="tile"></span><span class="tile"></span><span class="tile"></span><span class="tile"></span><span class="tile"></span><span class="tile"></span>
+      </div>
+    </div>
+
+    <div class="lab-caption" aria-live="polite">
+      <p class="lab-style-name" id="lab-name">Editorial</p>
+      <p id="lab-desc">Soft corners, a serif headline, and a masonry gallery that lets the photography lead.</p>
+      <p><a class="lab-link" id="lab-link" href="spec-projects/haven-hair-studio/index.html">See it on Haven Hair Studio &rarr;</a></p>
+      <p class="lab-fineprint">Sample content for demonstration. Your own photos, services, prices, and booking link go here.</p>
+    </div>
+    <div class="lab-cta"><a href="contact.html" class="btn btn-primary">Get a free quote</a></div>
+  </section>
+
 </main>
 
 <footer>
