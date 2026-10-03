@@ -321,7 +321,7 @@
       <div class="contact-info">
         <dl>
           <dt>Email</dt>
-          <dd>michelle.feliciano502@gmail.com</dd>
+          <dd><a href="mailto:michelle.feliciano502@gmail.com">michelle.feliciano502@gmail.com</a></dd>
           <dt>Location</dt>
           <dd>Fort Worth, TX (remote-friendly)</dd>
           <dt>Response time</dt>
@@ -332,13 +332,22 @@
           <a href="https://www.linkedin.com/in/michelle-felicianowebdev/" class="social-pill" target="_blank" rel="noopener">LinkedIn</a>
         </div>
       </div>
-      <form action="mailto:michelle.feliciano502@gmail.com" method="post" enctype="text/plain">
-        <input type="text" name="name" placeholder="Your name" required>
-        <input type="email" name="email" placeholder="Your email" required>
-        <textarea name="message" placeholder="Tell me about your business and what you need" required></textarea>
-        <button type="submit" class="btn btn-primary">Send message</button>
-        <p class="form-note">This form opens your email client rather than submitting to a live backend &mdash; matches the zero-dependency, no-backend approach used across this whole project.</p>
+      <form id="contact-form" novalidate hidden>
+        <label class="sr-only" for="cf-name">Your name</label>
+        <input id="cf-name" type="text" name="name" placeholder="Your name" autocomplete="name" maxlength="80" required>
+        <label class="sr-only" for="cf-email">Your email</label>
+        <input id="cf-email" type="email" name="email" placeholder="Your email" autocomplete="email" maxlength="120" required>
+        <label class="sr-only" for="cf-message">Tell me about your business and what you need</label>
+        <textarea id="cf-message" name="message" placeholder="Tell me about your business and what you need" maxlength="1000" required></textarea>
+        <p id="cf-error" class="form-error" role="alert" hidden></p>
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary">Send message</button>
+          <button type="button" id="copy-email" class="btn btn-ghost">Copy email address</button>
+        </div>
+        <p id="cf-status" class="form-status" role="status" aria-live="polite"></p>
+        <p class="form-note">Sending opens your email app with the message ready to go. Nothing is stored or sent through this website.</p>
       </form>
+      <noscript><p class="form-note">The form needs JavaScript. You can always email me directly at <a href="mailto:michelle.feliciano502@gmail.com">michelle.feliciano502@gmail.com</a>.</p></noscript>
     </div>
   </section>
 </main>

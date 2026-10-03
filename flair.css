@@ -456,3 +456,14 @@
   .band-credit { left: 14px; right: auto; }
 }
 @media print { .photo-band { display: none !important; } }
+
+/* ---------- Contact form (opens the visitor's email app) ---------- */
+#contact-form[hidden] { display: none; }
+#contact-form input[aria-invalid="true"],
+#contact-form textarea[aria-invalid="true"] { border-color: #9c2b27; }
+.form-error { margin: 0; color: #9c2b27; font-size: 0.9rem; font-weight: 600; }
+.form-error[hidden] { display: none; }
+.form-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+.form-status { margin: 0; min-height: 1.4em; font-size: 0.85rem; color: var(--ink-soft); }
+.contact-info dd a { color: var(--rust); border-bottom: 1px solid var(--terracotta); }
+.contact-info dd a:hover { color: #8a3b21; }
