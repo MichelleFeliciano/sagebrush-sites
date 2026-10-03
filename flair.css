@@ -309,3 +309,106 @@
   .nav-cta { padding: 8px 13px; }
   .nav-toggle { padding: 6px 6px; }
 }
+
+/* ---------- Hero: word-by-word headline ---------- */
+@media (prefers-reduced-motion: no-preference) {
+  .hero > h1 { animation: none; }
+  .hero h1 .w {
+    display: inline-block;
+    animation: word-in 0.65s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+    animation-delay: calc(0.1s + var(--i, 0) * 0.065s);
+  }
+  @keyframes word-in { from { opacity: 0; transform: translateY(0.5em); } to { opacity: 1; transform: none; } }
+}
+
+/* ---------- Concept-work showcase / carousel ---------- */
+.showcase { padding-top: 10px; }
+.showcase-body { max-width: 760px; margin: 0 auto; }
+.showcase-track { display: flex; flex-direction: column; gap: 30px; }
+.slide { margin: 0; background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; }
+.slide .device-stage { padding: 30px 34px 42px; }
+.slide figcaption { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 16px; padding: 16px 24px 20px; }
+.slide figcaption strong { font-family: Georgia, "Iowan Old Style", Palatino, serif; font-weight: 400; font-size: 1.2rem; }
+.slide figcaption span { flex: 1 1 260px; color: var(--ink-soft); font-size: 0.9rem; }
+.slide figcaption a { color: var(--rust); font-weight: 600; border-bottom: 1px solid transparent; }
+.slide figcaption a:hover { border-bottom-color: var(--rust); }
+
+.showcase.is-carousel .showcase-track { display: grid; gap: 0; }
+.showcase.is-carousel .slide {
+  grid-area: 1 / 1;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.6s ease, visibility 0s linear 0.6s;
+}
+.showcase.is-carousel .slide.is-active { opacity: 1; visibility: visible; transition: opacity 0.6s ease, visibility 0s; }
+@media (prefers-reduced-motion: reduce) {
+  .showcase.is-carousel .slide, .showcase.is-carousel .slide.is-active { transition: none; }
+}
+
+.carousel-controls { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 6px 14px; margin-top: 20px; }
+.carousel-btn {
+  width: 42px;
+  height: 42px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: 1.5px solid var(--terracotta);
+  background: var(--panel);
+  color: var(--rust);
+  font-size: 1.2rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+.carousel-btn:hover { background: var(--rust); border-color: var(--rust); color: #fff8f0; transform: translateY(-2px); }
+.carousel-dots { display: flex; }
+.carousel-dot { position: relative; width: 26px; height: 26px; padding: 0; border: 0; background: none; cursor: pointer; }
+.carousel-dot::before {
+  content: "";
+  position: absolute;
+  inset: 7px;
+  border-radius: 50%;
+  border: 1.5px solid var(--terracotta);
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+.carousel-dot:hover::before { transform: scale(1.25); }
+.carousel-dot[aria-current="true"]::before { background: var(--rust); border-color: var(--rust); }
+.carousel-toggle {
+  padding: 8px 16px;
+  border: 1.5px solid var(--line);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--ink-soft);
+  font: inherit;
+  font-size: 0.82rem;
+  cursor: pointer;
+}
+.carousel-toggle:hover { border-color: var(--terracotta); color: var(--rust); }
+
+@media (max-width: 600px) {
+  .slide .device-stage { padding: 22px 20px 34px; }
+}
+
+/* ---------- Floating quote button ---------- */
+.quote-fab {
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  z-index: 150;
+  padding: 12px 20px;
+  border-radius: 999px;
+  background: var(--rust);
+  color: #fff8f0;
+  font-size: 0.9rem;
+  font-weight: 600;
+  box-shadow: 0 16px 30px -14px rgba(138, 59, 33, 0.75);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(16px);
+  transition: opacity 0.3s ease, transform 0.3s ease, visibility 0s linear 0.3s, background 0.2s ease;
+}
+.quote-fab.is-shown { opacity: 1; visibility: visible; transform: none; transition: opacity 0.3s ease, transform 0.3s ease, visibility 0s, background 0.2s ease; }
+.quote-fab:hover { background: #8a3b21; }
+@media (prefers-reduced-motion: reduce) { .quote-fab, .quote-fab.is-shown { transition: none; } }
+@media print { .quote-fab, .scroll-progress { display: none !important; } }
