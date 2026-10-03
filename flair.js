@@ -192,8 +192,14 @@
     document.body.appendChild(quote);
 
     var quoteShown = false;
+    var quoteBand = document.getElementById("photo-band");
     var checkQuote = function () {
       var shouldShow = window.scrollY > 480;
+      if (shouldShow && quoteBand) {
+        // The band has its own button, so don't show two quote buttons at once.
+        var box = quoteBand.getBoundingClientRect();
+        if (box.top < window.innerHeight && box.bottom > 0) shouldShow = false;
+      }
       if (shouldShow !== quoteShown) {
         quoteShown = shouldShow;
         quote.classList.toggle("is-shown", shouldShow);
@@ -201,6 +207,31 @@
     };
     window.addEventListener("scroll", checkQuote, { passive: true });
     checkQuote();
+  }
+
+  /* ---------- Photo band parallax ---------- */
+  var band = document.getElementById("photo-band");
+  if (band && !reduceMotion) {
+    var bandImgs = Array.prototype.slice.call(band.querySelectorAll(".band-photos img"));
+    var bandTicking = false;
+    var driftBand = function () {
+      bandTicking = false;
+      var box = band.getBoundingClientRect();
+      var vh = window.innerHeight;
+      if (box.bottom < 0 || box.top > vh) return;
+      var progress = (vh / 2 - (box.top + box.height / 2)) / vh; // about -0.5 .. 0.5
+      bandImgs.forEach(function (img, i) {
+        var direction = i % 2 ? -1 : 1;
+        img.style.setProperty("--py", (progress * 28 * direction).toFixed(1) + "px");
+      });
+    };
+    window.addEventListener("scroll", function () {
+      if (!bandTicking) {
+        bandTicking = true;
+        window.requestAnimationFrame(driftBand);
+      }
+    }, { passive: true });
+    driftBand();
   }
 
   /* ---------- Scroll progress bar ---------- */

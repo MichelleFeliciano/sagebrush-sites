@@ -412,3 +412,47 @@
 .quote-fab:hover { background: #8a3b21; }
 @media (prefers-reduced-motion: reduce) { .quote-fab, .quote-fab.is-shown { transition: none; } }
 @media print { .quote-fab, .scroll-progress { display: none !important; } }
+
+/* ---------- Photo band ---------- */
+.photo-band { position: relative; padding: 0; margin-top: 30px; overflow: hidden; background: #2b2018; }
+.band-photos { display: grid; grid-template-columns: repeat(4, 1fr); height: 460px; }
+.band-photos::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(43, 32, 24, 0.12), rgba(43, 32, 24, 0.5));
+  pointer-events: none;
+}
+.band-photos img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: translateY(var(--py, 0px)) scale(1.14);
+  will-change: transform;
+}
+.band-card {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: min(540px, calc(100% - 32px));
+  padding: 34px 32px 36px;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  background: rgba(250, 243, 234, 0.95);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: 0 30px 60px -30px rgba(0, 0, 0, 0.7);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+}
+.band-logo { width: 72px; height: 72px; margin: 0 auto 14px; border-radius: 50%; }
+.band-card h2 { font-size: clamp(1.5rem, 3.4vw, 2.1rem); line-height: 1.2; margin-bottom: 10px; }
+.band-card p { color: var(--ink-soft); margin-bottom: 20px; }
+.band-credit { position: absolute; right: 12px; bottom: 10px; margin: 0; padding: 3px 10px; border-radius: 999px; background: rgba(43, 32, 24, 0.7); font-size: 0.7rem; color: #fff8f0; }
+
+@media (max-width: 700px) {
+  .band-photos { grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; height: 560px; }
+  .band-card { padding: 26px 22px 28px; }
+  .band-credit { left: 14px; right: auto; }
+}
+@media print { .photo-band { display: none !important; } }
