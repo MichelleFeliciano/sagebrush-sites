@@ -176,7 +176,7 @@
 /* The sample page. Each style only changes these variables. */
 .mock {
   --m-bg: #faf6f1; --m-panel: #f1e2d8; --m-ink: #2b2622; --m-soft: #6e665e; --m-line: #e8ded2;
-  --m-accent: #b3583f; --m-accent-ink: #ffffff; --m-radius: 3px; --m-btn-radius: 999px;
+  --m-accent: #b3583f; --m-accent-ink: #ffffff; --m-kicker: #9c4731; --m-radius: 3px; --m-btn-radius: 999px;
   --m-head-font: Georgia, "Times New Roman", serif; --m-head-weight: 400; --m-head-case: none; --m-head-track: 0;
   --t1: #e0c3b2; --t2: #d9b8a6; --t3: #b3583f; --t4: #8d6e5e; --t5: #f1e2d8; --t6: #c9a592;
   max-width: 900px;
@@ -192,19 +192,19 @@
 }
 .mock[data-style="colorblock"] {
   --m-bg: #fffaf9; --m-panel: #ffffff; --m-ink: #2c2430; --m-soft: #675b6c; --m-line: #f0e2e6;
-  --m-accent: #ff7a6b; --m-accent-ink: #2c2430; --m-radius: 16px;
+  --m-accent: #ff7a6b; --m-accent-ink: #2c2430; --m-kicker: #675b6c; --m-radius: 16px;
   --m-head-font: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; --m-head-weight: 800; --m-head-track: -0.02em;
   --t1: #ff7a6b; --t2: #4fd1b3; --t3: #b892f0; --t4: #ffc857; --t5: #e2503f; --t6: #21916f;
 }
 .mock[data-style="vintage"] {
   --m-bg: #14100c; --m-panel: #1c1712; --m-ink: #f1e9db; --m-soft: #b8ab97; --m-line: #332a20;
-  --m-accent: #c9a15a; --m-accent-ink: #14100c; --m-radius: 2px; --m-btn-radius: 2px;
+  --m-accent: #c9a15a; --m-accent-ink: #14100c; --m-kicker: #e0bd7c; --m-radius: 2px; --m-btn-radius: 2px;
   --m-head-font: Georgia, "Times New Roman", serif; --m-head-weight: 400; --m-head-case: uppercase; --m-head-track: 0.07em;
   --t1: #c9a15a; --t2: #8a6d3b; --t3: #a8492b; --t4: #4a3d2e; --t5: #e0bd7c; --t6: #332a20;
 }
 .mock[data-style="calm"] {
   --m-bg: #f7f6f1; --m-panel: #ffffff; --m-ink: #33392f; --m-soft: #646b59; --m-line: #e4e5da;
-  --m-accent: #55684c; --m-accent-ink: #ffffff; --m-radius: 6px;
+  --m-accent: #55684c; --m-accent-ink: #ffffff; --m-kicker: #55684c; --m-radius: 6px;
   --m-head-font: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; --m-head-weight: 300; --m-head-track: 0.02em;
   --t1: #7c9070; --t2: #ded9c9; --t3: #55684c; --t4: #cfd6c5; --t5: #a9b79d; --t6: #efece0;
 }
@@ -224,9 +224,7 @@
   transition: background-color 0.45s ease, color 0.45s ease, border-radius 0.45s ease;
 }
 .mock-hero { padding: 38px 0 28px; max-width: 520px; }
-.mock-kicker { display: block; font-size: 0.7rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--m-accent); margin-bottom: 10px; }
-.mock[data-style="vintage"] .mock-kicker { color: var(--t5); }
-.mock[data-style="colorblock"] .mock-kicker { color: var(--m-soft); }
+.mock-kicker { display: block; font-size: 0.7rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--m-kicker); margin-bottom: 10px; }
 .mock-title { margin: 0 0 10px; font-family: var(--m-head-font); font-weight: var(--m-head-weight); text-transform: var(--m-head-case); letter-spacing: var(--m-head-track); font-size: clamp(1.6rem, 4vw, 2.3rem); line-height: 1.15; }
 .mock-lede { margin: 0 0 18px; color: var(--m-soft); font-size: 0.94rem; }
 
