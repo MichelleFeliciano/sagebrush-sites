@@ -19,6 +19,17 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Haven Hair Studio — Austin, TX</title>
+<link rel="icon" type="image/png" href="images/logo.png">
+<meta name="description" content="Concept website for Haven Hair Studio: color, cut and styling for low-maintenance hair. A Sagebrush Sites portfolio project.">
+<link rel="canonical" href="https://sagebrushsites.com/spec-projects/haven-hair-studio/index.html">
+<meta property="og:title" content="Haven Hair Studio — Austin, TX">
+<meta property="og:description" content="Concept website for Haven Hair Studio: color, cut and styling for low-maintenance hair. A Sagebrush Sites portfolio project.">
+<meta property="og:url" content="https://sagebrushsites.com/spec-projects/haven-hair-studio/index.html">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://sagebrushsites.com/spec-projects/haven-hair-studio/images/logo.png">
+<meta property="og:image:alt" content="Haven Hair Studio logo (concept project)">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://sagebrushsites.com/spec-projects/haven-hair-studio/images/logo.png">
 <style>
   :root {
     --cream: #faf6f1;
@@ -176,7 +187,7 @@
   .team-strip { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 56px; }
   .team-card { text-align: center; }
   .team-avatar { width: 84px; height: 84px; border-radius: 50%; margin: 0 auto 14px; background: var(--blush); display: flex; align-items: center; justify-content: center; font-family: Georgia, serif; font-size: 1.4rem; color: var(--accent); }
-  .team-card h4 { font-size: 1rem; margin-bottom: 3px; }
+  .team-card h3 { font-size: 1rem; margin-bottom: 3px; }
   .team-card p { font-size: 0.82rem; color: var(--charcoal-soft); font-family: -apple-system, sans-serif; }
 
   /* ---------- Testimonials: star list ---------- */
@@ -357,9 +368,9 @@
     </div>
 
     <div class="team-strip">
-      <div class="team-card"><div class="team-avatar">MW</div><h4>Mara Whitfield</h4><p>Founder &amp; Colorist</p></div>
-      <div class="team-card"><div class="team-avatar">JT</div><h4>Jordan Tran</h4><p>Senior Stylist</p></div>
-      <div class="team-card"><div class="team-avatar">SP</div><h4>Sasha Perez</h4><p>Stylist</p></div>
+      <div class="team-card"><div class="team-avatar">MW</div><h3>Mara Whitfield</h3><p>Founder &amp; Colorist</p></div>
+      <div class="team-card"><div class="team-avatar">JT</div><h3>Jordan Tran</h3><p>Senior Stylist</p></div>
+      <div class="team-card"><div class="team-avatar">SP</div><h3>Sasha Perez</h3><p>Stylist</p></div>
     </div>
   </section>
 
@@ -407,9 +418,9 @@
              matching whichever platform the client already uses. -->
       </div>
       <form action="mailto:hello@havenhairstudio.example" method="post" enctype="text/plain">
-        <input type="text" name="name" placeholder="Your name" required>
-        <input type="email" name="email" placeholder="Your email" required>
-        <textarea name="message" placeholder="What are you looking to book?" required></textarea>
+        <input type="text" name="name" placeholder="Your name" aria-label="Your name" required>
+        <input type="email" name="email" placeholder="Your email" aria-label="Your email" required>
+        <textarea name="message" placeholder="What are you looking to book?" aria-label="What are you looking to book?" required></textarea>
         <button type="submit" class="btn btn-primary">Send message</button>
         <p class="form-note">Concept project: this form opens your email client rather than submitting to a live booking system.</p>
       </form>
