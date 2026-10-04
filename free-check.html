@@ -27,11 +27,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sagebrush Sites — Web Development for Salons & Beauty Businesses</title>
-<meta name="description" content="Sagebrush Sites — a Fort Worth, TX studio building fast, mobile-first websites for salons and beauty businesses. Hand-coded, zero-dependency, offline-first.">
-<meta property="og:title" content="Sagebrush Sites — Web Development for Salons & Beauty Businesses">
-<meta property="og:description" content="Sagebrush Sites — a Fort Worth, TX studio building fast, mobile-first websites for salons and beauty businesses. Hand-coded, zero-dependency, offline-first.">
-<meta property="og:url" content="https://sagebrushsites.com">
+<title>Free Website Check — Sagebrush Sites</title>
+<meta name="description" content="Request a free website check from Sagebrush Sites: speed, phone-friendliness, search basics, accessibility and security, explained in a plain-English report.">
+<meta property="og:title" content="Free Website Check — Sagebrush Sites">
+<meta property="og:description" content="Request a free website check: a plain-English report on your site's speed, mobile experience, search basics, accessibility and security.">
+<meta property="og:url" content="https://sagebrushsites.com/free-check.html">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary">
 <link rel="icon" type="image/png" href="images/logo.png">
@@ -280,15 +280,40 @@
     .sprig { display: none; }
   }
 
-  /* ---------- Free website check promo ---------- */
-  .check-promo { padding: 20px 0 60px; }
-  .check-promo-card { max-width: 860px; margin: 0 auto; background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); padding: 34px 32px; display: flex; align-items: center; justify-content: space-between; gap: 26px; flex-wrap: wrap; }
-  .check-promo-card .copy { flex: 1 1 380px; }
-  .check-promo-card .eyebrow { display: inline-flex; font-size: 0.76rem; letter-spacing: 0.14em; text-transform: uppercase; color: #5c6b49; margin-bottom: 10px; }
-  .check-promo-card h2 { font-size: clamp(1.4rem, 3vw, 1.8rem); font-weight: 400; margin-bottom: 8px; }
-  .check-promo-card p { color: #6f5b4e; font-size: 0.96rem; }
+  /* ---------- Free website check page ---------- */
+  :root { --ink-muted: #6f5b4e; }
+
+  .check-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 20px; }
+  main > section.wrap + section.wrap { padding-top: 56px; padding-bottom: 8px; }
+  .check-card { background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); padding: 26px 24px; }
+  .check-card h3 { font-size: 1.08rem; margin-bottom: 8px; font-weight: 400; color: var(--rust); }
+  .check-card p { font-size: 0.92rem; color: var(--ink-muted); }
+
+  .check-form-wrap { max-width: 720px; margin: 0 auto; background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); padding: 36px 32px; }
+  .check-form-wrap h2 { font-size: 1.6rem; font-weight: 400; margin-bottom: 8px; text-align: center; }
+  .check-form-wrap > p.sub { text-align: center; color: var(--ink-muted); margin-bottom: 26px; }
+
+  #check-form { gap: 18px; }
+  #check-form .field { display: flex; flex-direction: column; gap: 6px; }
+  #check-form label { font-size: 0.9rem; font-weight: 600; color: var(--ink); }
+  #check-form .opt { font-weight: 400; color: var(--ink-muted); }
+  #check-form input, #check-form textarea { border: 1px solid #8a7566; background: #fff; }
+  #check-form input[aria-invalid="true"], #check-form textarea[aria-invalid="true"] { border-color: #9c2b27; border-width: 2px; }
+  #check-form .hint { font-size: 0.82rem; color: var(--ink-muted); }
+  .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+
+  .page-hero p, .section-head p, .process-card p, .form-note, .form-status, .check-fine { color: var(--ink-muted); opacity: 1; }
+  .section-head .eyebrow { color: #5c6b49; }
+  .check-status a { color: var(--rust); font-weight: 600; border-bottom: 1px solid var(--rust); }
+  .check-fine { max-width: 720px; margin: 22px auto 0; text-align: center; font-size: 0.82rem; color: var(--ink-muted); }
+
+  @media (max-width: 620px) {
+    .field-row { grid-template-columns: 1fr; }
+    .check-form-wrap { padding: 28px 20px; }
+  }
 </style>
 <link rel="stylesheet" href="flair.css">
+<noscript><style>#check-form { display: none; }</style></noscript>
 </head>
 <body>
 
@@ -303,7 +328,7 @@
       <a href="process.html">Process</a>
       <a href="about.html">About</a>
       <a href="skills.html">Skills</a>
-      <a href="free-check.html">Free check</a>
+      <a href="free-check.html" class="active">Free check</a>
       <a href="contact.html">Contact</a>
     </div>
     <a href="contact.html" class="nav-cta">Get in touch</a>
@@ -314,184 +339,90 @@
     <a href="process.html">Process</a>
     <a href="about.html">About</a>
     <a href="skills.html">Skills</a>
-    <a href="free-check.html">Free check</a>
+    <a href="free-check.html" class="active">Free check</a>
     <a href="contact.html">Contact</a>
   </div>
 </header>
 
-<main id="top">
-
-  <!-- ---------- Hero ---------- -->
-  <section class="hero wrap">
-    <svg class="sprig left icon" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M12 21C12 21 5 17 5 10C5 6 8 3 12 3C16 3 19 6 19 10C19 17 12 21 12 21Z"/><path d="M12 21V6"/></svg>
-    <svg class="sprig right icon" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M12 21C12 21 5 17 5 10C5 6 8 3 12 3C16 3 19 6 19 10C19 17 12 21 12 21Z"/><path d="M12 21V6"/></svg>
-
-    <img src="images/logo.png" alt="Sagebrush Sites" class="hero-logo">
-
-    <p class="eyebrow">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></svg>
-      Fort Worth, Texas
-    </p>
-    <h1><span class="w" style="--i:0">Websites</span> <span class="w" style="--i:1">for</span> <span class="accent-serif"><span class="w" style="--i:2">salons</span> <span class="w" style="--i:3">&amp;</span> <span class="w" style="--i:4">beauty</span> <span class="w" style="--i:5">businesses</span></span> <span class="w" style="--i:6">that</span> <span class="w" style="--i:7">turn</span> <span class="w" style="--i:8">browsers</span> <span class="w" style="--i:9">into</span> <span class="w" style="--i:10">booked</span> <span class="w" style="--i:11">appointments.</span></h1>
-    <p class="lead">I'm Sagebrush Sites, a Fort Worth-based studio. I design and build warm, mobile-first sites for hair, nail, barber, and spa businesses &mdash; thoughtful detail without the bloat, and a site that gets people to actually book.</p>
-    <div class="hero-ctas">
-      <a href="work.html" class="btn btn-primary">View my work</a>
-      <a href="contact.html" class="btn btn-ghost">Get in touch</a>
+<main>
+  <section class="page-hero wrap">
+    <p class="eyebrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="11" cy="11" r="6"/><path d="M16 16l5 5"/></svg> Free Website Check</p>
+    <h1>How healthy is your <span class="accent-serif">website</span>?</h1>
+    <p>Send me your website address and I&rsquo;ll check it over &mdash; speed, phone-friendliness, search basics, accessibility and security &mdash; then email you a plain-English report. It&rsquo;s free, with no strings attached.</p>
+    <div class="hero-ctas" style="margin-top: 26px;">
+      <a href="#request" class="btn btn-primary">Request my free check</a>
     </div>
   </section>
 
-  <!-- ---------- Concept-work showcase (becomes a carousel in flair.js) ---------- -->
-  <section class="showcase wrap" id="showcase" aria-labelledby="showcase-title">
+  <section class="wrap" aria-labelledby="what-title">
     <div class="section-head">
-      <p class="eyebrow">Concept work</p>
-      <h2 id="showcase-title">Built to turn visitors into bookings</h2>
-      <p>Four fully coded, live concept sites for the salon, nail, barber, and spa niches.</p>
+      <p class="eyebrow">The check</p>
+      <h2 id="what-title">A clear picture, not a pile of jargon</h2>
+      <p>Every result comes from real measurements of your public pages. If something can&rsquo;t be tested, the report says so instead of guessing.</p>
     </div>
-    <div class="showcase-body" role="region" aria-roledescription="carousel" aria-label="Concept sites">
-      <div class="showcase-track">
-        <figure class="slide" aria-roledescription="slide" aria-label="1 of 4: Haven Hair Studio">
-          <div class="device-stage" data-tilt>
-            <div class="device-rig">
-              <div class="browser">
-                <div class="browser-bar" aria-hidden="true"><i></i><i></i><i></i><span>haven-hair-studio &middot; concept site</span></div>
-                <img src="images/mock-hair-desktop.jpg" width="799" height="506" alt="Haven Hair Studio concept site on a desktop: a full-width photo of a stylist applying color behind the headline “Hair that looks effortless, because the work happened here.”.">
-              </div>
-              <div class="phone"><img src="images/mock-hair-mobile.jpg" width="260" height="563" alt=""></div>
-            </div>
-          </div>
-          <figcaption><strong>Haven Hair Studio</strong><span>Editorial hair salon site with a masonry gallery and icon-led service menu.</span><a href="spec-projects/haven-hair-studio/index.html">View project &rarr;</a></figcaption>
-        </figure>
-        <figure class="slide" aria-roledescription="slide" aria-label="2 of 4: Bloom Nail Studio">
-          <div class="device-stage" data-tilt>
-            <div class="device-rig">
-              <div class="browser">
-                <div class="browser-bar" aria-hidden="true"><i></i><i></i><i></i><span>bloom-nail-studio &middot; concept site</span></div>
-                <img src="images/mock-nail-desktop.jpg" width="799" height="506" alt="Bloom Nail Studio concept site on a desktop: a colorful hand-painted nails photo behind the headline “Nail art that feels as good as it looks.”." loading="lazy">
-              </div>
-              <div class="phone"><img src="images/mock-nail-mobile.jpg" width="260" height="563" alt="" loading="lazy"></div>
-            </div>
-          </div>
-          <figcaption><strong>Bloom Nail Studio</strong><span>Color-blocked nail studio site with pill-chip services and a bento-style gallery.</span><a href="spec-projects/bloom-nail-studio/index.html">View project &rarr;</a></figcaption>
-        </figure>
-        <figure class="slide" aria-roledescription="slide" aria-label="3 of 4: Ironclad Barber Co.">
-          <div class="device-stage" data-tilt>
-            <div class="device-rig">
-              <div class="browser">
-                <div class="browser-bar" aria-hidden="true"><i></i><i></i><i></i><span>ironclad-barber-co &middot; concept site</span></div>
-                <img src="images/mock-barber-desktop.jpg" width="799" height="506" alt="Ironclad Barber Co. concept site on a desktop: a dark hero with a straight-razor shave and the headline “Ironclad Barber Co.” in cream and gold." loading="lazy">
-              </div>
-              <div class="phone"><img src="images/mock-barber-mobile.jpg" width="260" height="563" alt="" loading="lazy"></div>
-            </div>
-          </div>
-          <figcaption><strong>Ironclad Barber Co.</strong><span>Vintage-modern barbershop site with a dotted-leader price ledger and filmstrip gallery.</span><a href="spec-projects/ironclad-barber-co/index.html">View project &rarr;</a></figcaption>
-        </figure>
-        <figure class="slide" aria-roledescription="slide" aria-label="4 of 4: Still Water Spa">
-          <div class="device-stage" data-tilt>
-            <div class="device-rig">
-              <div class="browser">
-                <div class="browser-bar" aria-hidden="true"><i></i><i></i><i></i><span>still-water-spa &middot; concept site</span></div>
-                <img src="images/mock-spa-desktop.jpg" width="799" height="506" alt="Still Water Spa concept site on a desktop: a calm treatment-room photo behind the headline “An hour where nothing is asked of you.”." loading="lazy">
-              </div>
-              <div class="phone"><img src="images/mock-spa-mobile.jpg" width="260" height="563" alt="" loading="lazy"></div>
-            </div>
-          </div>
-          <figcaption><strong>Still Water Spa</strong><span>Calm day-spa site with story-style sections and a quiet sage palette.</span><a href="spec-projects/still-water-spa/index.html">View project &rarr;</a></figcaption>
-        </figure>
-      </div>
+    <div class="check-grid">
+      <div class="check-card"><h3>Speed</h3><p>How quickly your pages respond and load, and what&rsquo;s slowing them down.</p></div>
+      <div class="check-card"><h3>On a phone</h3><p>Whether your site fits and works on a phone screen, where many clients will first see it.</p></div>
+      <div class="check-card"><h3>Search basics</h3><p>Page titles, descriptions, headings and links &mdash; the fundamentals search engines look for.</p></div>
+      <div class="check-card"><h3>Accessibility</h3><p>Common barriers for people who use screen readers or navigate with a keyboard.</p></div>
+      <div class="check-card"><h3>Security</h3><p>HTTPS and other safe, non-invasive checks of what your site shows publicly.</p></div>
+      <div class="check-card"><h3>Local details</h3><p>Your address, phone, hours and map &mdash; what a nearby client needs in order to book.</p></div>
     </div>
   </section>
 
-  <!-- ---------- Try a style (shown by flair.js) ---------- -->
-  <section class="style-lab wrap" id="style-lab" aria-labelledby="lab-title" hidden>
+  <section class="wrap" aria-labelledby="how-title">
     <div class="section-head">
-      <p class="eyebrow">Try a style</p>
-      <h2 id="lab-title">One salon, four personalities</h2>
-      <p>Pick a look and watch the sample page below restyle itself. Every concept site on the Work page started with a choice like this.</p>
+      <p class="eyebrow">How it works</p>
+      <h2 id="how-title">Three easy steps</h2>
     </div>
-
-    <fieldset class="lab-picker">
-      <legend class="sr-only">Choose a style</legend>
-      <input type="radio" name="lab-style" id="lab-editorial" value="editorial" checked
-        data-title="Editorial" data-href="spec-projects/haven-hair-studio/index.html" data-site="Haven Hair Studio"
-        data-desc="Soft corners, a serif headline, and a masonry gallery that lets the photography lead.">
-      <label for="lab-editorial"><span class="swatch" aria-hidden="true"><i style="background:#b3583f"></i><i style="background:#f1e2d8"></i><i style="background:#2b2622"></i></span>Editorial</label>
-
-      <input type="radio" name="lab-style" id="lab-colorblock" value="colorblock"
-        data-title="Color-block" data-href="spec-projects/bloom-nail-studio/index.html" data-site="Bloom Nail Studio"
-        data-desc="Bold type, rounded shapes, pill-shaped service chips, and a bento-style gallery.">
-      <label for="lab-colorblock"><span class="swatch" aria-hidden="true"><i style="background:#ff7a6b"></i><i style="background:#4fd1b3"></i><i style="background:#ffc857"></i></span>Color-block</label>
-
-      <input type="radio" name="lab-style" id="lab-vintage" value="vintage"
-        data-title="Vintage" data-href="spec-projects/ironclad-barber-co/index.html" data-site="Ironclad Barber Co."
-        data-desc="Dark panels, brass accents, a dotted-leader price ledger, and a scrolling filmstrip.">
-      <label for="lab-vintage"><span class="swatch" aria-hidden="true"><i style="background:#c9a15a"></i><i style="background:#a8492b"></i><i style="background:#14100c"></i></span>Vintage</label>
-
-      <input type="radio" name="lab-style" id="lab-calm" value="calm"
-        data-title="Calm" data-href="spec-projects/still-water-spa/index.html" data-site="Still Water Spa"
-        data-desc="Airy spacing, light type, a quiet sage palette, and a story-style layout.">
-      <label for="lab-calm"><span class="swatch" aria-hidden="true"><i style="background:#55684c"></i><i style="background:#7c9070"></i><i style="background:#ded9c9"></i></span>Calm</label>
-    </fieldset>
-
-    <div class="mock" id="mock" data-style="editorial" aria-hidden="true">
-      <div class="mock-nav">
-        <span class="mock-brand">Your Salon</span>
-        <span class="mock-links"><span>Services</span><span>Gallery</span><span>About</span></span>
-        <span class="mock-btn">Book now</span>
-      </div>
-      <div class="mock-hero">
-        <span class="mock-kicker">Your City, Texas</span>
-        <p class="mock-title">Hair that feels like you.</p>
-        <p class="mock-lede">Color, cuts, and styling from a studio that listens first.</p>
-        <span class="mock-btn">Book an appointment</span>
-      </div>
-      <ul class="mock-services">
-        <li><span class="n">Cut &amp; style</span><span class="d"></span><span class="p">$65</span></li>
-        <li><span class="n">Color</span><span class="d"></span><span class="p">$120</span></li>
-        <li><span class="n">Gloss treatment</span><span class="d"></span><span class="p">$55</span></li>
-      </ul>
-      <div class="mock-gallery" id="mock-gallery">
-        <span class="tile"></span><span class="tile"></span><span class="tile"></span><span class="tile"></span><span class="tile"></span><span class="tile"></span>
-      </div>
-    </div>
-
-    <div class="lab-caption" aria-live="polite">
-      <p class="lab-style-name" id="lab-name">Editorial</p>
-      <p id="lab-desc">Soft corners, a serif headline, and a masonry gallery that lets the photography lead.</p>
-      <p><a class="lab-link" id="lab-link" href="spec-projects/haven-hair-studio/index.html">See it on Haven Hair Studio &rarr;</a></p>
-      <p class="lab-fineprint">Sample content for demonstration. Your own photos, services, prices, and booking link go here.</p>
-    </div>
-    <div class="lab-cta"><a href="contact.html" class="btn btn-primary">Get a free quote</a></div>
-  </section>
-
-  <!-- ---------- Free website check promo ---------- -->
-  <section class="check-promo wrap" aria-labelledby="check-promo-title">
-    <div class="check-promo-card">
-      <div class="copy">
-        <p class="eyebrow">Free for local businesses</p>
-        <h2 id="check-promo-title">How healthy is your <span class="accent-serif">website</span>?</h2>
-        <p>Send me your address and I&rsquo;ll check its speed, phone-friendliness, search basics, accessibility and security, then email you a plain-English report.</p>
-      </div>
-      <a href="free-check.html" class="btn btn-primary">Get my free check</a>
+    <div class="process-grid">
+      <div class="process-card"><div class="num-circle" aria-hidden="true">1</div><h3>Send your address</h3><p>Fill in the short form below. It opens an email to me with everything filled in.</p></div>
+      <div class="process-card"><div class="num-circle" aria-hidden="true">2</div><h3>I run the check</h3><p>I audit your site and write up what I find. You&rsquo;ll hear back within 1&ndash;2 business days.</p></div>
+      <div class="process-card"><div class="num-circle" aria-hidden="true">3</div><h3>You get a PDF</h3><p>A plain-English report to keep. If you&rsquo;d like help fixing anything, I&rsquo;ll send a clear quote first &mdash; no pressure.</p></div>
     </div>
   </section>
 
-  <!-- ---------- Photo band ---------- -->
-  <section class="photo-band" id="photo-band" aria-labelledby="band-title">
-    <div class="band-photos" aria-hidden="true">
-      <img src="spec-projects/haven-hair-studio/images/warm-balayage.jpg" width="900" height="600" alt="" loading="lazy" decoding="async">
-      <img src="spec-projects/bloom-nail-studio/images/golden-hour.jpg" width="900" height="600" alt="" loading="lazy" decoding="async">
-      <img src="spec-projects/ironclad-barber-co/images/hot-towel-shave.jpg" width="900" height="600" alt="" loading="lazy" decoding="async">
-      <img src="spec-projects/still-water-spa/images/quiet-lounge.jpg" width="900" height="600" alt="" loading="lazy" decoding="async">
+  <section class="wrap" id="request" aria-labelledby="request-title">
+    <div class="check-form-wrap">
+      <h2 id="request-title">Request your free check</h2>
+      <p class="sub">Four quick details and I&rsquo;ll take it from there.</p>
+      <form id="check-form" novalidate>
+        <div class="field-row">
+          <div class="field">
+            <label for="ck-name">Your name</label>
+            <input id="ck-name" type="text" name="name" autocomplete="name" maxlength="80" required>
+          </div>
+          <div class="field">
+            <label for="ck-email">Your email</label>
+            <input id="ck-email" type="email" name="email" autocomplete="email" maxlength="120" required>
+          </div>
+        </div>
+        <div class="field">
+          <label for="ck-business">Business name</label>
+          <input id="ck-business" type="text" name="business" autocomplete="organization" maxlength="100" required>
+        </div>
+        <div class="field">
+          <label for="ck-site">Your website address</label>
+          <input id="ck-site" type="text" name="site" inputmode="url" autocomplete="url" autocapitalize="none" spellcheck="false" maxlength="200" placeholder="yourbusiness.com" aria-describedby="ck-site-hint" required>
+          <span class="hint" id="ck-site-hint">Just the address is fine &mdash; no need to type https://.</span>
+        </div>
+        <div class="field">
+          <label for="ck-notes">Anything you&rsquo;d like me to look at? <span class="opt">(optional)</span></label>
+          <textarea id="ck-notes" name="notes" maxlength="800"></textarea>
+        </div>
+        <p id="ck-error" class="form-error" role="alert" hidden></p>
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary">Request my free check</button>
+          <button type="button" id="ck-copy-request" class="btn btn-ghost">Copy my request</button>
+          <button type="button" id="ck-copy-email" class="btn btn-ghost">Copy email address</button>
+        </div>
+        <p id="ck-status" class="form-status check-status" role="status" aria-live="polite"></p>
+        <p class="form-note">Sending opens your email app with the request ready to go. Nothing is stored or sent through this website. I only look at your public pages. Prefer to write it yourself? Email <a class="check-mail" href="mailto:michelle.feliciano502@gmail.com">michelle.feliciano502@gmail.com</a>.</p>
+      </form>
+      <noscript><p class="form-note">The form needs JavaScript. You can always email me your website address at <a href="mailto:michelle.feliciano502@gmail.com">michelle.feliciano502@gmail.com</a> and I&rsquo;ll run the check.</p></noscript>
     </div>
-    <div class="band-card">
-      <img class="band-logo" src="images/logo.png" alt="" width="72" height="72">
-      <h2 id="band-title">Hand-coded in <span class="accent-serif">Fort Worth</span>. Built to book.</h2>
-      <p>Fast, mobile-first sites without the bloat, with a clear quote before any work starts.</p>
-      <a href="contact.html" class="btn btn-primary">Start your site</a>
-    </div>
-    <p class="band-credit">Concept-site photography: Pexels (free license).</p>
+    <p class="check-fine">The check is automated and shows a snapshot of your site at one moment. It isn&rsquo;t an official certification, and it can&rsquo;t promise search rankings.</p>
   </section>
-
 </main>
 
 <footer>
@@ -515,6 +446,106 @@
         mobileMenu.classList.remove('open');
         navToggle.setAttribute('aria-expanded', 'false');
       });
+    });
+  })();
+</script>
+
+<script>
+  (function () {
+    var form = document.getElementById('check-form');
+    var mailLink = document.querySelector('.check-mail');
+    if (!form || !mailLink) return;
+
+    var toAddress = mailLink.getAttribute('href').replace(/^mailto:/i, '');
+    var f = {
+      name: document.getElementById('ck-name'),
+      email: document.getElementById('ck-email'),
+      business: document.getElementById('ck-business'),
+      site: document.getElementById('ck-site'),
+      notes: document.getElementById('ck-notes')
+    };
+    var errorBox = document.getElementById('ck-error');
+    var statusBox = document.getElementById('ck-status');
+    var inputs = [f.name, f.email, f.business, f.site];
+
+    function oneLine(v) { return v.replace(/[\r\n]+/g, ' ').trim(); }
+
+    // "example.com" or "https://www.example.com/page" -> a full address, or '' if it doesn't look like a website.
+    function normalizeSite(raw) {
+      var v = oneLine(raw);
+      if (!v || /\s/.test(v)) return '';
+      if (!/^https?:\/\//i.test(v)) v = 'https://' + v;
+      try {
+        var u = new URL(v);
+        if (u.username || u.password) return '';
+        if (!/^[a-z0-9.-]+$/i.test(u.hostname) || u.hostname.indexOf('.') < 1 || /\.$/.test(u.hostname)) return '';
+        return u.protocol + '//' + u.host + (u.pathname === '/' ? '' : u.pathname);
+      } catch (e) { return ''; }
+    }
+
+    function showError(field, message) {
+      inputs.forEach(function (i) { i.removeAttribute('aria-invalid'); i.removeAttribute('aria-describedby'); });
+      if (!field) { errorBox.hidden = true; errorBox.textContent = ''; return; }
+      field.setAttribute('aria-invalid', 'true');
+      field.setAttribute('aria-describedby', 'ck-error');
+      errorBox.textContent = message;
+      errorBox.hidden = false;
+      field.focus();
+    }
+
+    // Returns the request, or null after showing the first problem.
+    function collect() {
+      statusBox.textContent = '';
+      var name = oneLine(f.name.value), email = oneLine(f.email.value), business = oneLine(f.business.value);
+      var site = normalizeSite(f.site.value);
+      if (!name) { showError(f.name, 'Please enter your name.'); return null; }
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { showError(f.email, 'Please enter a valid email address so I can send your report.'); return null; }
+      if (!business) { showError(f.business, 'Please enter your business name.'); return null; }
+      if (!site) { showError(f.site, 'Please enter your website address, for example yourbusiness.com.'); return null; }
+      showError(null);
+      var notes = f.notes.value.trim();
+      var body = 'Hi Michelle,\n\nI\u2019d like a free website check.\n\n' +
+        'Business: ' + business + '\nWebsite: ' + site + '\nName: ' + name + '\nEmail: ' + email +
+        (notes ? '\n\nAnything specific:\n' + notes : '') + '\n';
+      return { subject: 'Free website check request: ' + business, body: body };
+    }
+
+    function copyText(text, okMessage, failMessage) {
+      var fallback = function () {
+        var t = document.createElement('textarea');
+        t.value = text; t.setAttribute('readonly', '');
+        t.style.position = 'absolute'; t.style.left = '-9999px';
+        document.body.appendChild(t); t.select();
+        var ok = false;
+        try { ok = document.execCommand('copy'); } catch (e) { ok = false; }
+        document.body.removeChild(t);
+        statusBox.textContent = ok ? okMessage : failMessage;
+      };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(function () { statusBox.textContent = okMessage; }, fallback);
+      } else { fallback(); }
+    }
+
+    form.addEventListener('submit', function (event) {
+      event.preventDefault();
+      var req = collect();
+      if (!req) return;
+      var href = 'mailto:' + toAddress + '?subject=' + encodeURIComponent(req.subject) + '&body=' + encodeURIComponent(req.body);
+      statusBox.innerHTML = 'Your email app should open with the request ready to send. If nothing happens, ' +
+        '<a href="' + href.replace(/"/g, '&quot;') + '">open the email here</a> or use \u201cCopy my request\u201d and send it from any email program.';
+      window.location.href = href;
+    });
+
+    document.getElementById('ck-copy-request').addEventListener('click', function () {
+      var req = collect();
+      if (!req) return;
+      copyText('To: ' + toAddress + '\nSubject: ' + req.subject + '\n\n' + req.body,
+        'Request copied. Paste it into an email to ' + toAddress + '.',
+        'Couldn\u2019t copy automatically. Please email ' + toAddress + ' with your website address.');
+    });
+
+    document.getElementById('ck-copy-email').addEventListener('click', function () {
+      copyText(toAddress, 'Email address copied: ' + toAddress, 'Couldn\u2019t copy automatically. My email address is ' + toAddress);
     });
   })();
 </script>
