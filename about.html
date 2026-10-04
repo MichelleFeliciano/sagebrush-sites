@@ -44,11 +44,12 @@
     --cream-deep: #f2e6d5;
     --panel: #fffdf9;
     --ink: #40312a;
-    --ink-soft: #8a7566;
+    --ink-soft: #6f5b4e;
     --line: #e6d6c2;
     --terracotta: #c1653f;
     --rust: #a8492b;
     --sage: #7f8f6a;
+    --sage-deep: #5c6b49; /* sage for text (AA contrast); --sage stays for decoration */
     --rose: #d69a8e;
     --mustard: #d3a13f;
     --radius: 22px;
@@ -117,7 +118,7 @@
   .nav-links a.active { background: var(--cream-deep); color: var(--rust); }
 
   .nav-cta { border: 1.5px solid var(--terracotta); color: var(--rust); padding: 9px 18px; border-radius: 999px; font-size: 0.82rem; font-weight: 600; white-space: nowrap; }
-  .nav-cta:hover { background: var(--terracotta); color: #fff8f0; }
+  .nav-cta:hover { background: var(--rust); color: #fff8f0; }
 
   .nav-toggle { display: none; background: none; border: none; color: var(--ink); font-size: 1.4rem; cursor: pointer; padding: 6px 10px; }
 
@@ -165,7 +166,7 @@
   section { padding: 60px 0 78px; }
 
   .section-head { max-width: 640px; margin: 0 auto 46px; text-align: center; }
-  .section-head .eyebrow { display: inline-flex; align-items: center; gap: 8px; font-size: 0.76rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--sage); margin-bottom: 14px; justify-content: center; }
+  .section-head .eyebrow { display: inline-flex; align-items: center; gap: 8px; font-size: 0.76rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--sage-deep); margin-bottom: 14px; justify-content: center; }
   .section-head h2 { font-size: clamp(1.7rem, 3.4vw, 2.3rem); margin-bottom: 12px; font-weight: 400; }
   .section-head p { color: var(--ink-soft); }
 
@@ -233,7 +234,7 @@
 
   .facts { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 22px; }
   .fact { background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius-sm); padding: 14px 16px; }
-  .fact .k { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--sage); margin-bottom: 4px; }
+  .fact .k { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--sage-deep); margin-bottom: 4px; }
   .fact .v { font-size: 0.9rem; }
 
   /* ---------- Skills ---------- */
@@ -262,10 +263,10 @@
     background: var(--panel);
     color: var(--ink);
   }
-  form input::placeholder, form textarea::placeholder { color: var(--ink-soft); opacity: 0.8; }
+  form input::placeholder, form textarea::placeholder { color: var(--ink-soft); opacity: 1; }
   form textarea { min-height: 120px; resize: vertical; }
   form button { align-self: flex-start; border: none; cursor: pointer; }
-  .form-note { font-size: 0.78rem; color: var(--ink-soft); opacity: 0.85; }
+  .form-note { font-size: 0.78rem; color: var(--ink-soft); }
 
   /* ---------- Footer ---------- */
   footer { padding: 36px 0; text-align: center; font-size: 0.88rem; color: var(--ink-soft); border-top: 1px solid var(--line); margin-top: 20px; }

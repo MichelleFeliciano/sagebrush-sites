@@ -15,8 +15,9 @@
 <meta name="theme-color" content="#c1653f">
 <style>
   :root {
-    --cream: #faf3ea; --cream-deep: #f2e6d5; --panel: #fffdf9; --ink: #40312a; --ink-soft: #8a7566;
-    --line: #e6d6c2; --terracotta: #c1653f; --rust: #a8492b; --sage: #7f8f6a; --rose: #d69a8e;
+    --cream: #faf3ea; --cream-deep: #f2e6d5; --panel: #fffdf9; --ink: #40312a; --ink-soft: #6f5b4e;
+    --line: #e6d6c2; --terracotta: #c1653f; --rust: #a8492b; --sage: #7f8f6a;
+    --sage-deep: #5c6b49; /* sage for text (AA contrast); --sage stays for decoration */ --rose: #d69a8e;
     --radius: 22px; --radius-sm: 12px;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -41,7 +42,7 @@
   .brand span { color: var(--rust); }
   .brand-logo { width: 24px; height: 24px; border-radius: 50%; flex-shrink: 0; }
   .back-link { font-size: 0.86rem; color: var(--rust); border: 1.5px solid var(--terracotta); padding: 9px 18px; border-radius: 999px; }
-  .back-link:hover { background: var(--terracotta); color: #fff8f0; }
+  .back-link:hover { background: var(--rust); color: #fff8f0; }
 
   .divider { height: 3px; background-image: radial-gradient(circle, var(--terracotta) 1.4px, transparent 1.6px); background-size: 14px 3px; background-repeat: repeat-x; opacity: 0.55; margin: 46px 0; }
 
@@ -53,8 +54,8 @@
 
   .cta-row { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; margin-top: 30px; }
   .btn { display: inline-block; padding: 12px 24px; border-radius: 999px; font-size: 0.9rem; border: 1.5px solid var(--terracotta); }
-  .btn-primary { background: var(--terracotta); color: #fff8f0; }
-  .btn-primary:hover { background: var(--rust); border-color: var(--rust); }
+  .btn-primary { background: var(--rust); border-color: var(--rust); color: #fff8f0; }
+  .btn-primary:hover { background: #8f3c22; border-color: #8f3c22; }
   .btn-ghost { background: transparent; color: var(--rust); }
   .btn-ghost:hover { background: var(--cream-deep); }
 
