@@ -26,7 +26,7 @@
     --bg: #f7f6f1;
     --panel: #ffffff;
     --ink: #33392f;
-    --ink-soft: #6f7565;
+    --ink-soft: #646a5a; /* was #6f7565 (4.4:1); now AA */
     --line: #e4e5da;
     --sage: #7c9070;
     --sage-deep: #55684c;
@@ -171,10 +171,10 @@
   .quote-slide.active { display: block; }
   .quote-slide p.quote { font-size: 1.25rem; font-weight: 300; font-style: italic; margin-bottom: 20px; }
   .quote-slide p.who { font-size: 0.82rem; color: var(--sage-deep); letter-spacing: 0.04em; text-transform: uppercase; }
-  .quote-dots { display: flex; justify-content: center; gap: 10px; margin-top: 30px; }
-  .quote-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--line); border: none; cursor: pointer; padding: 0; }
-  .quote-dot.active { background: var(--sage-deep); }
-  .testimonials-disclaimer { text-align: center; font-size: 0.78rem; color: var(--ink-soft); margin-top: 30px; opacity: 0.75; }
+  .quote-dots { display: flex; justify-content: center; gap: 0; margin-top: 22px; }
+  .quote-dot { box-sizing: content-box; width: 8px; height: 8px; padding: 8px; border-radius: 50%; background: var(--line); background-clip: content-box; border: none; cursor: pointer; }
+  .quote-dot.active { background-color: var(--sage-deep); }
+  .testimonials-disclaimer { text-align: center; font-size: 0.78rem; color: var(--ink-soft); margin-top: 30px; }
 
   /* ---------- Closing CTA band ---------- */
   .cta-band { background: var(--sage-deep); color: #fff; text-align: center; padding: 80px 24px; }
@@ -194,12 +194,12 @@
   form input:focus, form textarea:focus { outline: none; border-color: var(--sage-deep); }
   form textarea { min-height: 90px; resize: vertical; }
   form button { align-self: flex-start; margin-top: 6px; }
-  .form-note { font-size: 0.76rem; color: var(--ink-soft); opacity: 0.8; }
+  .form-note { font-size: 0.76rem; color: var(--ink-soft); }
 
   /* ---------- Footer ---------- */
   footer { padding: 38px 0; text-align: center; font-size: 0.82rem; color: var(--ink-soft); border-top: 1px solid var(--line); }
   footer .concept-logo { width: 14px; height: 14px; border-radius: 50%; vertical-align: middle; margin-right: 5px; opacity: 0.85; }
-  footer .concept-tag { display: inline-block; margin-top: 8px; font-size: 0.7rem; letter-spacing: 0.05em; text-transform: uppercase; color: var(--sage-deep); opacity: 0.85; }
+  footer .concept-tag { display: inline-block; margin-top: 8px; font-size: 0.7rem; letter-spacing: 0.05em; text-transform: uppercase; color: var(--sage-deep); }
 
   @media (max-width: 860px) {
     .path-row { grid-template-columns: 1fr; }

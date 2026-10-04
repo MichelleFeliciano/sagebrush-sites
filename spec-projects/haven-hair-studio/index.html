@@ -25,7 +25,7 @@
     --blush: #f1e2d8;
     --charcoal: #2b2622;
     --charcoal-soft: #726a62;
-    --accent: #b3583f;
+    --accent: #a24c34; /* was #b3583f (4.45:1); now AA on cream and blush */
     --line: #e8ded2;
     --radius: 3px;
   }
@@ -186,7 +186,7 @@
   .stars { color: var(--accent); letter-spacing: 3px; margin-bottom: 14px; font-size: 0.9rem; }
   .review p.quote { font-size: 1.05rem; font-style: italic; max-width: 560px; margin: 0 auto 12px; }
   .review p.who { font-family: -apple-system, sans-serif; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--charcoal-soft); }
-  .testimonials-disclaimer { text-align: center; font-size: 0.78rem; color: var(--charcoal-soft); margin-top: 24px; opacity: 0.75; font-family: -apple-system, sans-serif; }
+  .testimonials-disclaimer { text-align: center; font-size: 0.78rem; color: var(--charcoal-soft); margin-top: 24px; font-family: -apple-system, sans-serif; }
 
   /* ---------- Contact ---------- */
   .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; font-family: -apple-system, sans-serif; }
@@ -198,12 +198,12 @@
   form input, form textarea { font-family: inherit; font-size: 0.92rem; padding: 12px 14px; border: 1px solid var(--line); border-radius: var(--radius); background: #fff; color: var(--charcoal); }
   form textarea { min-height: 110px; resize: vertical; }
   form button { align-self: flex-start; }
-  .form-note { font-size: 0.78rem; color: var(--charcoal-soft); opacity: 0.8; }
+  .form-note { font-size: 0.78rem; color: var(--charcoal-soft); }
 
   /* ---------- Footer ---------- */
   footer { padding: 34px 0; text-align: center; font-size: 0.82rem; color: var(--charcoal-soft); border-top: 1px solid var(--line); font-family: -apple-system, sans-serif; }
   footer .concept-logo { width: 14px; height: 14px; border-radius: 50%; vertical-align: middle; margin-right: 5px; opacity: 0.85; }
-  footer .concept-tag { display: inline-block; margin-top: 8px; font-size: 0.72rem; letter-spacing: 0.04em; text-transform: uppercase; color: var(--accent); opacity: 0.85; }
+  footer .concept-tag { display: inline-block; margin-top: 8px; font-size: 0.72rem; letter-spacing: 0.04em; text-transform: uppercase; color: var(--accent); }
 
   @media (max-width: 900px) {
     .categories { grid-template-columns: repeat(2, 1fr); }

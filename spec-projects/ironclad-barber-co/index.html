@@ -221,6 +221,7 @@
     padding-right: 24px;
   }
 
+  .filmstrip:focus-visible { outline: 2px solid var(--brass-bright); outline-offset: 6px; }
   .filmstrip::-webkit-scrollbar { height: 6px; }
   .filmstrip::-webkit-scrollbar-thumb { background: var(--panel-line); border-radius: 999px; }
 
@@ -388,7 +389,7 @@
       <p class="eyebrow">Recent Work</p>
       <h2>Cuts we're proud of</h2>
     </div>
-    <div class="filmstrip">
+    <div class="filmstrip" tabindex="0" role="region" aria-label="Gallery of cuts. Scroll sideways, or use the arrow keys.">
       <div class="film-item"><div class="film-photo f1"></div><h3>Mid Skin Fade</h3><p>Clean mid fade to skin with a textured crop on top.</p></div>
       <div class="film-item"><div class="film-photo f2"></div><h3>Classic Side Part</h3><p>Traditional scissor cut with a hard side part and low taper.</p></div>
       <div class="film-item"><div class="film-photo f3"></div><h3>Full Beard Sculpt</h3><p>Beard shaped and lined for a sharp, defined edge.</p></div>
