@@ -173,7 +173,11 @@
       toggle.addEventListener("click", function () { playing = !playing; syncToggle(); tick(); });
       body.addEventListener("pointerenter", function () { hovering = true; tick(); });
       body.addEventListener("pointerleave", function () { hovering = false; tick(); });
-      body.addEventListener("focusin", function () { focusing = true; tick(); });
+      // Only keyboard focus pauses the rotation, so pressing Play with a mouse really plays.
+      body.addEventListener("focusin", function (event) {
+        focusing = !!(event.target.matches && event.target.matches(":focus-visible"));
+        tick();
+      });
       body.addEventListener("focusout", function () { focusing = false; tick(); });
       document.addEventListener("visibilitychange", tick);
 
@@ -282,7 +286,7 @@
       var message = messageField.value.trim();
 
       if (!name) return showError(nameField, "Please enter your name.");
-      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      if (!/^[^\s@]+@[^\s@.]+(\.[^\s@.]+)+$/.test(email)) {
         return showError(emailField, "Please enter a valid email address so I can reply.");
       }
       if (message.length < 10) {

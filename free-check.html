@@ -127,7 +127,7 @@
   .nav-toggle { display: none; background: none; border: none; color: var(--ink); font-size: 1.4rem; cursor: pointer; padding: 6px 10px; }
 
   .mobile-menu { display: none; flex-direction: column; max-width: 1000px; margin: 10px auto 0; background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; }
-  .mobile-menu.open { display: flex; }
+  @media (max-width: 820px) { .mobile-menu.open { display: flex; } }
   .mobile-menu a { padding: 14px 20px; border-bottom: 1px solid var(--line); font-size: 0.92rem; color: var(--ink-soft); }
   .mobile-menu a.active { color: var(--rust); font-weight: 600; }
   .mobile-menu a:last-child { border-bottom: none; }
@@ -446,6 +446,14 @@
       navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
     });
 
+    document.addEventListener('keydown', function (event) {
+      if (event.key === 'Escape' && mobileMenu.classList.contains('open')) {
+        mobileMenu.classList.remove('open');
+        navToggle.setAttribute('aria-expanded', 'false');
+        navToggle.focus();
+      }
+    });
+
     mobileMenu.querySelectorAll('a').forEach(function (link) {
       link.addEventListener('click', function () {
         mobileMenu.classList.remove('open');
@@ -483,7 +491,7 @@
       try {
         var u = new URL(v);
         if (u.username || u.password) return '';
-        if (!/^[a-z0-9.-]+$/i.test(u.hostname) || u.hostname.indexOf('.') < 1 || /\.$/.test(u.hostname)) return '';
+        if (!/^([a-z0-9]([a-z0-9-]*[a-z0-9])?\.)+[a-z]{2,}$/i.test(u.hostname)) return '';
         return u.protocol + '//' + u.host + (u.pathname === '/' ? '' : u.pathname);
       } catch (e) { return ''; }
     }
@@ -504,7 +512,7 @@
       var name = oneLine(f.name.value), email = oneLine(f.email.value), business = oneLine(f.business.value);
       var site = normalizeSite(f.site.value);
       if (!name) { showError(f.name, 'Please enter your name.'); return null; }
-      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { showError(f.email, 'Please enter a valid email address so I can send your report.'); return null; }
+      if (!/^[^\s@]+@[^\s@.]+(\.[^\s@.]+)+$/.test(email)) { showError(f.email, 'Please enter a valid email address so I can send your report.'); return null; }
       if (!business) { showError(f.business, 'Please enter your business name.'); return null; }
       if (!site) { showError(f.site, 'Please enter your website address, for example yourbusiness.com.'); return null; }
       showError(null);

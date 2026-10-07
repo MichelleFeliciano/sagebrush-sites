@@ -90,7 +90,7 @@
   .nav-toggle { display: none; background: none; border: none; font-size: 1.6rem; color: var(--ink); cursor: pointer; line-height: 1; padding: 4px; justify-self: end; }
 
   .mobile-menu { display: none; flex-direction: column; border-top: 1px solid var(--line); background: var(--bg); }
-  .mobile-menu.open { display: flex; }
+  @media (max-width: 780px) { .mobile-menu.open { display: flex; } }
   .mobile-menu a { padding: 14px 24px; border-bottom: 1px solid var(--line); font-size: 0.92rem; }
 
   /* ---------- Hero ---------- */
@@ -232,7 +232,7 @@
 </head>
 <body>
 
-<div class="utility-bar">
+<div class="utility-bar" role="region" aria-label="Opening hours and phone">
   <div class="wrap">
     <span>Wed–Sun · 10am–6pm</span>
     <span>(817) 555-0164</span>
@@ -446,6 +446,14 @@
       navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
     });
 
+    document.addEventListener('keydown', function (event) {
+      if (event.key === 'Escape' && mobileMenu.classList.contains('open')) {
+        mobileMenu.classList.remove('open');
+        navToggle.setAttribute('aria-expanded', 'false');
+        navToggle.focus();
+      }
+    });
+
     mobileMenu.querySelectorAll('a').forEach(function (link) {
       link.addEventListener('click', function () {
         mobileMenu.classList.remove('open');
@@ -470,10 +478,21 @@
       show((current + 1) % slides.length);
     }
 
+    var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    var paused = false;
+    var carousel = document.getElementById("quote-carousel");
+
     function resetTimer() {
       clearInterval(timer);
-      timer = setInterval(next, 6000);
+      // Auto-rotation is skipped for reduced motion and paused while hovering or focused.
+      if (reduceMotion) return;
+      timer = setInterval(function () { if (!paused) next(); }, 6000);
     }
+
+    carousel.addEventListener("mouseenter", function () { paused = true; });
+    carousel.addEventListener("mouseleave", function () { paused = false; });
+    carousel.addEventListener("focusin", function () { paused = true; });
+    carousel.addEventListener("focusout", function () { paused = false; });
 
     dots.forEach(function (dot) {
       dot.addEventListener('click', function () {

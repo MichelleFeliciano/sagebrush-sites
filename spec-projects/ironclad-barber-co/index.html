@@ -128,7 +128,7 @@
   }
 
   .mobile-menu { display: none; flex-direction: column; border-top: 1px solid var(--panel-line); background: var(--bg); }
-  .mobile-menu.open { display: flex; }
+  @media (max-width: 780px) { .mobile-menu.open { display: flex; } }
   .mobile-menu a { padding: 14px 24px; border-bottom: 1px solid var(--panel-line); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.1em; }
   .mobile-menu a.book-btn { text-align: center; margin: 14px 24px; border-bottom: none; }
 
@@ -478,6 +478,14 @@
     navToggle.addEventListener('click', function () {
       var isOpen = mobileMenu.classList.toggle('open');
       navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+
+    document.addEventListener('keydown', function (event) {
+      if (event.key === 'Escape' && mobileMenu.classList.contains('open')) {
+        mobileMenu.classList.remove('open');
+        navToggle.setAttribute('aria-expanded', 'false');
+        navToggle.focus();
+      }
     });
 
     mobileMenu.querySelectorAll('a').forEach(function (link) {

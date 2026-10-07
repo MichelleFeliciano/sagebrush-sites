@@ -127,7 +127,7 @@
   .nav-toggle { display: none; background: none; border: none; color: var(--ink); font-size: 1.4rem; cursor: pointer; padding: 6px 10px; }
 
   .mobile-menu { display: none; flex-direction: column; max-width: 1000px; margin: 10px auto 0; background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; }
-  .mobile-menu.open { display: flex; }
+  @media (max-width: 820px) { .mobile-menu.open { display: flex; } }
   .mobile-menu a { padding: 14px 20px; border-bottom: 1px solid var(--line); font-size: 0.92rem; color: var(--ink-soft); }
   .mobile-menu a.active { color: var(--rust); font-weight: 600; }
   .mobile-menu a:last-child { border-bottom: none; }
@@ -249,9 +249,9 @@
   /* ---------- Contact ---------- */
   .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; }
 
-  .contact-info dl { display: grid; grid-template-columns: auto 1fr; gap: 12px 16px; font-size: 0.94rem; }
+  .contact-info dl { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 12px 16px; font-size: 0.94rem; }
   .contact-info dt { color: var(--rust); font-weight: 600; }
-  .contact-info dd { color: var(--ink-soft); }
+  .contact-info dd { color: var(--ink-soft); overflow-wrap: anywhere; }
 
   .social-row { display: flex; gap: 10px; margin-top: 24px; flex-wrap: wrap; }
   .social-pill { font-size: 0.82rem; padding: 9px 18px; border-radius: 999px; background: var(--panel); border: 1px solid var(--line); color: var(--ink-soft); }
@@ -375,6 +375,14 @@
     navToggle.addEventListener('click', function () {
       var isOpen = mobileMenu.classList.toggle('open');
       navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+
+    document.addEventListener('keydown', function (event) {
+      if (event.key === 'Escape' && mobileMenu.classList.contains('open')) {
+        mobileMenu.classList.remove('open');
+        navToggle.setAttribute('aria-expanded', 'false');
+        navToggle.focus();
+      }
     });
 
     mobileMenu.querySelectorAll('a').forEach(function (link) {

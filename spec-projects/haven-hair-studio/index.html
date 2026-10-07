@@ -92,7 +92,7 @@
   }
 
   .mobile-menu { display: none; flex-direction: column; border-top: 1px solid var(--line); background: var(--cream); }
-  .mobile-menu.open { display: flex; }
+  @media (max-width: 780px) { .mobile-menu.open { display: flex; } }
   .mobile-menu a { padding: 14px 24px; border-bottom: 1px solid var(--line); font-size: 0.95rem; }
 
   /* ---------- Hero ---------- */
@@ -476,6 +476,14 @@
     navToggle.addEventListener('click', function () {
       var isOpen = mobileMenu.classList.toggle('open');
       navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+
+    document.addEventListener('keydown', function (event) {
+      if (event.key === 'Escape' && mobileMenu.classList.contains('open')) {
+        mobileMenu.classList.remove('open');
+        navToggle.setAttribute('aria-expanded', 'false');
+        navToggle.focus();
+      }
     });
 
     mobileMenu.querySelectorAll('a').forEach(function (link) {
