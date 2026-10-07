@@ -24,6 +24,7 @@
 <link rel="manifest" href="../manifest.json">
 <meta name="theme-color" content="#c1653f">
 <style>
+  picture { display: contents; } picture > source { display: none; }
   :root {
     --cream: #faf3ea; --cream-deep: #f2e6d5; --panel: #fffdf9; --ink: #40312a; --ink-soft: #6f5b4e;
     --line: #e6d6c2; --terracotta: #c1653f; --rust: #a8492b; --sage: #7f8f6a;
@@ -90,7 +91,7 @@
 
 <header>
   <nav class="pill">
-    <a href="../" class="brand"><img src="../images/logo.png" alt="Sagebrush Sites logo" class="brand-logo">Sagebrush <span>Sites</span></a>
+    <a href="../" class="brand"><picture><source srcset="../images/logo.webp" type="image/webp"><img src="../images/logo.png" alt="Sagebrush Sites logo" class="brand-logo"></picture>Sagebrush <span>Sites</span></a>
     <a href="../work.html" class="back-link">← All Work</a>
   </nav>
 </header>
@@ -142,7 +143,7 @@
 
 <footer>
   <div class="wrap">
-    <img src="../images/logo.png" alt="Sagebrush Sites logo" class="footer-logo">
+    <picture><source srcset="../images/logo.webp" type="image/webp"><img src="../images/logo.png" alt="Sagebrush Sites logo" class="footer-logo"></picture>
     <p class="sig">Sagebrush Sites</p>
     <p>Interested in something similar for your salon? <a href="../contact.html" style="color: var(--rust); font-weight: 600; border-bottom: 1px solid var(--rust);">Get in touch</a>.</p>
   </div>

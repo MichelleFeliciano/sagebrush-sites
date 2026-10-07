@@ -43,6 +43,7 @@
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#c1653f">
 <style>
+  picture { display: contents; } picture > source { display: none; }
   :root {
     --cream: #faf3ea;
     --cream-deep: #f2e6d5;
@@ -292,7 +293,7 @@
 <header>
   <nav class="pill">
     <a href="./" class="brand">
-      <img src="images/logo.png" alt="Sagebrush Sites logo" class="brand-logo" width="28" height="28">
+      <picture><source srcset="images/logo.webp" type="image/webp"><img src="images/logo.png" alt="Sagebrush Sites logo" class="brand-logo" width="28" height="28"></picture>
       Sagebrush <span>Sites</span>
     </a>
     <div class="nav-links" id="nav-links">
@@ -335,7 +336,7 @@
 </main>
 
 <footer>
-  <img src="images/logo.png" alt="Sagebrush Sites logo" class="footer-logo">
+  <picture><source srcset="images/logo.webp" type="image/webp"><img src="images/logo.png" alt="Sagebrush Sites logo" class="footer-logo"></picture>
   <p class="sig">Sagebrush Sites</p>
   <p>&copy; 2026 &middot; Fort Worth, Texas &middot; Founded by Michelle Feliciano</p>
 </footer>
