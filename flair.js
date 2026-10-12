@@ -1,11 +1,26 @@
 /* Sagebrush Sites: flair layer. Plain JavaScript, no dependencies.
-   Every effect is skipped for visitors who prefer reduced motion. */
+   Every effect is skipped for visitors who prefer reduced motion.
+
+   Loaded with "defer" by the seven main pages only (not the case studies or
+   concept sites). Each section below looks for its own elements first and does
+   nothing if they are missing, so one shared file can serve every page:
+     1. Scroll-in reveals        (all pages)
+     2. Device-mockup tilt       (Home, Work)
+     3. "Try a style" demo       (Home)
+     4. Concept-work carousel    (Home)
+     5. Floating quote button    (all pages except Contact)
+     6. Photo-band parallax      (Home)
+     7. Contact form             (Contact)
+     8. Scroll progress bar      (all pages)
+   Everything is wrapped in one function so no variables leak into the page. */
 (function () {
   "use strict";
 
+  // True when the visitor's system asks for less motion; every animation checks this.
   var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   /* ---------- Scroll-in reveals ---------- */
+  // Elements that fade and slide up the first time they scroll into view.
   var REVEAL = [
     ".section-head", ".work-card", ".process-card", ".process-note", ".work-note",
     ".about-arch", ".about-copy", ".skill-chip", ".fact", ".contact-info",
@@ -13,6 +28,8 @@
   ].join(",");
 
   if (!reduceMotion && "IntersectionObserver" in window) {
+    // Counts how many siblings of each parent have been seen so far, so a row of
+    // cards animates one after another (a stagger) instead of all at once.
     var seen = new Map();
     var targets = Array.prototype.slice.call(document.querySelectorAll(REVEAL));
 
@@ -20,16 +37,20 @@
       var parent = el.parentElement;
       var index = seen.get(parent) || 0;
       seen.set(parent, index + 1);
+      // Delay grows 0.08s per sibling, capped at 6 steps so long lists do not lag.
       el.style.setProperty("--d", Math.min(index, 6) * 0.08 + "s");
+      // The hidden starting state (.reveal) is added here, not in the HTML, so
+      // nothing stays invisible if this script fails to run.
       el.classList.add("reveal");
     });
 
+    // Fire when 12% of an element is visible, slightly before it reaches the bottom edge.
     var observer = new IntersectionObserver(
       function (entries) {
         entries.forEach(function (entry) {
           if (!entry.isIntersecting) return;
           var el = entry.target;
-          observer.unobserve(el);
+          observer.unobserve(el); // each element reveals only once
           el.classList.add("in");
           // Hand control back to the element's own hover transitions.
           el.addEventListener("transitionend", function done(event) {
@@ -46,14 +67,18 @@
   }
 
   /* ---------- Device mockup tilt (pointer devices only) ---------- */
+  // Moving the mouse over a browser/phone mockup rotates it slightly in 3D.
+  // Skipped on touch screens, where there is no hover to follow.
   if (!reduceMotion && window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
     document.querySelectorAll("[data-tilt]").forEach(function (stage) {
       var rig = stage.querySelector(".device-rig");
       if (!rig) return;
       stage.addEventListener("pointermove", function (event) {
         var box = stage.getBoundingClientRect();
+        // Pointer position inside the stage as -0.5 (left/top) to +0.5 (right/bottom).
         var x = (event.clientX - box.left) / box.width - 0.5;
         var y = (event.clientY - box.top) / box.height - 0.5;
+        // .is-tilting switches to a short transition so the tilt tracks the cursor closely.
         rig.classList.add("is-tilting");
         rig.style.setProperty("--ry", (x * 14).toFixed(2) + "deg");
         rig.style.setProperty("--rx", (-y * 10).toFixed(2) + "deg");
@@ -67,8 +92,12 @@
   }
 
   /* ---------- "Try a style" demo ---------- */
+  // The radio buttons restyle a sample salon page by changing its data-style
+  // attribute (the styles themselves live in flair.css).
   var lab = document.getElementById("style-lab");
   if (lab) {
+    // The section is "hidden" in the HTML and revealed here, because the
+    // controls do nothing without JavaScript.
     lab.hidden = false;
     var mock = document.getElementById("mock");
     var gallery = document.getElementById("mock-gallery");
@@ -76,6 +105,8 @@
     var labDesc = document.getElementById("lab-desc");
     var labLink = document.getElementById("lab-link");
 
+    // Apply one style: swap the sample page's look, update the caption and link
+    // (all read from data-* attributes on the radio button), and replay the tile animation.
     var applyStyle = function (input) {
       mock.setAttribute("data-style", input.value);
       labName.textContent = input.getAttribute("data-title");
@@ -84,7 +115,7 @@
       labLink.innerHTML = "See it on " + input.getAttribute("data-site") + " &rarr;";
       if (!reduceMotion) {
         gallery.classList.remove("pop");
-        void gallery.offsetWidth; // restart the animation
+        void gallery.offsetWidth; // reading offsetWidth forces a reflow so the animation can restart
         gallery.classList.add("pop");
       }
     };
@@ -97,18 +128,22 @@
   }
 
   /* ---------- Concept-work carousel ---------- */
+  // Without JavaScript the four concept sites simply stack as a list. With it,
+  // they become a carousel: one slide visible, Previous/Next buttons, dots,
+  // auto-rotation, and a Pause/Play button.
   var showcase = document.getElementById("showcase");
   if (showcase) {
     var slides = Array.prototype.slice.call(showcase.querySelectorAll(".slide"));
     var body = showcase.querySelector(".showcase-body");
     if (slides.length > 1 && body) {
-      showcase.classList.add("is-carousel");
-      var current = 0;
-      var playing = !reduceMotion;
-      var hovering = false;
-      var focusing = false;
-      var timer = null;
+      showcase.classList.add("is-carousel"); // CSS stacks the slides on top of each other
+      var current = 0;                  // index of the visible slide
+      var playing = !reduceMotion;      // auto-rotation starts off for reduced-motion visitors
+      var hovering = false;             // mouse is over the carousel (pauses rotation)
+      var focusing = false;             // keyboard focus is inside the carousel (pauses rotation)
+      var timer = null;                 // setInterval handle for auto-rotation
 
+      // Build the controls in JS (they would be dead buttons without it).
       var controls = document.createElement("div");
       controls.className = "carousel-controls";
 
@@ -146,6 +181,8 @@
       controls.appendChild(toggle);
       body.appendChild(controls);
 
+      // Show one slide: wrap the index around, mark that slide active, and make the
+      // others inert so keyboard and screen-reader users cannot reach hidden links.
       var show = function (index) {
         current = (index + slides.length) % slides.length;
         slides.forEach(function (slide, i) {
@@ -156,6 +193,8 @@
         });
       };
 
+      // (Re)start the rotation timer. It only runs while playing and not hovered,
+      // focused, or in a background tab; every other event calls tick() to re-evaluate.
       var tick = function () {
         if (timer) { window.clearInterval(timer); timer = null; }
         if (playing && !hovering && !focusing && !document.hidden) {
@@ -163,6 +202,8 @@
         }
       };
 
+      // Keep the Pause/Play label correct, and let assistive tech announce slide
+      // changes only while rotation is paused (announcing every 5.5s would be noisy).
       var syncToggle = function () {
         toggle.textContent = playing ? "Pause rotation" : "Play rotation";
         body.setAttribute("aria-live", playing ? "off" : "polite");
@@ -188,6 +229,7 @@
   }
 
   /* ---------- Floating "Get a free quote" button ---------- */
+  // Added to every page except Contact (where it would point at the page you are on).
   if (!/contact/i.test(window.location.pathname)) {
     var quote = document.createElement("a");
     quote.className = "quote-fab";
@@ -198,7 +240,7 @@
     var quoteShown = false;
     var quoteBand = document.getElementById("photo-band");
     var checkQuote = function () {
-      var shouldShow = window.scrollY > 480;
+      var shouldShow = window.scrollY > 480; // appears after scrolling past the first screen
       if (shouldShow && quoteBand) {
         // The band has its own button, so don't show two quote buttons at once.
         var box = quoteBand.getBoundingClientRect();
@@ -214,6 +256,7 @@
   }
 
   /* ---------- Photo band parallax ---------- */
+  // The four photos in the Home page band drift slightly as it scrolls past.
   var band = document.getElementById("photo-band");
   if (band && !reduceMotion) {
     var bandImgs = Array.prototype.slice.call(band.querySelectorAll(".band-photos img"));
@@ -225,10 +268,12 @@
       if (box.bottom < 0 || box.top > vh) return;
       var progress = (vh / 2 - (box.top + box.height / 2)) / vh; // about -0.5 .. 0.5
       bandImgs.forEach(function (img, i) {
+        // Alternate photos drift in opposite directions for a layered look.
         var direction = i % 2 ? -1 : 1;
         img.style.setProperty("--py", (progress * 28 * direction).toFixed(1) + "px");
       });
     };
+    // Throttle to one update per animation frame so scrolling stays smooth.
     window.addEventListener("scroll", function () {
       if (!bandTicking) {
         bandTicking = true;
@@ -246,6 +291,7 @@
   var mailLink = document.querySelector('.contact-info a[href^="mailto:"]');
 
   if (contactForm && mailLink) {
+    // The destination address is read from the visible mailto link, so it is only written once in the HTML.
     var toAddress = mailLink.getAttribute("href").replace(/^mailto:/i, "");
     var nameField = document.getElementById("cf-name");
     var emailField = document.getElementById("cf-email");
@@ -257,10 +303,12 @@
 
     contactForm.hidden = false;
 
+    // Collapse line breaks so single-line fields cannot add extra lines to the email.
     var singleLine = function (value) {
       return value.replace(/[\r\n]+/g, " ").trim();
     };
 
+    // Show one error and flag its field for assistive technology; showError(null) clears it.
     var showError = function (field, message) {
       fields.forEach(function (f) {
         f.removeAttribute("aria-invalid");
@@ -286,6 +334,7 @@
       var message = messageField.value.trim();
 
       if (!name) return showError(nameField, "Please enter your name.");
+      // Basic shape check only (text@domain.tld, no spaces); the email app does the rest.
       if (!/^[^\s@]+@[^\s@.]+(\.[^\s@.]+)+$/.test(email)) {
         return showError(emailField, "Please enter a valid email address so I can reply.");
       }
@@ -294,6 +343,7 @@
       }
       showError(null);
 
+      // Build the mailto: link and hand it to the visitor's email app.
       var subject = "Website inquiry from " + name;
       var body = message + "\n\n" + name + "\n" + email;
       window.location.href =
@@ -304,6 +354,8 @@
         "Your email app should open with the message ready to send. If nothing happens, use \"Copy email address\" and send it from any email program.";
     });
 
+    // "Copy email address": uses the Clipboard API, with a hidden-input fallback
+    // for older browsers or pages where the API is blocked.
     copyBtn.addEventListener("click", function () {
       var done = function () {
         statusBox.textContent = "Email address copied: " + toAddress;
@@ -338,12 +390,14 @@
   }
 
   /* ---------- Scroll progress bar ---------- */
+  // A thin bar at the top of the page; CSS scales it using the --p variable (0 to 1).
   var bar = document.createElement("div");
   bar.className = "scroll-progress";
   bar.setAttribute("aria-hidden", "true");
   document.body.appendChild(bar);
 
   var ticking = false;
+  // Set --p to how far down the page the visitor has scrolled (0 at top, 1 at bottom).
   function updateProgress() {
     var doc = document.documentElement;
     var max = doc.scrollHeight - doc.clientHeight;
@@ -356,6 +410,6 @@
       window.requestAnimationFrame(updateProgress);
     }
   }, { passive: true });
-  window.addEventListener("resize", updateProgress);
+  window.addEventListener("resize", updateProgress); // page height changes with window size
   updateProgress();
 })();

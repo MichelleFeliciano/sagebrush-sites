@@ -28,6 +28,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Contact — Sagebrush Sites</title>
+<!-- Search-result and social-sharing text for this page -->
 <meta name="description" content="Get in touch with Sagebrush Sites about a website for your salon or beauty business.">
 <meta property="og:title" content="Contact — Sagebrush Sites">
 <meta property="og:description" content="Get in touch with Sagebrush Sites about a website for your salon or beauty business.">
@@ -38,12 +39,17 @@
 <meta property="og:image:alt" content="Sagebrush Sites logo">
 <meta name="twitter:image" content="https://sagebrushsites.com/images/logo.png">
 <meta name="twitter:card" content="summary">
+<!-- Tab icon, home-screen icon, web-app manifest, and browser-bar colour -->
 <link rel="icon" type="image/png" href="images/logo.png">
 <link rel="apple-touch-icon" href="images/logo.png">
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#c1653f">
 <style>
+  /* <picture> only picks the WebP/JPEG file; display: contents makes it layout-neutral
+     so the <img> inside is styled exactly as if the wrapper were not there. */
   picture { display: contents; } picture > source { display: none; }
+  /* Colour palette (warm cream, terracotta, sage) and corner radii. Change a colour
+     here and the whole page follows; flair.css reuses these same variable names. */
   :root {
     --cream: #faf3ea;
     --cream-deep: #f2e6d5;
@@ -61,10 +67,12 @@
     --radius-sm: 12px;
   }
 
+  /* Reset: padding is included in element widths and default margins are removed. */
   * { box-sizing: border-box; margin: 0; padding: 0; }
 
   html { scroll-behavior: smooth; }
 
+  /* Page base: system sans-serif body text on cream with a faint dotted texture. */
   body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
     background-color: var(--cream);
@@ -74,6 +82,7 @@
     line-height: 1.65;
   }
 
+  /* Headlines use a serif system font stack (no web fonts, so nothing to download). */
   h1, h2, h3 {
     font-family: Georgia, "Iowan Old Style", "Palatino Linotype", Palatino, serif;
     font-weight: 400;
@@ -97,15 +106,6 @@
   .accent-serif { font-family: Georgia, "Iowan Old Style", Palatino, serif; font-style: italic; color: var(--rust); }
 
   .icon { color: var(--terracotta); flex-shrink: 0; }
-
-  /* ---------- Dotted divider ---------- */
-  .divider {
-    height: 3px;
-    background-image: radial-gradient(circle, var(--terracotta) 1.4px, transparent 1.6px);
-    background-size: 14px 3px;
-    background-repeat: repeat-x;
-    opacity: 0.55;
-  }
 
   /* ---------- Nav ---------- */
   header { position: sticky; top: 0; z-index: 100; padding: 18px 24px; background: rgba(250, 243, 234, 0.88); backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
@@ -279,11 +279,13 @@
     .sprig { display: none; }
   }
 </style>
+<!-- Shared effects stylesheet; loads after the styles above so it can override them -->
 <link rel="stylesheet" href="flair.css">
 <noscript><style>#contact-form { display: none; }</style></noscript>
 </head>
 <body>
 
+<!-- Site header: brand, page links, "Get in touch" button, and the mobile menu -->
 <header>
   <nav class="pill">
     <a href="./" class="brand">
@@ -311,7 +313,9 @@
   </div>
 </header>
 
+<!-- Page content -->
 <main>
+  <!-- Page heading -->
   <section class="page-hero wrap">
     <p class="eyebrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></svg> Get In Touch</p>
     <h1>Let's create something beautiful together</h1>
@@ -320,6 +324,7 @@
 
   <section class="wrap">
     <div class="contact-grid">
+      <!-- Contact details, link to the free website check, and social links -->
       <div class="contact-info">
         <dl>
           <dt>Email</dt>
@@ -335,6 +340,7 @@
           <a href="https://www.linkedin.com/in/michelle-felicianowebdev/" class="social-pill" target="_blank" rel="noopener">LinkedIn</a>
         </div>
       </div>
+      <!-- Contact form: hidden until flair.js runs; sending opens the visitor's own email app (no server involved) -->
       <form id="contact-form" novalidate>
         <label class="sr-only" for="cf-name">Your name</label>
         <input id="cf-name" type="text" name="name" placeholder="Your name" autocomplete="name" maxlength="80" required>
@@ -355,14 +361,18 @@
   </section>
 </main>
 
+<!-- Footer: logo, copyright, and founder credit -->
 <footer>
   <picture><source srcset="images/logo.webp" type="image/webp"><img src="images/logo.png" alt="Sagebrush Sites logo" class="footer-logo"></picture>
   <p class="sig">Sagebrush Sites</p>
   <p>&copy; 2026 &middot; Fort Worth, Texas &middot; Founded by Michelle Feliciano</p>
 </footer>
 
+<!-- Mobile menu behaviour (inline so every page works on its own) -->
 <script>
   (function () {
+    // Mobile menu: the hamburger button toggles the "open" class on the menu panel
+    // and keeps aria-expanded in sync so screen readers announce its state.
     var navToggle = document.getElementById('nav-toggle');
     var mobileMenu = document.getElementById('mobile-menu');
 
@@ -371,6 +381,7 @@
       navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
     });
 
+    // Escape closes an open menu and returns focus to the hamburger button.
     document.addEventListener('keydown', function (event) {
       if (event.key === 'Escape' && mobileMenu.classList.contains('open')) {
         mobileMenu.classList.remove('open');
@@ -379,6 +390,7 @@
       }
     });
 
+    // Choosing a link closes the menu (important for in-page #anchor links).
     mobileMenu.querySelectorAll('a').forEach(function (link) {
       link.addEventListener('click', function () {
         mobileMenu.classList.remove('open');
@@ -388,6 +400,7 @@
   })();
 </script>
 
+<!-- Shared effects: scroll reveals, carousel, quote button, forms (see flair.js) -->
 <script src="flair.js" defer></script>
 </body>
 </html>

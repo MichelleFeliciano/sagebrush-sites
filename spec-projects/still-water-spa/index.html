@@ -21,7 +21,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Still Water Spa — Fort Worth, TX</title>
+<!-- Tab icon, home-screen icon, web-app manifest, and browser-bar colour -->
 <link rel="icon" type="image/png" href="images/logo.png">
+<!-- Search-result and social-sharing text for this page -->
 <meta name="description" content="Concept website for Still Water Spa: facials, peels and massage in a quiet space. A Sagebrush Sites portfolio project.">
 <link rel="canonical" href="https://sagebrushsites.com/spec-projects/still-water-spa/index.html">
 <meta property="og:title" content="Still Water Spa — Fort Worth, TX">
@@ -33,6 +35,8 @@
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://sagebrushsites.com/spec-projects/still-water-spa/images/logo.png">
 <style>
+  /* <picture> only picks the WebP/JPEG file; display: contents makes it layout-neutral
+     so the <img> inside is styled exactly as if the wrapper were not there. */
   picture { display: contents; } picture > source { display: none; }
   :root {
     --bg: #f7f6f1;
@@ -240,6 +244,7 @@
   </div>
 </div>
 
+<!-- Header: brand and the mobile menu -->
 <header>
   <nav class="wrap">
     <div class="nav-links">
@@ -262,8 +267,10 @@
   </div>
 </header>
 
+<!-- Page content, in order from the hero down -->
 <main id="top">
 
+  <!-- Hero: headline, short pitch, and call-to-action buttons -->
   <section class="hero">
     <div class="hero-inner">
       <p class="eyebrow">Fort Worth, Texas</p>
@@ -280,6 +287,7 @@
     </div>
   </section>
 
+  <!-- Three-card "choose your path" intro -->
   <section class="wrap" style="padding-top: 130px;">
     <div class="section-head">
       <p class="eyebrow">Find Your Way</p>
@@ -307,6 +315,7 @@
     </div>
   </section>
 
+  <!-- Treatments: alternating photo and text story sections -->
   <section id="facials" class="wrap">
     <div class="story">
       <div class="story-media" style="background-image: url('images/facial-bar.jpg');"></div>
@@ -343,6 +352,7 @@
     <p>&ldquo;The quiet lounge alone is worth booking early and staying after.&rdquo;</p>
   </div>
 
+  <!-- About the space -->
   <section id="about" class="wrap">
     <div class="story reverse" style="border-top: none;">
       <div class="story-media" style="background-image: url('images/reception.jpg');"></div>
@@ -370,6 +380,7 @@
     </div>
   </section>
 
+  <!-- Client reviews (invented for the concept) -->
   <section id="testimonials" class="wrap-narrow">
     <div class="section-head">
       <p class="eyebrow">Reviews</p>
@@ -403,6 +414,7 @@
     <a href="#contact" class="btn btn-primary">Book your appointment</a>
   </div>
 
+  <!-- Contact / booking section -->
   <section id="contact" class="wrap">
     <div class="section-head">
       <p class="eyebrow">Visit Us</p>
@@ -432,13 +444,17 @@
 
 </main>
 
+<!-- Footer: copyright and the "concept project" credit -->
 <footer>
   <p>&copy; 2026 Still Water Spa · Fort Worth, TX</p>
   <p class="concept-tag"><picture><source srcset="images/logo.webp" type="image/webp"><img src="images/logo.png" alt="Sagebrush Sites" class="concept-logo"></picture>Concept project — designed &amp; built by Sagebrush Sites</p>
 </footer>
 
+<!-- Page behaviour (inline so this concept site stays a single self-contained file) -->
 <script>
   (function () {
+    // Mobile menu: the hamburger button toggles the "open" class on the menu panel
+    // and keeps aria-expanded in sync so screen readers announce its state.
     var navToggle = document.getElementById('nav-toggle');
     var mobileMenu = document.getElementById('mobile-menu');
 
@@ -447,6 +463,7 @@
       navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
     });
 
+    // Escape closes an open menu and returns focus to the hamburger button.
     document.addEventListener('keydown', function (event) {
       if (event.key === 'Escape' && mobileMenu.classList.contains('open')) {
         mobileMenu.classList.remove('open');
@@ -455,6 +472,7 @@
       }
     });
 
+    // Choosing a link closes the menu (important for in-page #anchor links).
     mobileMenu.querySelectorAll('a').forEach(function (link) {
       link.addEventListener('click', function () {
         mobileMenu.classList.remove('open');
@@ -462,11 +480,14 @@
       });
     });
 
+    // Review carousel: one quote on screen at a time, auto-advancing every 6 seconds,
+    // with clickable dots. Slide 0 and dot 0 start with the "active" class in the HTML.
     var slides = document.querySelectorAll('#quote-carousel .quote-slide');
     var dots = document.querySelectorAll('#quote-dots .quote-dot');
     var current = 0;
     var timer;
 
+    // Swap the "active" class from the current slide/dot to the requested one.
     function show(index) {
       slides[current].classList.remove('active');
       dots[current].classList.remove('active');
@@ -475,6 +496,7 @@
       dots[current].classList.add('active');
     }
 
+    // Advance to the next slide, wrapping back to the first after the last.
     function next() {
       show((current + 1) % slides.length);
     }
@@ -483,6 +505,8 @@
     var paused = false;
     var carousel = document.getElementById("quote-carousel");
 
+    // (Re)start the auto-advance timer; restarting after a manual click stops the
+    // carousel jumping again a split second later.
     function resetTimer() {
       clearInterval(timer);
       // Auto-rotation is skipped for reduced motion and paused while hovering or focused.
@@ -490,11 +514,13 @@
       timer = setInterval(function () { if (!paused) next(); }, 6000);
     }
 
+    // Hovering or focusing the carousel pauses auto-advance so a quote can be read.
     carousel.addEventListener("mouseenter", function () { paused = true; });
     carousel.addEventListener("mouseleave", function () { paused = false; });
     carousel.addEventListener("focusin", function () { paused = true; });
     carousel.addEventListener("focusout", function () { paused = false; });
 
+    // Each dot jumps straight to its slide (data-index) and restarts the timer.
     dots.forEach(function (dot) {
       dot.addEventListener('click', function () {
         show(parseInt(dot.getAttribute('data-index'), 10));

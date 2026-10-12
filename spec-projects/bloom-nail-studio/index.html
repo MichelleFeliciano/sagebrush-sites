@@ -19,7 +19,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Bloom Nail Studio — Houston, TX</title>
+<!-- Tab icon, home-screen icon, web-app manifest, and browser-bar colour -->
 <link rel="icon" type="image/png" href="images/logo.png">
+<!-- Search-result and social-sharing text for this page -->
 <meta name="description" content="Concept website for Bloom Nail Studio: gel, dip powder and hand-painted nail art for color lovers. A Sagebrush Sites portfolio project.">
 <link rel="canonical" href="https://sagebrushsites.com/spec-projects/bloom-nail-studio/index.html">
 <meta property="og:title" content="Bloom Nail Studio — Houston, TX">
@@ -31,6 +33,8 @@
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://sagebrushsites.com/spec-projects/bloom-nail-studio/images/logo.png">
 <style>
+  /* <picture> only picks the WebP/JPEG file; display: contents makes it layout-neutral
+     so the <img> inside is styled exactly as if the wrapper were not there. */
   picture { display: contents; } picture > source { display: none; }
   :root {
     --bg: #fffaf9;
@@ -85,7 +89,7 @@
   }
 
   .mobile-menu { display: none; flex-direction: column; border-top: 1px solid var(--line); background: var(--bg); }
-  @media (max-width: 780px) { .mobile-menu.open { display: flex; } }
+  .mobile-menu.open { display: flex; }
   .mobile-menu a { padding: 16px 24px; border-bottom: 1px solid var(--line); font-size: 1rem; font-weight: 700; }
 
   /* ---------- Hero: full-bleed photo ---------- */
@@ -116,8 +120,6 @@
   .btn-primary:hover { background: #ff5c48; color: var(--ink); }
   .btn-light { background: #fff; color: var(--ink); }
   .btn-light:hover { background: #ffe8e4; }
-  .btn-outline { background: transparent; color: #fff; border-color: #fff; }
-  .btn-outline:hover { background: rgba(255,255,255,0.15); }
 
   /* ---------- Full-bleed color panel ---------- */
   .panel { padding: 90px 24px; text-align: center; color: #fff; }
@@ -224,7 +226,6 @@
   footer .concept-tag { display: inline-block; margin-top: 8px; font-size: 0.72rem; letter-spacing: 0.04em; text-transform: uppercase; color: var(--coral-text); font-weight: 700; }
 
   @media (max-width: 780px) {
-    .nav-links { display: none; }
     .bento { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 150px; }
     .b1 { grid-column: span 2; grid-row: span 2; }
     .b2, .b5, .b6 { grid-column: span 2; }
@@ -235,6 +236,7 @@
 </head>
 <body>
 
+<!-- Header: brand and the mobile menu -->
 <header>
   <nav class="wrap">
     <a href="#top" class="brand">bloom<span>.</span></a>
@@ -249,8 +251,10 @@
   </div>
 </header>
 
+<!-- Page content, in order from the hero down -->
 <main id="top">
 
+  <!-- Hero: headline, short pitch, and call-to-action buttons -->
   <section class="hero">
     <div class="hero-inner">
       <p class="eyebrow">Houston, Texas</p>
@@ -269,6 +273,7 @@
     </div>
   </div>
 
+  <!-- Services: pill-shaped, colour-coded price chips grouped by category -->
   <section id="services" class="wrap">
     <div class="section-head">
       <p class="eyebrow">Services &amp; Pricing</p>
@@ -304,6 +309,7 @@
 
   <div class="photo-break" style="background-image: url('images/golden-hour.jpg');"></div>
 
+  <!-- Gallery: bento grid; each tile opens the lightbox below -->
   <section id="gallery" class="wrap">
     <div class="section-head">
       <p class="eyebrow">Recent Work</p>
@@ -329,6 +335,8 @@
     </div>
   </div>
 
+  <!-- Client reviews (invented for the concept) -->
+  <!-- Client reviews as tilted Polaroid-style cards (invented for the concept) -->
   <section id="testimonials" class="wrap">
     <div class="section-head">
       <p class="eyebrow">Reviews</p>
@@ -372,24 +380,29 @@
 
 </main>
 
+<!-- Footer: copyright and the "concept project" credit -->
 <footer>
   <p>&copy; 2026 Bloom Nail Studio · Houston, TX</p>
   <p class="concept-tag"><picture><source srcset="images/logo.webp" type="image/webp"><img src="images/logo.png" alt="Sagebrush Sites" class="concept-logo"></picture>Concept project — designed &amp; built by Sagebrush Sites</p>
 </footer>
 
-<div class="lightbox" id="lightbox">
+<!-- Lightbox dialog opened from the gallery (see the script at the bottom) -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-labelledby="lightbox-title">
   <div class="lightbox-panel">
     <div class="lightbox-swatch" id="lightbox-swatch"></div>
     <div class="lightbox-body">
       <h3 id="lightbox-title"></h3>
       <p id="lightbox-desc"></p>
-      <button class="lightbox-close" id="lightbox-close">Close</button>
+      <button type="button" class="lightbox-close" id="lightbox-close">Close</button>
     </div>
   </div>
 </div>
 
+<!-- Page behaviour (inline so this concept site stays a single self-contained file) -->
 <script>
   (function () {
+    // Gallery lightbox: clicking (or pressing Enter/Space on) a photo opens a
+    // dialog with a larger image, a title and a short description.
     var lightbox = document.getElementById('lightbox');
     var swatch = document.getElementById('lightbox-swatch');
     var titleEl = document.getElementById('lightbox-title');
@@ -397,22 +410,45 @@
     var closeBtn = document.getElementById('lightbox-close');
     var items = document.querySelectorAll('.bento-item');
 
+    // Remember which photo opened the dialog so focus can return to it on close.
+    var lastFocus = null;
+
     items.forEach(function (item) {
-      item.addEventListener('click', function () {
+      // Make each photo reachable and operable by keyboard (added here so the
+      // markup stays clean if JavaScript is off).
+      item.setAttribute('tabindex', '0');
+      item.setAttribute('role', 'button');
+      var open = function () {
         titleEl.textContent = item.getAttribute('data-title');
         descEl.textContent = item.getAttribute('data-desc');
+        // Bloom's tiles use CSS background photos, so copy the computed background into the dialog.
         var bgImage = getComputedStyle(item).backgroundImage;
         swatch.style.backgroundImage = bgImage;
+        lastFocus = item;
         lightbox.classList.add('open');
+        closeBtn.focus();
+      };
+      item.addEventListener('click', open);
+      // Enter and Space activate the photo like a button; preventDefault stops Space scrolling the page.
+      item.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(); }
       });
     });
 
-    function close() { lightbox.classList.remove('open'); }
+    // Closing hands focus back to the photo that opened the dialog.
+    function close() {
+      if (!lightbox.classList.contains('open')) return;
+      lightbox.classList.remove('open');
+      if (lastFocus) lastFocus.focus();
+    }
 
+    // Close via the button, by clicking the dark backdrop, or with Escape.
     closeBtn.addEventListener('click', close);
     lightbox.addEventListener('click', function (e) { if (e.target === lightbox) close(); });
     document.addEventListener('keydown', function (e) { if (e.key === 'Escape') close(); });
 
+    // Mobile menu: the hamburger button toggles the "open" class on the menu panel
+    // and keeps aria-expanded in sync so screen readers announce its state.
     var navToggle = document.getElementById('nav-toggle');
     var mobileMenu = document.getElementById('mobile-menu');
 
@@ -421,6 +457,7 @@
       navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
     });
 
+    // Escape closes an open menu and returns focus to the hamburger button.
     document.addEventListener('keydown', function (event) {
       if (event.key === 'Escape' && mobileMenu.classList.contains('open')) {
         mobileMenu.classList.remove('open');
@@ -429,6 +466,7 @@
       }
     });
 
+    // Choosing a link closes the menu (important for in-page #anchor links).
     mobileMenu.querySelectorAll('a').forEach(function (link) {
       link.addEventListener('click', function () {
         mobileMenu.classList.remove('open');

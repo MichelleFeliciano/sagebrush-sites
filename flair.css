@@ -1,7 +1,17 @@
 /* Sagebrush Sites: flair layer. Loaded after each page's inline styles.
-   Everything animated is wrapped in prefers-reduced-motion: no-preference. */
+   Everything animated is wrapped in prefers-reduced-motion: no-preference.
+
+   Because this file loads AFTER the <style> block in each page, a rule here
+   overrides an equal-specificity rule there. It relies on the colour variables
+   (--rust, --terracotta, --line, --panel ...) that every main page defines in
+   its own :root block. Sections, in order:
+     contrast fixes -> hover polish -> scroll bar -> motion -> device mockups
+     -> "try a style" demo -> small-phone header -> headline animation
+     -> concept carousel -> quote button -> photo band -> contact form */
 
 /* ---------- Accessibility: contrast ---------- */
+/* A slightly darker soft-text colour and the deeper "rust" button fill keep text
+   at WCAG AA contrast on the cream background. */
 :root { --ink-soft: #6f5d50; }
 .btn-primary { background: var(--rust); border-color: var(--rust); }
 .btn-primary:hover { background: #8a3b21; border-color: #8a3b21; }
@@ -10,6 +20,8 @@
 .sr-only { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
 
 /* ---------- Hover polish (small, always on) ---------- */
+/* Hover lifts are tiny and not "motion" in the vestibular sense, so they are not
+   gated by prefers-reduced-motion. */
 .btn { transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease, color 0.2s ease; }
 .btn:hover { transform: translateY(-2px); box-shadow: 0 12px 22px -14px rgba(138, 59, 33, 0.7); }
 .btn:active { transform: none; box-shadow: none; }
@@ -23,6 +35,8 @@
 .skill-chip:hover, .fact:hover { transform: translateY(-2px); border-color: var(--terracotta); box-shadow: 0 10px 18px -14px rgba(168, 73, 43, 0.5); }
 
 /* ---------- Scroll progress bar ---------- */
+/* The element is created by flair.js. It is full width and scaled horizontally
+   from the left edge; --p (0 to 1) is the scroll position set by the script. */
 .scroll-progress {
   position: fixed;
   top: 0;
@@ -37,6 +51,12 @@
 }
 
 /* ---------- Motion ---------- */
+/* Smooth anchor scrolling is set on <html> in every page's own CSS; turn it off
+   for visitors who asked for reduced motion. */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
+
 @media (prefers-reduced-motion: no-preference) {
   /* Entrance for the first screen of every page (pure CSS, no JS needed). */
   .hero > .hero-logo, .hero > .eyebrow, .hero > h1, .hero > p.lead, .hero > .hero-ctas,
@@ -75,7 +95,10 @@
   .reveal.in { opacity: 1; transform: none; }
 }
 
-/* ---------- Device mockups (Work page) ---------- */
+/* ---------- Device mockups (Home carousel and Work page) ---------- */
+/* A browser window with a phone overlapping its corner. .device-rig is rotated
+   in 3D by flair.js using the --rx / --ry variables; perspective on the stage
+   gives the tilt depth, and translateZ lifts the phone off the browser. */
 .device-stage {
   position: relative;
   padding: 26px 22px 34px;
@@ -149,6 +172,8 @@
 }
 
 /* ---------- "Try a style" demo (home page) ---------- */
+/* The section starts [hidden] and is shown by flair.js. The radios are visually
+   hidden but still focusable; their labels are the visible pills. */
 .style-lab[hidden] { display: none; }
 .style-lab { padding-top: 20px; }
 
@@ -173,7 +198,9 @@
 .swatch i { width: 14px; height: 14px; border-radius: 50%; margin-left: -4px; border: 2px solid var(--panel); }
 .swatch i:first-child { margin-left: 0; }
 
-/* The sample page. Each style only changes these variables. */
+/* The sample page. Each style only changes these variables: the defaults below
+   are "editorial"; each [data-style] block after it overrides colours, corner
+   radius, heading font and the six gallery-tile colours (--t1 to --t6). */
 .mock {
   --m-bg: #faf6f1; --m-panel: #f1e2d8; --m-ink: #2b2622; --m-soft: #6e665e; --m-line: #e8ded2;
   --m-accent: #b3583f; --m-accent-ink: #ffffff; --m-kicker: #9c4731; --m-radius: 3px; --m-btn-radius: 999px;
@@ -253,6 +280,7 @@
 .tile:nth-child(5) { --c: var(--t5); }
 .tile:nth-child(6) { --c: var(--t6); }
 
+/* Gallery layouts per style (the same six tiles are re-arranged by CSS alone). */
 /* Masonry */
 .mock[data-style="editorial"] .mock-gallery { grid-template-columns: repeat(3, 1fr); grid-auto-rows: 30px; grid-auto-flow: dense; }
 .mock[data-style="editorial"] .tile:nth-child(1) { grid-row: span 5; }
@@ -277,6 +305,7 @@
 .mock[data-style="calm"] .tile { aspect-ratio: 16 / 7; }
 .mock[data-style="calm"] .tile:nth-child(n+5) { display: none; }
 
+/* Tiles pop in when a new style is chosen (flair.js re-adds .pop to replay it). */
 @media (prefers-reduced-motion: no-preference) {
   .mock-gallery.pop .tile { animation: tile-pop 0.5s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
   .mock-gallery.pop .tile:nth-child(2) { animation-delay: 0.04s; }
@@ -322,6 +351,9 @@
 }
 
 /* ---------- Concept-work showcase / carousel ---------- */
+/* Without JavaScript the slides are a plain vertical list. flair.js adds
+   .is-carousel, which puts every slide in the same grid cell (grid-area 1 / 1)
+   so they stack; only .is-active is visible, and the rest fade out. */
 .showcase { padding-top: 10px; }
 .showcase-body { max-width: 760px; margin: 0 auto; }
 .showcase-track { display: flex; flex-direction: column; gap: 30px; }
@@ -391,6 +423,8 @@
 }
 
 /* ---------- Floating quote button ---------- */
+/* Created by flair.js; hidden until the visitor scrolls (.is-shown). Using
+   visibility with a delayed transition keeps it out of the tab order while hidden. */
 .quote-fab {
   position: fixed;
   right: 18px;
@@ -414,6 +448,9 @@
 @media print { .quote-fab, .scroll-progress { display: none !important; } }
 
 /* ---------- Photo band ---------- */
+/* Four concept-site photos in a row with a centred call-to-action card on top.
+   Images are scaled up 14% so the parallax drift (--py, set by flair.js) never
+   exposes an edge; a dark gradient overlay keeps the card readable. */
 .photo-band { position: relative; padding: 0; margin-top: 30px; overflow: hidden; background: #2b2018; }
 .band-photos { display: grid; grid-template-columns: repeat(4, 1fr); height: 460px; }
 .band-photos::after {
@@ -458,6 +495,9 @@
 @media print { .photo-band { display: none !important; } }
 
 /* ---------- Contact form (opens the visitor's email app) ---------- */
+/* The form is [hidden] in the HTML and shown by flair.js, so it never appears as a
+   dead control when JavaScript is off. Errors use a dark red with a bold weight so
+   they do not rely on colour alone. */
 #contact-form[hidden] { display: none; }
 #contact-form input[aria-invalid="true"],
 #contact-form textarea[aria-invalid="true"] { border-color: #9c2b27; }

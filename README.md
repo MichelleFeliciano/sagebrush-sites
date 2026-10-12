@@ -7,7 +7,7 @@ warm, mobile-first sites for salons, barbers, nail studios, and spas.
 
 ## What's in it
 
-- Multi-page site: Home, About, Work, Process, Skills, and Contact.
+- Multi-page site: Home, Work, Process, About, Skills, Free check, and Contact.
 - Four spec (concept) projects with case studies — Bloom Nail Studio, Haven Hair Studio,
   Ironclad Barber Co, and Still Water Spa — each a standalone demo site under
   `spec-projects/`.

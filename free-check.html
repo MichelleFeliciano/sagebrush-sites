@@ -28,6 +28,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Free Website Check — Sagebrush Sites</title>
+<!-- Search-result and social-sharing text for this page -->
 <meta name="description" content="Request a free website check from Sagebrush Sites: speed, phone-friendliness, search basics, accessibility and security, explained in a plain-English report.">
 <meta property="og:title" content="Free Website Check — Sagebrush Sites">
 <meta property="og:description" content="Request a free website check: a plain-English report on your site's speed, mobile experience, search basics, accessibility and security.">
@@ -38,12 +39,17 @@
 <meta property="og:image:alt" content="Sagebrush Sites logo">
 <meta name="twitter:image" content="https://sagebrushsites.com/images/logo.png">
 <meta name="twitter:card" content="summary">
+<!-- Tab icon, home-screen icon, web-app manifest, and browser-bar colour -->
 <link rel="icon" type="image/png" href="images/logo.png">
 <link rel="apple-touch-icon" href="images/logo.png">
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#c1653f">
 <style>
+  /* <picture> only picks the WebP/JPEG file; display: contents makes it layout-neutral
+     so the <img> inside is styled exactly as if the wrapper were not there. */
   picture { display: contents; } picture > source { display: none; }
+  /* Colour palette (warm cream, terracotta, sage) and corner radii. Change a colour
+     here and the whole page follows; flair.css reuses these same variable names. */
   :root {
     --cream: #faf3ea;
     --cream-deep: #f2e6d5;
@@ -61,10 +67,12 @@
     --radius-sm: 12px;
   }
 
+  /* Reset: padding is included in element widths and default margins are removed. */
   * { box-sizing: border-box; margin: 0; padding: 0; }
 
   html { scroll-behavior: smooth; }
 
+  /* Page base: system sans-serif body text on cream with a faint dotted texture. */
   body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
     background-color: var(--cream);
@@ -74,6 +82,7 @@
     line-height: 1.65;
   }
 
+  /* Headlines use a serif system font stack (no web fonts, so nothing to download). */
   h1, h2, h3 {
     font-family: Georgia, "Iowan Old Style", "Palatino Linotype", Palatino, serif;
     font-weight: 400;
@@ -97,15 +106,6 @@
   .accent-serif { font-family: Georgia, "Iowan Old Style", Palatino, serif; font-style: italic; color: var(--rust); }
 
   .icon { color: var(--terracotta); flex-shrink: 0; }
-
-  /* ---------- Dotted divider ---------- */
-  .divider {
-    height: 3px;
-    background-image: radial-gradient(circle, var(--terracotta) 1.4px, transparent 1.6px);
-    background-size: 14px 3px;
-    background-repeat: repeat-x;
-    opacity: 0.55;
-  }
 
   /* ---------- Nav ---------- */
   header { position: sticky; top: 0; z-index: 100; padding: 18px 24px; background: rgba(250, 243, 234, 0.88); backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
@@ -302,7 +302,6 @@
   .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
 
   .page-hero p, .section-head p, .process-card p, .form-note, .form-status, .check-fine { color: var(--ink-muted); opacity: 1; }
-  .section-head .eyebrow { color: #5c6b49; }
   .check-status a { color: var(--rust); font-weight: 600; border-bottom: 1px solid var(--rust); }
   .check-fine { max-width: 720px; margin: 22px auto 0; text-align: center; font-size: 0.82rem; color: var(--ink-muted); }
 
@@ -311,11 +310,13 @@
     .check-form-wrap { padding: 28px 20px; }
   }
 </style>
+<!-- Shared effects stylesheet; loads after the styles above so it can override them -->
 <link rel="stylesheet" href="flair.css">
 <noscript><style>#check-form { display: none; }</style></noscript>
 </head>
 <body>
 
+<!-- Site header: brand, page links, "Get in touch" button, and the mobile menu -->
 <header>
   <nav class="pill">
     <a href="./" class="brand">
@@ -343,7 +344,9 @@
   </div>
 </header>
 
+<!-- Page content -->
 <main>
+  <!-- Page heading -->
   <section class="page-hero wrap">
     <p class="eyebrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="11" cy="11" r="6"/><path d="M16 16l5 5"/></svg> Free Website Check</p>
     <h1>How healthy is your <span class="accent-serif">website</span>?</h1>
@@ -353,6 +356,7 @@
     </div>
   </section>
 
+  <!-- What the check covers -->
   <section class="wrap" aria-labelledby="what-title">
     <div class="section-head">
       <p class="eyebrow">The check</p>
@@ -369,6 +373,7 @@
     </div>
   </section>
 
+  <!-- How it works, in three steps -->
   <section class="wrap" aria-labelledby="how-title">
     <div class="section-head">
       <p class="eyebrow">How it works</p>
@@ -381,6 +386,7 @@
     </div>
   </section>
 
+  <!-- Request form: validated by the script at the bottom of this page, then sent through the visitor's email app -->
   <section class="wrap" id="request" aria-labelledby="request-title">
     <div class="check-form-wrap">
       <h2 id="request-title">Request your free check</h2>
@@ -424,14 +430,18 @@
   </section>
 </main>
 
+<!-- Footer: logo, copyright, and founder credit -->
 <footer>
   <picture><source srcset="images/logo.webp" type="image/webp"><img src="images/logo.png" alt="Sagebrush Sites logo" class="footer-logo"></picture>
   <p class="sig">Sagebrush Sites</p>
   <p>&copy; 2026 &middot; Fort Worth, Texas &middot; Founded by Michelle Feliciano</p>
 </footer>
 
+<!-- Mobile menu behaviour (inline so every page works on its own) -->
 <script>
   (function () {
+    // Mobile menu: the hamburger button toggles the "open" class on the menu panel
+    // and keeps aria-expanded in sync so screen readers announce its state.
     var navToggle = document.getElementById('nav-toggle');
     var mobileMenu = document.getElementById('mobile-menu');
 
@@ -440,6 +450,7 @@
       navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
     });
 
+    // Escape closes an open menu and returns focus to the hamburger button.
     document.addEventListener('keydown', function (event) {
       if (event.key === 'Escape' && mobileMenu.classList.contains('open')) {
         mobileMenu.classList.remove('open');
@@ -448,6 +459,7 @@
       }
     });
 
+    // Choosing a link closes the menu (important for in-page #anchor links).
     mobileMenu.querySelectorAll('a').forEach(function (link) {
       link.addEventListener('click', function () {
         mobileMenu.classList.remove('open');
@@ -459,10 +471,13 @@
 
 <script>
   (function () {
+    // Free-check request form. There is no server: the form validates the input,
+    // then builds a mailto: link so the request goes out from the visitor's own email app.
     var form = document.getElementById('check-form');
     var mailLink = document.querySelector('.check-mail');
     if (!form || !mailLink) return;
 
+    // Read the destination address from the visible mailto link so it is only defined once in the HTML.
     var toAddress = mailLink.getAttribute('href').replace(/^mailto:/i, '');
     var f = {
       name: document.getElementById('ck-name'),
@@ -473,8 +488,10 @@
     };
     var errorBox = document.getElementById('ck-error');
     var statusBox = document.getElementById('ck-status');
+    // Fields that can be flagged invalid (notes is optional, so it is not validated).
     var inputs = [f.name, f.email, f.business, f.site];
 
+    // Collapse line breaks so single-line fields cannot inject extra mail headers or lines.
     function oneLine(v) { return v.replace(/[\r\n]+/g, ' ').trim(); }
 
     // "example.com" or "https://www.example.com/page" -> a full address, or '' if it doesn't look like a website.
@@ -490,11 +507,16 @@
       } catch (e) { return ''; }
     }
 
+    // Show one error message and flag its field (aria-invalid) for assistive technology.
+    // Passing null clears any error. The website field keeps its hint reference either way.
     function showError(field, message) {
-      inputs.forEach(function (i) { i.removeAttribute('aria-invalid'); i.removeAttribute('aria-describedby'); });
+      inputs.forEach(function (i) {
+        i.removeAttribute('aria-invalid');
+        if (i === f.site) { i.setAttribute('aria-describedby', 'ck-site-hint'); } else { i.removeAttribute('aria-describedby'); }
+      });
       if (!field) { errorBox.hidden = true; errorBox.textContent = ''; return; }
       field.setAttribute('aria-invalid', 'true');
-      field.setAttribute('aria-describedby', 'ck-error');
+      field.setAttribute('aria-describedby', field === f.site ? 'ck-error ck-site-hint' : 'ck-error');
       errorBox.textContent = message;
       errorBox.hidden = false;
       field.focus();
@@ -517,6 +539,8 @@
       return { subject: 'Free website check request: ' + business, body: body };
     }
 
+    // Copy text to the clipboard, falling back to a hidden textarea + execCommand on
+    // browsers or pages where the Clipboard API is unavailable.
     function copyText(text, okMessage, failMessage) {
       var fallback = function () {
         var t = document.createElement('textarea');
@@ -533,6 +557,8 @@
       } else { fallback(); }
     }
 
+    // Submit: validate, then open the visitor's email app with the request filled in.
+    // The status line also offers a plain link in case the email app does not open.
     form.addEventListener('submit', function (event) {
       event.preventDefault();
       var req = collect();
@@ -543,6 +569,7 @@
       window.location.href = href;
     });
 
+    // "Copy my request": for visitors without a desktop email app.
     document.getElementById('ck-copy-request').addEventListener('click', function () {
       var req = collect();
       if (!req) return;
@@ -551,12 +578,14 @@
         'Couldn\u2019t copy automatically. Please email ' + toAddress + ' with your website address.');
     });
 
+    // "Copy email address": copies just the address.
     document.getElementById('ck-copy-email').addEventListener('click', function () {
       copyText(toAddress, 'Email address copied: ' + toAddress, 'Couldn\u2019t copy automatically. My email address is ' + toAddress);
     });
   })();
 </script>
 
+<!-- Shared effects: scroll reveals, carousel, quote button, forms (see flair.js) -->
 <script src="flair.js" defer></script>
 </body>
 </html>

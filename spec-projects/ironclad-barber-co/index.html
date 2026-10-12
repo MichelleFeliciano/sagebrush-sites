@@ -19,7 +19,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Ironclad Barber Co. — San Antonio, TX</title>
+<!-- Tab icon, home-screen icon, web-app manifest, and browser-bar colour -->
 <link rel="icon" type="image/png" href="images/logo.png">
+<!-- Search-result and social-sharing text for this page -->
 <meta name="description" content="Concept website for Ironclad Barber Co.: old-school barbering with modern fades, walk in or book ahead. A Sagebrush Sites portfolio project.">
 <link rel="canonical" href="https://sagebrushsites.com/spec-projects/ironclad-barber-co/index.html">
 <meta property="og:title" content="Ironclad Barber Co. — San Antonio, TX">
@@ -31,6 +33,8 @@
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://sagebrushsites.com/spec-projects/ironclad-barber-co/images/logo.png">
 <style>
+  /* <picture> only picks the WebP/JPEG file; display: contents makes it layout-neutral
+     so the <img> inside is styled exactly as if the wrapper were not there. */
   picture { display: contents; } picture > source { display: none; }
   :root {
     --bg: #14100c;
@@ -57,8 +61,6 @@
 
   a { color: inherit; text-decoration: none; }
   img { display: block; max-width: 100%; }
-
-  .sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; }
 
   .wrap { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
   .wrap-narrow { max-width: 720px; margin: 0 auto; padding: 0 24px; }
@@ -334,6 +336,7 @@
 </head>
 <body>
 
+<!-- Header: brand and the mobile menu -->
 <header>
   <nav class="wrap">
     <div class="nav-links">
@@ -364,8 +367,10 @@
   </div>
 </header>
 
+<!-- Page content, in order from the hero down -->
 <main id="top">
 
+  <!-- Hero: headline, short pitch, and call-to-action buttons -->
   <section class="hero">
     <div class="hero-inner">
       <p class="stars">&#9733; &#9733; &#9733;</p>
@@ -379,6 +384,7 @@
     </div>
   </section>
 
+  <!-- Services: two-column price ledger with dotted leaders -->
   <section id="services" class="wrap">
     <div class="section-head">
       <p class="eyebrow">The Board</p>
@@ -396,6 +402,7 @@
     </div>
   </section>
 
+  <!-- Gallery: horizontal scroll-snap filmstrip (no JavaScript needed) -->
   <section id="gallery" class="wrap">
     <div class="section-head">
       <p class="eyebrow">Recent Work</p>
@@ -412,6 +419,7 @@
     <p class="filmstrip-hint">Scroll to see more &rarr;</p>
   </section>
 
+  <!-- About: owner pull-quote over a photo -->
   <section id="about" class="wrap">
     <div class="about-panel">
       <blockquote>&ldquo;Every client gets the full time their service takes. No exceptions.&rdquo;</blockquote>
@@ -423,6 +431,7 @@
     </div>
   </section>
 
+  <!-- Client reviews (invented for the concept) -->
   <section id="testimonials" class="wrap-narrow">
     <div class="section-head">
       <p class="eyebrow">Word of Mouth</p>
@@ -436,6 +445,7 @@
     <p class="testimonials-disclaimer">Concept project — reviews above are illustrative sample copy, not real client quotes.</p>
   </section>
 
+  <!-- Contact / booking section -->
   <section id="contact" class="wrap">
     <div class="section-head">
       <p class="eyebrow">Visit Us</p>
@@ -466,13 +476,17 @@
 
 </main>
 
+<!-- Footer: copyright and the "concept project" credit -->
 <footer>
   <p>&copy; 2026 Ironclad Barber Co. · San Antonio, TX</p>
   <p class="concept-tag"><picture><source srcset="images/logo.webp" type="image/webp"><img src="images/logo.png" alt="Sagebrush Sites" class="concept-logo"></picture>Concept project — designed &amp; built by Sagebrush Sites</p>
 </footer>
 
+<!-- Page behaviour (inline so this concept site stays a single self-contained file) -->
 <script>
   (function () {
+    // Mobile menu: the hamburger button toggles the "open" class on the menu panel
+    // and keeps aria-expanded in sync so screen readers announce its state.
     var navToggle = document.getElementById('nav-toggle');
     var mobileMenu = document.getElementById('mobile-menu');
 
@@ -481,6 +495,7 @@
       navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
     });
 
+    // Escape closes an open menu and returns focus to the hamburger button.
     document.addEventListener('keydown', function (event) {
       if (event.key === 'Escape' && mobileMenu.classList.contains('open')) {
         mobileMenu.classList.remove('open');
@@ -489,6 +504,7 @@
       }
     });
 
+    // Choosing a link closes the menu (important for in-page #anchor links).
     mobileMenu.querySelectorAll('a').forEach(function (link) {
       link.addEventListener('click', function () {
         mobileMenu.classList.remove('open');
