@@ -12,7 +12,8 @@ warm, mobile-first sites for salons, barbers, nail studios, and spas.
   Ironclad Barber Co, and Still Water Spa — each a standalone demo site under
   `spec-projects/`.
 - Installable web app manifest and a custom domain served from GitHub Pages.
-- A shared interaction layer (`flair.css`, `flair.js`): scroll reveals, device mockups with hover
+- One shared stylesheet, `flair.css`, holds the base styles for all main pages (each page keeps
+  only its own one-off styles inline), plus an interaction layer with `flair.js`: scroll reveals, device mockups with hover
   tilt, an interactive "try a style" demo, a concept-site carousel, and a floating quote button.
   Every effect is skipped for visitors who prefer reduced motion.
 
