@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<!--
+  Portfolio site (multi-page). Structural layout inspired by
+  lokkeestudios.com, coryhughart.com, and wassim.dev (bold hero, pill
+  nav, chip tags, card-based work grid), restyled warm/boho-feminine:
+  cream/terracotta/sage palette, serif headlines, inline line-art (sun,
+  leaf sprig) instead of tech-glow gradients, dotted dividers instead of
+  hard borders. No external fonts/icons/frameworks, no build step, zero
+  external dependencies. All seven main pages share one stylesheet
+  (flair.css); only styles used by a single page stay in that page's
+  own style block. The case-study and concept-site pages keep
+  their own styles.
+  Pages: index.html (Home), work.html, process.html, about.html,
+  skills.html, contact.html -- share this header/footer; nav "active"
+  state is static per page (no more scroll-spy JS, since there's no
+  single scrolling page anymore).
+  Brand: "Sagebrush Sites" is the primary business brand; Michelle
+  Feliciano is credited as founder in About and on personal profiles
+  (GitHub/LinkedIn). Domain sagebrushsites.com is registered and served
+  from GitHub Pages (see the CNAME file).
+  Contact email is currently the founder's personal Gmail; replace it
+  with a dedicated business Gmail address once that account is created.
+  Founder headshot in
+  About is intentionally a monogram, not a stock photo (would
+  misrepresent a real person). Real logo: images/logo.png (user-supplied).
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pricing and FAQ — Sagebrush Sites</title>
+<!-- Search-result and social-sharing text for this page -->
+<meta name="description" content="Starting prices for Sagebrush Sites website packages for salons and beauty businesses, plus answers about timing, revisions, hosting and what you need to provide.">
+<meta property="og:title" content="Pricing and FAQ — Sagebrush Sites">
+<meta property="og:description" content="Clear starting prices for salon and beauty-business websites, with a written quote before any work begins.">
+<meta property="og:url" content="https://sagebrushsites.com/pricing.html">
+<meta property="og:type" content="website">
+<link rel="canonical" href="https://sagebrushsites.com/pricing.html">
+<meta property="og:image" content="https://sagebrushsites.com/images/og-image.jpg">
+<meta property="og:image:alt" content="Sagebrush Sites: websites for salons and beauty businesses in Fort Worth, Texas">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:image" content="https://sagebrushsites.com/images/og-image.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<!-- Tab icon, home-screen icon, web-app manifest, and browser-bar colour -->
+<link rel="icon" type="image/png" href="images/logo.png">
+<link rel="apple-touch-icon" href="images/logo.png">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#c1653f">
+<!-- Shared stylesheet: base styles and effects for every main page. It loads before any page-specific style block below so that page can override it -->
+<link rel="stylesheet" href="flair.css">
+<style>
+  /* ---------- Pricing page ---------- */
+  main > section.wrap + section.wrap { padding-top: 56px; padding-bottom: 8px; }
+
+  /* Package cards */
+  .tier-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 28px; max-width: 880px; margin: 0 auto; }
+  .tier { position: relative; display: flex; flex-direction: column; background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); padding: 36px 30px 30px; }
+  .tier.featured { border: 1.5px solid var(--terracotta); box-shadow: 0 24px 40px -30px rgba(168, 73, 43, 0.5); }
+  .tier-flag { position: absolute; top: -13px; left: 30px; background: var(--rust); color: #fff8f0; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 5px 14px; border-radius: 999px; }
+  .tier h3 { font-size: 1.4rem; margin-bottom: 4px; }
+  .tier .for { color: var(--ink-soft); font-size: 0.92rem; margin-bottom: 20px; }
+  @media (min-width: 700px) { .tier .for { min-height: 3.3em; } } /* two lines, so both prices line up */
+  .tier .price { font-family: Georgia, "Iowan Old Style", Palatino, serif; font-size: 2.7rem; line-height: 1; color: var(--rust); }
+  .tier .price small { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; font-size: 0.82rem; color: var(--ink-soft); margin-right: 6px; letter-spacing: 0.02em; }
+  .tier .pages { font-size: 0.78rem; color: var(--sage-deep); text-transform: uppercase; letter-spacing: 0.1em; margin: 10px 0 20px; }
+  .tier ul { list-style: none; display: grid; gap: 10px; margin-bottom: 28px; font-size: 0.95rem; }
+  .tier li { position: relative; padding-left: 24px; }
+  .tier li::before { content: ""; position: absolute; left: 2px; top: 0.55em; width: 9px; height: 9px; border-radius: 50%; border: 1.5px solid var(--terracotta); }
+  .tier .btn { margin-top: auto; align-self: flex-start; }
+  .price-note { text-align: center; max-width: 640px; margin: 30px auto 0; color: var(--ink-soft); font-size: 0.9rem; }
+
+  /* Add-on price list with dotted leaders, like a salon service menu */
+  .addon-list { list-style: none; max-width: 720px; margin: 0 auto; background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); padding: 8px 28px; }
+  .addon-list li { display: flex; align-items: baseline; gap: 12px; padding: 15px 0; border-bottom: 1px solid var(--line); }
+  .addon-list li:last-child { border-bottom: 0; }
+  .addon-list .what small { display: block; color: var(--ink-soft); font-size: 0.84rem; }
+  .addon-list .dots { flex: 1; min-width: 18px; border-bottom: 2px dotted var(--terracotta); opacity: 0.45; transform: translateY(-5px); }
+  .addon-list .cost { font-weight: 600; color: var(--rust); white-space: nowrap; }
+
+  /* How it works / terms */
+  .terms-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; }
+  .term { flex: 1 1 230px; max-width: 300px; background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); padding: 26px 24px; }
+  .term h3 { font-size: 1.05rem; margin-bottom: 8px; color: var(--rust); }
+  .term p { font-size: 0.92rem; color: var(--ink-soft); }
+
+  /* First-client offer */
+  .first-client { max-width: 720px; margin: 0 auto; text-align: center; background: var(--cream-deep); border: 1px solid var(--line); border-radius: var(--radius); padding: 38px 32px; }
+  .first-client h2 { font-size: 1.6rem; margin-bottom: 12px; }
+  .first-client p { color: var(--ink-soft); margin-bottom: 22px; }
+
+  /* FAQ: native <details>, so it works without JavaScript */
+  .faq { max-width: 760px; margin: 0 auto; display: grid; gap: 12px; }
+  .faq details { background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius-sm); padding: 0 22px; }
+  .faq summary { position: relative; cursor: pointer; list-style: none; padding: 18px 30px 18px 0; font-family: Georgia, "Iowan Old Style", Palatino, serif; font-size: 1.05rem; }
+  .faq summary::-webkit-details-marker { display: none; }
+  .faq summary::after { content: "+"; position: absolute; right: 0; top: 50%; transform: translateY(-50%); color: var(--rust); font-size: 1.4rem; line-height: 1; }
+  .faq details[open] summary::after { content: "\2212"; }
+  .faq summary:focus-visible { outline: 2px solid var(--rust); outline-offset: 4px; border-radius: 4px; }
+  .faq details p { padding-bottom: 18px; color: var(--ink-soft); font-size: 0.95rem; }
+  .faq details a { color: var(--rust); font-weight: 600; border-bottom: 1px solid var(--rust); }
+
+  .pricing-cta { text-align: center; }
+  .pricing-cta .hero-ctas { margin-top: 8px; }
+
+  @media (max-width: 620px) {
+    .tier { padding: 32px 22px 26px; }
+    .addon-list { padding: 4px 18px; }
+    .first-client { padding: 30px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Site header: brand, page links, "Get in touch" button, and the mobile menu -->
+<header>
+  <nav class="pill">
+    <a href="./" class="brand">
+      <picture><source srcset="images/logo.webp" type="image/webp"><img src="images/logo.png" alt="Sagebrush Sites logo" class="brand-logo" width="28" height="28"></picture>
+      Sagebrush <span>Sites</span>
+    </a>
+    <div class="nav-links" id="nav-links">
+      <a href="work.html">Work</a>
+      <a href="process.html">Process</a>
+      <a href="pricing.html" class="active">Pricing</a>
+      <a href="about.html">About</a>
+      <a href="skills.html">Skills</a>
+      <a href="free-check.html">Free check</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <a href="contact.html" class="nav-cta">Get in touch</a>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Open menu" aria-expanded="false">&#9776;</button>
+  </nav>
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="work.html">Work</a>
+    <a href="process.html">Process</a>
+    <a href="pricing.html" class="active">Pricing</a>
+    <a href="about.html">About</a>
+    <a href="skills.html">Skills</a>
+    <a href="free-check.html">Free check</a>
+    <a href="contact.html">Contact</a>
+  </div>
+</header>
+
+<!-- Page content -->
+<main>
+  <!-- Page heading -->
+  <section class="page-hero wrap">
+    <p class="eyebrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M3 12l9-9h8v8l-9 9z"/><circle cx="16" cy="8" r="1.4"/></svg> Pricing</p>
+    <h1>Clear prices, <span class="accent-serif">no surprises</span></h1>
+    <p>Starting prices for salon and beauty-business websites. Every project gets a written quote before any work begins, so you know the exact number up front.</p>
+  </section>
+
+  <!-- Packages: two tiers; "from" prices because the final number depends on pages, photos and features -->
+  <section class="wrap" aria-labelledby="packages-title">
+    <div class="section-head">
+      <p class="eyebrow">Packages</p>
+      <h2 id="packages-title">Start with the one that fits</h2>
+      <p>Both include a mobile-first design, search-engine setup, and two rounds of revisions.</p>
+    </div>
+    <div class="tier-grid">
+      <article class="tier">
+        <h3>Starter</h3>
+        <p class="for">A clean, credible page for a new or one-chair business.</p>
+        <p class="price"><small>from</small>$600</p>
+        <p class="pages">Up to 3 pages</p>
+        <ul>
+          <li>Pages such as Home, Services &amp; prices, and Contact</li>
+          <li>Mobile-first, responsive design</li>
+          <li>Contact form that goes straight to your email</li>
+          <li>Search-engine setup so Google can read your site</li>
+          <li>Launched on your own domain</li>
+        </ul>
+        <a href="contact.html" class="btn btn-ghost">Ask about Starter</a>
+      </article>
+      <article class="tier featured">
+        <span class="tier-flag">Most complete</span>
+        <h3>Salon</h3>
+        <p class="for">A full site that shows off the work and gets people booking.</p>
+        <p class="price"><small>from</small>$1,350</p>
+        <p class="pages">Up to 6 pages</p>
+        <ul>
+          <li>Home, Services &amp; prices, Gallery, About, Reviews, Contact</li>
+          <li>Photo gallery with click-to-enlarge</li>
+          <li>Link to (or embed) your booking platform: Vagaro, Square, Fresha, Booksy, GlossGenius</li>
+          <li>Contact form and visitor analytics set up</li>
+          <li>Search-engine setup and a custom design for your brand</li>
+        </ul>
+        <a href="contact.html" class="btn btn-primary">Get a free quote</a>
+      </article>
+    </div>
+    <p class="price-note">Starting prices in US dollars. Your quote is based on your number of pages, how much content you have ready, and any add-ons below.</p>
+  </section>
+
+  <!-- Add-ons -->
+  <section class="wrap" aria-labelledby="addons-title">
+    <div class="section-head">
+      <p class="eyebrow">Add-ons</p>
+      <h2 id="addons-title">Only pay for what you need</h2>
+    </div>
+    <ul class="addon-list">
+      <li><span class="what">Extra page<small>Beyond the pages in your package</small></span><span class="dots" aria-hidden="true"></span><span class="cost">$150 each</span></li>
+      <li><span class="what">Search-engine (SEO) package<small>Keyword-informed titles and descriptions, structured data, sitemap, and Search Console setup</small></span><span class="dots" aria-hidden="true"></span><span class="cost">$350</span></li>
+      <li><span class="what">Copywriting<small>Original page copy, written from the facts you give me</small></span><span class="dots" aria-hidden="true"></span><span class="cost">$200 per page</span></li>
+      <li><span class="what">Photo sourcing<small>Licensed stock images selected and optimized (any license fees billed at cost)</small></span><span class="dots" aria-hidden="true"></span><span class="cost">$250</span></li>
+      <li><span class="what">Blog<small>Post list, individual post pages, and categories</small></span><span class="dots" aria-hidden="true"></span><span class="cost">$400</span></li>
+      <li><span class="what">Third-party integration<small>Connecting another tool or service to your site</small></span><span class="dots" aria-hidden="true"></span><span class="cost">$600 each</span></li>
+    </ul>
+  </section>
+
+  <!-- How payment and timing work -->
+  <section class="wrap" aria-labelledby="terms-title">
+    <div class="section-head">
+      <p class="eyebrow">How it works</p>
+      <h2 id="terms-title">The simple terms</h2>
+    </div>
+    <div class="terms-grid">
+      <div class="term"><h3>Deposit</h3><p>50% to start, and the balance is due at launch.</p></div>
+      <div class="term"><h3>Revisions</h3><p>Two rounds of changes are included. Anything beyond that is quoted before I start.</p></div>
+      <div class="term"><h3>Timeline</h3><p>About 1&frac12; weeks for Starter and 2&frac12;&ndash;3 weeks for Salon, counted from when I have your photos and details.</p></div>
+      <div class="term"><h3>Rush projects</h3><p>Need it faster? A rush fee of 25% moves your project to the front of the line.</p></div>
+      <div class="term"><h3>Domain &amp; hosting</h3><p>You pay for these directly, so you own everything. A domain is typically $15&ndash;25 a year.</p></div>
+    </div>
+  </section>
+
+  <!-- First-client offer: real proof matters most right now, so say so plainly -->
+  <section class="wrap" aria-labelledby="first-title">
+    <div class="first-client">
+      <h2 id="first-title">Be one of my first clients</h2>
+      <p>I&rsquo;m growing my portfolio with real local businesses. If you run a salon, barbershop, nail studio or spa in the Fort Worth area, ask about an introductory rate in exchange for an honest testimonial and permission to feature your finished site.</p>
+      <a href="contact.html" class="btn btn-primary">Ask about the intro rate</a>
+    </div>
+  </section>
+
+  <!-- FAQ: native details/summary elements, no JavaScript needed -->
+  <section class="wrap" aria-labelledby="faq-title">
+    <div class="section-head">
+      <p class="eyebrow">Questions</p>
+      <h2 id="faq-title">Frequently asked questions</h2>
+    </div>
+    <div class="faq">
+      <details>
+        <summary>How long does a website take?</summary>
+        <p>About 1&frac12; weeks for a Starter site and 2&frac12;&ndash;3 weeks for a Salon site. The clock starts once I have your photos, services and prices, so the faster those arrive, the faster you launch.</p>
+      </details>
+      <details>
+        <summary>What do I need to give you?</summary>
+        <p>Your logo (if you have one), photos of your work and space, your services and prices, hours, address, and your booking link. No photos yet? Photo sourcing is available as an add-on, and so is copywriting if you&rsquo;d rather not write the text.</p>
+      </details>
+      <details>
+        <summary>Can I keep my booking platform?</summary>
+        <p>Yes, and I&rsquo;d recommend it. I link or embed whatever you already use, such as Vagaro, Square, Fresha, Booksy or GlossGenius, instead of replacing it.</p>
+      </details>
+      <details>
+        <summary>Do I own my website and domain?</summary>
+        <p>Yes. Your domain is registered in your name, and you receive the site files at launch.</p>
+      </details>
+      <details>
+        <summary>What does hosting cost?</summary>
+        <p>Many of my sites can be hosted for free, so your ongoing cost is often just the domain name, typically $15&ndash;25 a year. If you&rsquo;d rather use a paid host, I&rsquo;ll set the site up there.</p>
+      </details>
+      <details>
+        <summary>What happens after launch?</summary>
+        <p>If something I built isn&rsquo;t working, I&rsquo;ll fix it at no charge. Content updates, such as new prices, photos or hours, are quoted per request, or ask me about a maintenance plan.</p>
+      </details>
+      <details>
+        <summary>Will my site show up on Google?</summary>
+        <p>I set up the search basics so Google can find and understand your site, and the SEO add-on goes further. Nobody can honestly promise a ranking, but a fast, mobile-friendly site with a free Google Business Profile gives you the best start.</p>
+      </details>
+      <details>
+        <summary>Do you build online stores?</summary>
+        <p>My focus is salon and beauty-business websites. If you sell products, I can link your site to the store you already use.</p>
+      </details>
+      <details>
+        <summary>I already have a website. Can you improve it?</summary>
+        <p>Start with a <a href="free-check.html">free website check</a>. I&rsquo;ll test its speed, mobile experience, search basics and accessibility, then send you a plain-English report, with no obligation.</p>
+      </details>
+    </div>
+  </section>
+
+  <!-- Closing call to action -->
+  <section class="wrap pricing-cta" aria-labelledby="cta-title">
+    <div class="section-head">
+      <h2 id="cta-title">Ready for a quote?</h2>
+      <p>Tell me about your business and I&rsquo;ll send a clear written quote, with no pressure.</p>
+    </div>
+    <div class="hero-ctas">
+      <a href="contact.html" class="btn btn-primary">Get a free quote</a>
+      <a href="free-check.html" class="btn btn-ghost">Get a free website check</a>
+    </div>
+  </section>
+</main>
+
+<!-- Footer: logo, copyright, and founder credit -->
+<footer>
+  <picture><source srcset="images/logo.webp" type="image/webp"><img src="images/logo.png" alt="Sagebrush Sites logo" class="footer-logo"></picture>
+  <p class="sig">Sagebrush Sites</p>
+  <p>&copy; 2026 &middot; Fort Worth, Texas &middot; Founded by Michelle Feliciano</p>
+</footer>
+
+<!-- Mobile menu behaviour (inline so every page works on its own) -->
+<script>
+  (function () {
+    // Mobile menu: the hamburger button toggles the "open" class on the menu panel
+    // and keeps aria-expanded in sync so screen readers announce its state.
+    var navToggle = document.getElementById('nav-toggle');
+    var mobileMenu = document.getElementById('mobile-menu');
+
+    navToggle.addEventListener('click', function () {
+      var isOpen = mobileMenu.classList.toggle('open');
+      navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+
+    // Escape closes an open menu and returns focus to the hamburger button.
+    document.addEventListener('keydown', function (event) {
+      if (event.key === 'Escape' && mobileMenu.classList.contains('open')) {
+        mobileMenu.classList.remove('open');
+        navToggle.setAttribute('aria-expanded', 'false');
+        navToggle.focus();
+      }
+    });
+
+    // Choosing a link closes the menu (important for in-page #anchor links).
+    mobileMenu.querySelectorAll('a').forEach(function (link) {
+      link.addEventListener('click', function () {
+        mobileMenu.classList.remove('open');
+        navToggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+  })();
+</script>
+
+<!-- Shared effects: scroll reveals, carousel, quote button, forms (see flair.js) -->
+<script src="flair.js" defer></script>
+</body>
+</html>

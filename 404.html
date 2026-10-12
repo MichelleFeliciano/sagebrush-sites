@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<!--
+  Custom "page not found" page. GitHub Pages serves this file automatically for
+  any address on the site that does not exist.
+
+  Because it can be shown at ANY address (for example /case-studies/typo), every
+  link and file below uses a root-relative path starting with "/". Relative paths
+  such as "flair.css" would break whenever the mistyped address is in a subfolder.
+  flair.js is deliberately not loaded: its floating quote button uses a relative link.
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Page not found — Sagebrush Sites</title>
+<!-- Keep this page out of search results -->
+<meta name="robots" content="noindex">
+<meta name="description" content="That page could not be found. Head back to Sagebrush Sites, web development for salons and beauty businesses in Fort Worth, TX.">
+<!-- Tab icon, home-screen icon, web-app manifest, and browser-bar colour -->
+<link rel="icon" type="image/png" href="/images/logo.png">
+<link rel="apple-touch-icon" href="/images/logo.png">
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#c1653f">
+<!-- Shared stylesheet: base styles and effects for every main page. It loads before any page-specific style block below so that page can override it -->
+<link rel="stylesheet" href="/flair.css">
+<style>
+  /* ---------- 404 page ---------- */
+  .lost { padding: 90px 0 110px; text-align: center; }
+  .lost .big { font-family: Georgia, "Iowan Old Style", Palatino, serif; font-style: italic; font-size: clamp(5rem, 18vw, 9rem); line-height: 1; color: var(--terracotta); opacity: 0.85; margin-bottom: 10px; }
+  .lost h1 { font-size: clamp(1.8rem, 4vw, 2.5rem); margin-bottom: 14px; }
+  .lost p { max-width: 480px; margin: 0 auto 30px; color: var(--ink-soft); font-size: 1.05rem; }
+  .lost .quick { margin-top: 34px; display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 22px; font-size: 0.92rem; }
+  .lost .quick a { color: var(--rust); font-weight: 600; border-bottom: 1px solid transparent; }
+  .lost .quick a:hover { border-bottom-color: var(--rust); }
+</style>
+</head>
+<body>
+
+<!-- Header: brand only, since the full menu needs scripts and relative paths -->
+<header>
+  <nav class="pill">
+    <a href="/" class="brand">
+      <picture><source srcset="/images/logo.webp" type="image/webp"><img src="/images/logo.png" alt="Sagebrush Sites logo" class="brand-logo" width="28" height="28"></picture>
+      Sagebrush <span>Sites</span>
+    </a>
+    <a href="/contact.html" class="nav-cta">Get in touch</a>
+  </nav>
+</header>
+
+<!-- Page content -->
+<main>
+  <section class="lost wrap">
+    <p class="big" aria-hidden="true">404</p>
+    <h1>That page <span class="accent-serif">wandered off</span></h1>
+    <p>The link may be old or mistyped. Let&rsquo;s get you back to something real.</p>
+    <div class="hero-ctas">
+      <a href="/" class="btn btn-primary">Back to the home page</a>
+      <a href="/work.html" class="btn btn-ghost">See the work</a>
+    </div>
+    <p class="quick">
+      <a href="/pricing.html">Pricing</a>
+      <a href="/process.html">Process</a>
+      <a href="/free-check.html">Free website check</a>
+      <a href="/contact.html">Contact</a>
+    </p>
+  </section>
+</main>
+
+<!-- Footer: logo, copyright, and founder credit -->
+<footer>
+  <picture><source srcset="/images/logo.webp" type="image/webp"><img src="/images/logo.png" alt="Sagebrush Sites logo" class="footer-logo"></picture>
+  <p class="sig">Sagebrush Sites</p>
+  <p>&copy; 2026 &middot; Fort Worth, Texas &middot; Founded by Michelle Feliciano</p>
+</footer>
+
+</body>
+</html>
