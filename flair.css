@@ -183,20 +183,18 @@
   /* ---------- About ---------- */
   .about-grid { display: grid; grid-template-columns: 1fr 1.4fr; gap: 50px; align-items: center; }
 
+  /* Founder photo in an arch-shaped frame (rounded top). The soft gradient shows if the photo fails to load. */
   .about-arch {
-    width: 220px;
-    height: 260px;
+    width: 260px;
+    height: 307px;
     margin: 0 auto;
-    border-radius: 110px 110px 0 0;
+    border-radius: 130px 130px 0 0;
     background: linear-gradient(160deg, var(--rose), var(--sage));
-    display: flex;
-    align-items: flex-end;
-    justify-content: center;
-    padding-bottom: 30px;
+    overflow: hidden;
     border: 1px solid var(--line);
   }
 
-  .about-arch .mono { font-family: Georgia, Palatino, serif; font-style: italic; font-size: 2.4rem; color: #fff8f0; }
+  .about-arch img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 35%; }
 
   .about-copy h1, .about-copy h2 { font-size: 1.9rem; margin-bottom: 16px; font-weight: 400; }
   .about-copy p { color: var(--ink-soft); margin-bottom: 14px; }
